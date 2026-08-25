@@ -1,0 +1,71 @@
+[
+  {
+    "slug": "chebyshev-inequality",
+    "chapter": "第五章 · 大数定律与中心极限定理",
+    "title": "切比雪夫不等式",
+    "englishTitle": "Chebyshev's Inequality",
+    "summary": "只知道均值和方差，也能对随机变量远离均值的概率给出通用上界。",
+    "readTime": 9,
+    "updatedAt": "2026.08",
+    "core": ["切比雪夫不等式不要求知道完整分布形状，只利用均值与有限方差控制尾部概率。", "它给的是保守上界而非精确概率，价值在于适用范围广，并为弱大数定律提供证明工具。"],
+    "definition": { "intro": "若 E(X)=μ、Var(X)=σ²<∞，则对任意 ε>0，偏离均值至少 ε 的概率受到方差控制。", "formulas": ["P(|X-\\mu|\\ge\\varepsilon)\\le\\frac{\\sigma^2}{\\varepsilon^2}", "P(|X-\\mu|<k\\sigma)\\ge1-\\frac{1}{k^2}\\quad(k>1)"] },
+    "intuition": ["如果方差很小，大量概率质量不可能都离均值很远，否则平均平方距离会被抬高。", "当阈值扩大到 k 个标准差时，区间外概率至多 1/k²；这是所有有限方差分布共同遵守的最低保证。"],
+    "visual": { "type": "bound", "caption": "方差给出均值两侧尾部面积的上界；区间越宽，上界按距离平方下降。" },
+    "properties": [
+      { "label": "分布无关", "text": "不要求正态、对称或连续，只要求方差有限。" },
+      { "label": "双侧界", "text": "控制的是 |X−μ| 的两侧偏差总概率。" },
+      { "label": "保守性", "text": "真实尾部概率通常远小于该上界。" },
+      { "label": "标准差形式", "text": "至少 1−1/k² 的概率落在 μ±kσ 内。" }
+    ],
+    "exams": ["已知均值、方差，估计落在某区间内的概率下界。", "把给定区间改写成 |X−μ|<ε。", "用于证明样本均值依概率收敛到总体均值。"],
+    "mistakes": ["把上界当成精确概率。", "事件使用 >、≥ 时机械忽略边界差异；离散情形边界可能有质量。", "得到 σ²/ε²>1 时仍当成有效改进；概率上界至多取 1。"],
+    "prerequisites": [{ "title": "数学期望", "slug": "expectation", "note": "中心位置由期望给出。" }, { "title": "方差", "slug": "variance", "note": "偏离概率由方差控制。" }],
+    "connections": [{ "title": "大数定律", "slug": "law-of-large-numbers", "note": "用于证明样本均值的波动概率趋于 0。" }, { "title": "中心极限定理", "slug": "central-limit-theorem", "note": "后者给出更精细的渐近分布，而非仅给上界。" }]
+  },
+  {
+    "slug": "law-of-large-numbers",
+    "chapter": "第五章 · 大数定律与中心极限定理",
+    "title": "大数定律与伯努利大数定律",
+    "englishTitle": "Law of Large Numbers",
+    "summary": "当独立重复观察足够多时，随机平均会稳定到理论期望。",
+    "readTime": 11,
+    "updatedAt": "2026.08",
+    "core": ["大数定律解释“平均带来稳定”：单次结果不可预测，但大量结果的平均值逐渐靠近期望。", "伯努利大数定律是频率版本，说明事件发生频率依概率收敛到其概率，为概率的频率解释提供理论基础。"],
+    "definition": { "intro": "若 X₁,X₂,… 独立同分布，E(Xᵢ)=μ、Var(Xᵢ)=σ²<∞，则样本均值依概率收敛到 μ。", "formulas": ["\\overline X_n=\\frac1n\\sum_{i=1}^{n}X_i\\xrightarrow{P}\\mu", "\\forall\\varepsilon>0,\\quad P(|\\overline X_n-\\mu|\\ge\\varepsilon)\\to0", "\\frac{N_n}{n}\\xrightarrow{P}p\\quad\\text{（伯努利大数定律）}"] },
+    "intuition": ["每个观测的随机偏差有正有负；独立重复后，偏差在平均中相互抵消，而样本均值方差缩小为 σ²/n。", "大数定律保证趋近，但不告诉我们误差经 √n 放大后的具体形状；后者由中心极限定理回答。"],
+    "visual": { "type": "convergence", "caption": "样本量增大时，多条样本均值轨迹逐渐收拢到理论期望 μ。" },
+    "properties": [
+      { "label": "依概率收敛", "text": "偏离任意固定 ε 的概率趋于 0，不等于有限 n 时完全相等。" },
+      { "label": "方差缩减", "text": "独立同分布时平均值波动随 n 反比下降。", "formula": "\\operatorname{Var}(\\overline X_n)=\\sigma^2/n" },
+      { "label": "切比雪夫证明", "text": "偏离概率上界随 1/n 趋于 0。", "formula": "P(|\\overline X_n-\\mu|\\ge\\varepsilon)\\le\\sigma^2/(n\\varepsilon^2)" },
+      { "label": "伯努利情形", "text": "令 Xᵢ 为事件指示变量，样本均值就是发生频率。" }
+    ],
+    "exams": ["区分伯努利大数定律与一般弱大数定律。", "用切比雪夫不等式证明样本均值依概率收敛。", "解释频率稳定性、蒙特卡洛估计和样本平均的合理性。"],
+    "mistakes": ["认为 n 足够大后样本均值必然等于 μ。", "把大数定律理解为随机和趋于常数；稳定的是平均或适当归一化后的量。", "混淆依概率收敛与分布收敛。"],
+    "prerequisites": [{ "title": "切比雪夫不等式", "slug": "chebyshev-inequality", "note": "提供经典弱大数定律的概率上界。" }, { "title": "独立性", "slug": "random-variable-independence", "note": "独立使平均值方差快速缩小。" }],
+    "connections": [{ "title": "中心极限定理", "slug": "central-limit-theorem", "note": "进一步描述样本均值误差的近似分布。" }, { "title": "参数估计", "slug": "parameter-estimation", "note": "保证许多样本统计量的一致性。", "type": "data-science" }]
+  },
+  {
+    "slug": "central-limit-theorem",
+    "chapter": "第五章 · 大数定律与中心极限定理",
+    "title": "中心极限定理",
+    "englishTitle": "Central Limit Theorem",
+    "summary": "大量独立、同量级的小随机影响相加并标准化后，分布趋近正态。",
+    "readTime": 12,
+    "updatedAt": "2026.08",
+    "core": ["中心极限定理解释正态分布为什么普遍出现：总误差、样本均值和许多聚合指标都是大量微小影响的和。", "它不是说原始变量变成正态，而是说随机和减去均值、除以标准差后的分布趋近标准正态。"],
+    "definition": { "intro": "Lindeberg–Lévy 形式：若 X₁,X₂,… 独立同分布，均值 μ、方差 0<σ²<∞，则标准化和依分布收敛到标准正态。", "formulas": ["\\frac{\\sum_{i=1}^{n}X_i-n\\mu}{\\sigma\\sqrt n}\\xrightarrow{d}N(0,1)", "\\frac{\\sqrt n(\\overline X_n-\\mu)}{\\sigma}\\xrightarrow{d}N(0,1)", "\\sum_{i=1}^{n}X_i\\approx N(n\\mu,n\\sigma^2)"] },
+    "intuition": ["卷积会把尖锐、偏斜和不规则的细节逐次平滑；许多独立贡献相加后，保留下来的主要特征是总均值与总方差，形状趋近钟形。", "n 越大近似通常越好，但原分布极端偏斜或重尾时需要更大样本；有限方差是经典形式的重要条件。"],
+    "visual": { "type": "clt", "caption": "从偏斜总体反复抽样，样本和或样本均值的标准化分布随 n 增大逐渐接近钟形。" },
+    "properties": [
+      { "label": "标准化不可省", "text": "随机和的均值、方差随 n 改变，必须中心化并缩放。" },
+      { "label": "二项正态近似", "text": "np 与 n(1−p) 较大时可用正态近似二项分布。", "formula": "B(n,p)\\approx N(np,np(1-p))" },
+      { "label": "连续性修正", "text": "用连续正态近似离散计数时边界加减 0.5。" },
+      { "label": "与大数定律区别", "text": "大数定律说明平均值趋向哪里；中心极限定理说明误差呈什么形状、以多快尺度波动。" }
+    ],
+    "exams": ["识别随机和并完成中心化、标准化。", "使用正态分布近似二项或泊松概率，注意连续性修正。", "解释样本均值的近似分布及其在统计推断中的作用。"],
+    "mistakes": ["不减 nμ 或分母误写成 nσ。", "认为任何随机变量相加都自动近似正态，忽略独立性和有限方差等条件。", "把大数定律与中心极限定理互换使用。", "离散正态近似时忘记连续性修正。"],
+    "prerequisites": [{ "title": "大数定律", "slug": "law-of-large-numbers", "note": "先理解样本平均的稳定性。" }, { "title": "正态分布", "slug": "normal", "note": "极限分布是标准正态。", "type": "distribution" }, { "title": "方差", "slug": "variance", "note": "标准化尺度由方差决定。" }],
+    "connections": [{ "title": "抽样分布", "slug": "sampling-distribution", "note": "统计推断依赖样本统计量的近似分布。", "type": "data-science" }, { "title": "假设检验", "slug": "hypothesis-testing", "note": "构造大样本检验统计量。", "type": "data-science" }, { "title": "机器学习", "slug": "machine-learning", "note": "解释聚合误差和许多渐近近似。", "type": "data-science" }]
+  }
+]

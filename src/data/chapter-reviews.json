@@ -1,0 +1,183 @@
+[
+  {
+    "id": "chapter-1",
+    "number": "01",
+    "title": "随机事件与概率",
+    "summary": "第一章的主线是：先把文字事件翻译成集合，再用条件概率把联合事件拆成路径，最后用全概率与贝叶斯在来源和结果之间切换。",
+    "source": "知识讲解第 4–16 页；强化习题第 72–82、126–131 页",
+    "nodeSlugs": ["random-experiment", "random-events", "probability-definition", "probability-properties", "conditional-probability", "total-probability", "bayes-theorem", "event-independence"],
+    "essentials": [
+      { "title": "事件语言", "note": "至少一个用并集，同时发生用交集，恰有一个要分互斥情况。" },
+      { "title": "古典与几何", "note": "使用等可能比值前必须先验证有限等可能或区域均匀。" },
+      { "title": "条件概率", "note": "条件写在右侧并决定分母；分阶段事件沿路径相乘。" },
+      { "title": "全概率与贝叶斯", "note": "全概率从原因到结果，贝叶斯从结果反推原因。" },
+      { "title": "独立性", "note": "独立看乘积等式，不看事件是否相交；两两独立不等于相互独立。" }
+    ],
+    "formulas": [
+      { "label": "加法公式", "formula": "P(A\\cup B)=P(A)+P(B)-P(A\\cap B)", "note": "一般情形必须减去交集。" },
+      { "label": "条件概率", "formula": "P(A\\mid B)=\\frac{P(A\\cap B)}{P(B)}", "note": "要求 P(B)>0。" },
+      { "label": "乘法公式", "formula": "P(A\\cap B)=P(B)P(A\\mid B)", "note": "多阶段试验逐层展开。" },
+      { "label": "全概率", "formula": "P(A)=\\sum_iP(B_i)P(A\\mid B_i)", "note": "{Bi} 为完备事件组。" },
+      { "label": "贝叶斯", "formula": "P(B_i\\mid A)=\\frac{P(B_i)P(A\\mid B_i)}{\\sum_jP(B_j)P(A\\mid B_j)}", "note": "分母是证据 A 的总概率。" },
+      { "label": "独立", "formula": "A\\perp B\\iff P(AB)=P(A)P(B)", "note": "正概率互斥事件不独立。" }
+    ],
+    "problemTypes": [
+      { "title": "事件表达与集合化简", "method": "先定义基本事件，再按关键词写并、交、补；复杂否定优先使用德摩根律。" },
+      { "title": "古典或几何概型", "method": "明确等可能样本单位，分别计算有利数/总数或有利面积/总面积。" },
+      { "title": "至少一次与分步抽样", "method": "至少一次优先算补事件；不放回抽样沿条件路径相乘。" },
+      { "title": "来源混合与反向追因", "method": "来源设为完备事件组，先全概率求证据，再贝叶斯反推来源。" }
+    ],
+    "mistakes": [
+      "把互斥当成独立，或把互斥当成对立。",
+      "没有验证等可能就套用有利数除以总数。",
+      "颠倒 P(A|B) 与 P(B|A)。",
+      "全概率的来源组不互斥或没有覆盖样本空间。",
+      "三个事件两两独立就直接认定相互独立。"
+    ]
+  },
+  {
+    "id": "chapter-2",
+    "number": "02",
+    "title": "随机变量及其分布",
+    "summary": "第二章从随机变量的数值化开始，用分布函数统一描述概率，再分别掌握离散分布律与连续密度的计算规则。",
+    "source": "知识讲解第 17–32 页；强化习题第 83–93、132–137 页",
+    "nodeSlugs": ["random-variable", "distribution-function", "discrete-random-variable", "continuous-random-variable"],
+    "essentials": [
+      { "title": "随机变量", "note": "它是样本空间上的实值函数；先列可能取值，再讨论分布。" },
+      { "title": "分布函数", "note": "F(x)=P(X≤x)，单调不减、右连续，左右极限为 0 和 1。" },
+      { "title": "离散分布律", "note": "点概率非负且总和为 1；区间概率是对应点概率之和。" },
+      { "title": "连续密度", "note": "密度不是点概率；区间概率是曲线下面积，单点概率为 0。" },
+      { "title": "常见分布识别", "note": "计数看二项/泊松，首次成功看几何，等待时间看指数，测量误差常看正态。" }
+    ],
+    "formulas": [
+      { "label": "分布函数", "formula": "F_X(x)=P(X\\le x)", "note": "任何随机变量都有分布函数。" },
+      { "label": "区间概率", "formula": "P(a<X\\le b)=F(b)-F(a)", "note": "含点质量时注意开闭端点。" },
+      { "label": "点概率", "formula": "P(X=a)=F(a)-F(a^-)", "note": "等于分布函数在 a 处的跳跃。" },
+      { "label": "离散归一性", "formula": "p_k\\ge0,\\quad\\sum_kp_k=1", "note": "求未知参数的首要条件。" },
+      { "label": "密度与分布函数", "formula": "F(x)=\\int_{-\\infty}^{x}f(t)\\,dt,\\quad f(x)=F'(x)", "note": "第二式在可导处成立。" },
+      { "label": "连续区间概率", "formula": "P(a<X<b)=\\int_a^bf(x)\\,dx", "note": "端点开闭不影响概率。" }
+    ],
+    "problemTypes": [
+      { "title": "由分布律或密度求 F", "method": "先找支持集和分界点，再分段累计；最后检查右连续和极限。" },
+      { "title": "由 F 求点概率/密度", "method": "离散跳跃用 F(a)-F(a-)；连续部分在可导处求导。" },
+      { "title": "归一化求参数", "method": "离散概率求和为 1，连续密度在支持集上积分为 1。" },
+      { "title": "随机变量函数分布", "method": "先确定新变量取值范围，再用分布函数法把 {g(X)≤y} 转回 X 的范围。" }
+    ],
+    "mistakes": [
+      "把随机变量 X 与具体取值 x 混用。",
+      "把右连续记成左连续。",
+      "把密度 f(x) 当成 P(X=x)。",
+      "求分段分布函数时漏写支持集外的 0 和 1。",
+      "认为分布函数连续就一定存在普通密度。"
+    ]
+  },
+  {
+    "id": "chapter-3",
+    "number": "03",
+    "title": "多维随机变量",
+    "summary": "第三章的核心是从联合分布出发，通过求和或积分得到边缘与条件分布，并用乘积分解判断独立；连续题的关键是区域。",
+    "source": "知识讲解第 33–46 页；强化习题第 94–104、138–147 页",
+    "nodeSlugs": ["bivariate-random-variable", "joint-distribution-function", "joint-probability-mass", "joint-density", "marginal-distribution", "conditional-distribution", "random-variable-independence", "bivariate-region-integral"],
+    "essentials": [
+      { "title": "联合分布", "note": "描述随机点整体规律，既含边缘信息也含变量间关系。" },
+      { "title": "边缘化", "note": "离散型对另一指标求和，连续型对另一变量积分。" },
+      { "title": "条件分布", "note": "联合量除以对应边缘量，并在条件支持集上重新归一化。" },
+      { "title": "独立性", "note": "联合分布能分解为边缘乘积；支持集形状也必须匹配直积。" },
+      { "title": "区域概率", "note": "先画支持集和事件区域的交，再决定二重积分限。" }
+    ],
+    "formulas": [
+      { "label": "联合分布函数", "formula": "F(x,y)=P(X\\le x,Y\\le y)", "note": "对应随机点落在 (x,y) 左下方。" },
+      { "label": "矩形概率", "formula": "P=F(x_2,y_2)-F(x_1,y_2)-F(x_2,y_1)+F(x_1,y_1)", "note": "二维容斥。" },
+      { "label": "边缘分布律", "formula": "p_{i\\cdot}=\\sum_jp_{ij},\\quad p_{\\cdot j}=\\sum_ip_{ij}", "note": "联合表按行列求和。" },
+      { "label": "区域概率", "formula": "P((X,Y)\\in D)=\\iint_Df(x,y)\\,dx\\,dy", "note": "D 要与密度支持集取交。" },
+      { "label": "边缘密度", "formula": "f_X(x)=\\int_{-\\infty}^{+\\infty}f(x,y)\\,dy", "note": "实际积分范围由支持集决定。" },
+      { "label": "条件密度", "formula": "f_{X\\mid Y}(x\\mid y)=\\frac{f(x,y)}{f_Y(y)}", "note": "要求 fY(y)>0。" },
+      { "label": "独立判据", "formula": "f(x,y)=f_X(x)f_Y(y)\\quad\\text{a.e.}", "note": "连续型在几乎处处意义下成立。" }
+    ],
+    "problemTypes": [
+      { "title": "二维离散联合表", "method": "先标有效数对，逐格计数，再用行列和求边缘并计算条件概率。" },
+      { "title": "联合密度归一化", "method": "画支持集，二重积分求参数；边缘和条件分布沿支持集截线。" },
+      { "title": "区域概率", "method": "画支持集与事件边界，找交点，选择分段最少的竖条或横条法。" },
+      { "title": "独立性判断", "method": "比较联合分布与边缘乘积，同时检查支持集是否为直积。" }
+    ],
+    "mistakes": [
+      "矩形概率四项符号写错或漏加左下角。",
+      "求边缘密度时仍使用固定积分限，忽略斜边支持集。",
+      "联合密度能写成两个因子的乘积就直接判独立，没有检查支持集。",
+      "二维均匀分布之外仍使用面积比代替密度积分。",
+      "把条件密度的分母写成错误方向的边缘密度。"
+    ]
+  },
+  {
+    "id": "chapter-4",
+    "number": "04",
+    "title": "随机变量的数字特征",
+    "summary": "第四章围绕期望、方差和共同变化展开。计算主线是先求一阶、二阶矩，再利用线性性、协方差与标准化关系减少运算。",
+    "source": "知识讲解第 47–55 页；强化习题第 105–114、148–159 页",
+    "nodeSlugs": ["expectation", "variance", "covariance", "correlation-coefficient", "moments"],
+    "essentials": [
+      { "title": "数学期望", "note": "概率加权平均；线性性不要求独立。" },
+      { "title": "函数期望", "note": "E[g(X)] 可直接对 g(x) 加权或积分，不必先求新分布。" },
+      { "title": "方差", "note": "优先使用 E(X²)-[E(X)]²；平移不变，缩放平方。" },
+      { "title": "协方差", "note": "决定和差方差中的交叉项；独立推出协方差为 0。" },
+      { "title": "相关系数", "note": "标准化后的线性相关强度；不相关通常不能推出独立。" }
+    ],
+    "formulas": [
+      { "label": "离散期望", "formula": "E(X)=\\sum_kx_kp_k", "note": "无限求和要求绝对收敛。" },
+      { "label": "连续期望", "formula": "E[g(X)]=\\int_{-\\infty}^{+\\infty}g(x)f(x)\\,dx", "note": "直接计算函数期望。" },
+      { "label": "方差快捷式", "formula": "D(X)=E(X^2)-[E(X)]^2", "note": "最常用计算式。" },
+      { "label": "和差方差", "formula": "D(X\\pm Y)=D(X)+D(Y)\\pm2\\operatorname{Cov}(X,Y)", "note": "独立或不相关时交叉项为 0。" },
+      { "label": "协方差", "formula": "\\operatorname{Cov}(X,Y)=E(XY)-E(X)E(Y)", "note": "也等于中心化乘积的期望。" },
+      { "label": "相关系数", "formula": "\\rho_{XY}=\\frac{\\operatorname{Cov}(X,Y)}{\\sqrt{D(X)D(Y)}}", "note": "要求两个方差均非零。" }
+    ],
+    "problemTypes": [
+      { "title": "由分布求期望方差", "method": "求 E(X) 与 E(X²)，再代方差快捷式；对称分布先利用奇偶性。" },
+      { "title": "随机变量函数期望", "method": "直接使用 E[g(X)]，不要先绕路求 g(X) 的分布。" },
+      { "title": "线性组合方差", "method": "先判断独立/不相关条件，再决定协方差项能否消失。" },
+      { "title": "相关关系判断", "method": "确定线性关系可直接判断 ±1；一般先求协方差再标准化。" }
+    ],
+    "mistakes": [
+      "误以为期望可乘性不需要独立。",
+      "把 D(aX+b) 写成 aD(X)+b。",
+      "计算 D(X+Y) 时无条件漏掉 2Cov(X,Y)。",
+      "由 Cov(X,Y)=0 直接推出独立。",
+      "比较协方差绝对值来判断相关强弱，忽略量纲。"
+    ]
+  },
+  {
+    "id": "chapter-5",
+    "number": "05",
+    "title": "大数定律与中心极限定理",
+    "summary": "第五章区分两个问题：大数定律研究样本平均是否稳定到期望，中心极限定理研究标准化随机和的分布是否接近正态。",
+    "source": "知识讲解第 56–59 页；强化习题第 115–116、160–162 页",
+    "nodeSlugs": ["chebyshev-inequality", "law-of-large-numbers", "central-limit-theorem"],
+    "essentials": [
+      { "title": "切比雪夫不等式", "note": "只知道均值、方差时给出尾概率上界，通常不等于真实概率。" },
+      { "title": "依概率收敛", "note": "对任意 ε>0，偏离超过 ε 的概率趋于 0。" },
+      { "title": "大数定律", "note": "样本平均稳定到总体期望；频率稳定到事件概率。" },
+      { "title": "中心极限定理", "note": "标准化和趋近标准正态，核心是减均值、除标准差。" },
+      { "title": "二项正态近似", "note": "使用 np、npq，并对整数边界做连续性修正。" }
+    ],
+    "formulas": [
+      { "label": "切比雪夫", "formula": "P(|X-E(X)|\\ge\\varepsilon)\\le\\frac{D(X)}{\\varepsilon^2}", "note": "ε>0。" },
+      { "label": "依概率收敛", "formula": "X_n\\xrightarrow{P}a\\iff P(|X_n-a|\\ge\\varepsilon)\\to0", "note": "对任意 ε>0。" },
+      { "label": "大数定律", "formula": "\\frac1n\\sum_{i=1}^nX_i\\xrightarrow{P}\\mu", "note": "常见条件为独立同分布且期望存在。" },
+      { "label": "伯努利大数定律", "formula": "\\frac{N_n}{n}\\xrightarrow{P}p", "note": "试验频率趋于成功概率。" },
+      { "label": "中心极限定理", "formula": "\\frac{\\sum_{i=1}^nX_i-n\\mu}{\\sqrt n\\sigma}\\xrightarrow{d}N(0,1)", "note": "独立同分布、方差有限的经典形式。" },
+      { "label": "二项标准化", "formula": "\\frac{X-np}{\\sqrt{np(1-p)}}\\approx N(0,1)", "note": "n 足够大时使用。" }
+    ],
+    "problemTypes": [
+      { "title": "切比雪夫概率界", "method": "先求目标变量的均值和方差，把事件改写成偏离均值至少 ε。" },
+      { "title": "样本平均极限", "method": "识别 1/n∑g(Xi)，极限等于 E[g(X)]。" },
+      { "title": "一般随机和的 CLT", "method": "先求单项 μ、σ²，再对总和减 nμ、除 √nσ。" },
+      { "title": "二项分布正态近似", "method": "使用 N(np,npq)，整数区间端点采用 ±0.5 修正。" }
+    ],
+    "mistakes": [
+      "把切比雪夫上界当成等号或精确概率。",
+      "混淆大数定律和中心极限定理的结论。",
+      "CLT 标准化时漏乘 n 或漏掉 √n。",
+      "样本平均与随机和使用同一个方差尺度。",
+      "二项正态近似忘记连续性修正。"
+    ]
+  }
+]

@@ -1,0 +1,365 @@
+[
+  {
+    "slug": "random-experiment",
+    "chapter": "第一章 · 随机事件与概率",
+    "title": "随机试验与样本空间",
+    "englishTitle": "Random Experiment & Sample Space",
+    "summary": "把不可预知的现象变成可重复、可描述的数学对象，是概率建模的第一步。",
+    "readTime": 7,
+    "updatedAt": "2026.08",
+    "core": [
+      "随机试验是在相同条件下可以重复进行、所有可能结果事先已知、但单次结果无法预先确定的试验。",
+      "样本空间把一次试验的所有可能结果完整收集起来。后续的事件、概率和随机变量都建立在这个集合上，因此建模时最先要问：一次试验究竟输出什么？"
+    ],
+    "definition": {
+      "intro": "随机试验记为 E，它的全部可能基本结果组成样本空间 Ω；每个基本结果 ω 称为样本点。",
+      "formulas": ["\\Omega=\\{\\omega:\\omega\\text{ 是试验 }E\\text{ 的一个可能结果}\\}"]
+    },
+    "intuition": [
+      "样本空间像一张结果清单：掷一枚骰子时 Ω={1,2,3,4,5,6}；连续测量灯泡寿命时 Ω=[0,+∞)。",
+      "样本空间取决于观察精度。同一次抛硬币两次，可以记录正面个数 Ω={0,1,2}，也可以记录先后次序 Ω={HH,HT,TH,TT}。两者回答的问题不同。"
+    ],
+    "visual": { "type": "events", "caption": "随机现象经过明确试验规则后，全部可能输出构成样本空间 Ω。" },
+    "properties": [
+      { "label": "可重复", "text": "试验条件可以在原则上重复设置。" },
+      { "label": "结果完备", "text": "试验前能够列明或描述所有可能结果。" },
+      { "label": "单次不确定", "text": "试验前不能确定本次必然出现哪个结果。" },
+      { "label": "建模原则", "text": "样本点应互斥、无遗漏，并与题目关心的信息粒度一致。" }
+    ],
+    "exams": [
+      "根据随机试验正确写出有限、可列或连续样本空间。",
+      "判断给定过程是否构成随机试验，并说明三个基本特点。",
+      "比较不同观察口径下的样本空间，尤其注意是否保留顺序。"
+    ],
+    "mistakes": [
+      "漏掉可能结果，或把不可能结果放进样本空间。",
+      "把样本点与事件混淆：样本点是单个结果，事件通常是若干结果的集合。",
+      "不说明观察规则就直接写 Ω，导致等可能性判断错误。"
+    ],
+    "prerequisites": [],
+    "connections": [
+      { "title": "随机事件", "slug": "random-events", "note": "事件是样本空间的子集。" },
+      { "title": "随机变量", "slug": "random-variable", "note": "随机变量是定义在样本空间上的实值函数。" }
+    ]
+  },
+  {
+    "slug": "random-events",
+    "chapter": "第一章 · 随机事件与概率",
+    "title": "随机事件与事件运算",
+    "englishTitle": "Random Events & Operations",
+    "summary": "用集合语言精确表达“至少一个、同时发生、没有发生”等随机陈述。",
+    "readTime": 9,
+    "updatedAt": "2026.08",
+    "core": [
+      "随机事件是样本空间 Ω 的一个子集。当试验结果 ω 落在集合 A 中，就说事件 A 发生。",
+      "事件运算把自然语言翻译成集合运算，是概率计算的语法基础：并集对应“至少一个”，交集对应“同时”，补集对应“不发生”。"
+    ],
+    "definition": {
+      "intro": "事件 A、B⊆Ω；单个样本点组成的事件称基本事件，包含多个样本点的称复合事件。",
+      "formulas": ["A\\cup B=\\{\\omega:\\omega\\in A\\text{ 或 }\\omega\\in B\\}", "A\\cap B=\\{\\omega:\\omega\\in A\\text{ 且 }\\omega\\in B\\}", "\\bar A=\\Omega\\setminus A"]
+    },
+    "intuition": [
+      "把 Ω 看成一块区域，每个事件是其中一块带颜色的区域。一次结果像落下的点，点落在哪些区域中，对应哪些事件发生。",
+      "A⊆B 表示 A 发生必然导致 B 发生；A∩B=∅ 表示两事件互斥；A=B 表示二者包含完全相同的样本点。"
+    ],
+    "visual": { "type": "sets", "caption": "用区域的重叠、合并与补集理解事件关系和运算。" },
+    "properties": [
+      { "label": "德摩根律", "text": "“并”的对立等于“各自对立再交”。", "formula": "\\overline{A\\cup B}=\\bar A\\cap\\bar B" },
+      { "label": "另一条德摩根律", "text": "“交”的对立等于“各自对立再并”。", "formula": "\\overline{A\\cap B}=\\bar A\\cup\\bar B" },
+      { "label": "交换律", "text": "事件次序不影响并、交运算。", "formula": "A\\cup B=B\\cup A,\\quad A\\cap B=B\\cap A" },
+      { "label": "分配律", "text": "复杂事件化简的常用规则。", "formula": "A\\cap(B\\cup C)=(A\\cap B)\\cup(A\\cap C)" }
+    ],
+    "exams": [
+      "把“至少、至多、恰有、都不”等文字事件写成集合表达式。",
+      "使用德摩根律处理“至少一个发生”的对立事件。",
+      "判断事件包含、相等、互斥关系并进行集合化简。"
+    ],
+    "mistakes": [
+      "把 A∪B 误解为只能发生一个；实际上它包含 A、B 同时发生。",
+      "互斥不等于对立：对立事件还必须满足并集为 Ω。",
+      "把 A−B 写成 B−A；A−B=A∩Bᶜ。"
+    ],
+    "prerequisites": [
+      { "title": "随机试验与样本空间", "slug": "random-experiment", "note": "先明确事件所在的全集 Ω。" }
+    ],
+    "connections": [
+      { "title": "概率定义", "slug": "probability-definition", "note": "概率是定义在事件集合上的函数。" },
+      { "title": "概率性质", "slug": "probability-properties", "note": "集合关系决定概率公式。" }
+    ]
+  },
+  {
+    "slug": "probability-definition",
+    "chapter": "第一章 · 随机事件与概率",
+    "title": "概率的定义",
+    "englishTitle": "Definitions of Probability",
+    "summary": "概率用 0 到 1 之间的数度量事件发生的可能性；古典、几何和公理化定义分别服务于不同问题。",
+    "readTime": 9,
+    "updatedAt": "2026.08",
+    "core": [
+      "概率不是对单次结果的保证，而是对随机机制长期规律的数量描述。",
+      "古典概率依赖有限个等可能样本点；几何概率依赖长度、面积或体积的均匀性；现代概率论以三条公理为统一基础。"
+    ],
+    "definition": {
+      "intro": "设 Ω 为样本空间，P 是从事件到实数的映射。概率公理要求非负、规范和可列可加。",
+      "formulas": ["P(A)\\ge 0", "P(\\Omega)=1", "A_i\\cap A_j=\\varnothing\\ (i\\ne j)\\Rightarrow P\\!\\left(\\bigcup_{i=1}^{\\infty}A_i\\right)=\\sum_{i=1}^{\\infty}P(A_i)", "P(A)=\\frac{|A|}{|\\Omega|}\\quad\\text{（有限等可能）}"]
+    },
+    "intuition": [
+      "古典概率是在数格子：有利结果数除以全部等可能结果数。几何概率是在量区域：有利区域测度除以整体区域测度。",
+      "三条公理不直接告诉你某事件概率是多少，它规定任何合法概率模型必须遵守的底层规则，其他性质都可由此推出。"
+    ],
+    "visual": { "type": "probability", "caption": "概率把不可能事件映射到 0、必然事件映射到 1，其余事件位于二者之间。" },
+    "properties": [
+      { "label": "古典概型", "text": "样本点有限且等可能时，通过计数求概率。", "formula": "P(A)=m/n" },
+      { "label": "几何概型", "text": "随机点在区域中均匀分布时，通过测度之比求概率。", "formula": "P(A)=\\mu(A)/\\mu(\\Omega)" },
+      { "label": "统计解释", "text": "大量独立重复试验中，频率通常稳定在概率附近。", "formula": "n_A/n\\to P(A)" },
+      { "label": "单调性", "text": "若 A⊆B，则 A 不会比 B 更容易发生。", "formula": "A\\subseteq B\\Rightarrow P(A)\\le P(B)" }
+    ],
+    "exams": [
+      "排列组合结合古典概型，尤其是不放回抽样、分组和占位问题。",
+      "在区间、平面区域上用长度或面积之比计算几何概率。",
+      "根据给定函数检验其是否满足概率公理。"
+    ],
+    "mistakes": [
+      "样本点并非等可能时仍套用有利数/总数。",
+      "几何概率把边界长度当成面积概率；连续模型中单点通常概率为 0。",
+      "把 P(A)=0 解释成 A 绝对不可能；在连续空间中零概率事件仍可能作为结果出现。"
+    ],
+    "prerequisites": [
+      { "title": "随机事件与事件运算", "slug": "random-events", "note": "概率的输入是事件。" }
+    ],
+    "connections": [
+      { "title": "概率性质", "slug": "probability-properties", "note": "由概率公理推出常用计算规则。" },
+      { "title": "大数定律", "slug": "law-of-large-numbers", "note": "解释频率为何稳定到概率。" }
+    ]
+  },
+  {
+    "slug": "probability-properties",
+    "chapter": "第一章 · 随机事件与概率",
+    "title": "概率性质与加法公式",
+    "englishTitle": "Probability Rules & Addition Law",
+    "summary": "利用事件之间的包含和重叠关系，把复杂概率化成已知概率。",
+    "readTime": 8,
+    "updatedAt": "2026.08",
+    "core": [
+      "概率性质是三条公理的直接推论。最常用的思想是：先把事件区域拆成互不重叠的部分，再利用可加性。",
+      "加法公式中的减项 P(A∩B) 是为了消除重复计数；对立事件公式则把“至少一个”等难算事件转成更简单的补集。"
+    ],
+    "definition": {
+      "intro": "对任意事件 A、B，概率满足补集、差事件和一般加法公式。",
+      "formulas": ["P(\\bar A)=1-P(A)", "P(A\\setminus B)=P(A)-P(A\\cap B)", "P(A\\cup B)=P(A)+P(B)-P(A\\cap B)"]
+    },
+    "intuition": [
+      "计算 A 与 B 的并集时，P(A)+P(B) 把交集数了两遍，所以必须减回一次。",
+      "面对“至少一次成功”，直接分类往往很繁琐；先算“一次也不成功”，再用 1 减去它通常更快。"
+    ],
+    "visual": { "type": "sets", "caption": "并集面积等于两个区域面积之和减去被重复计算的交叠区域。" },
+    "properties": [
+      { "label": "互斥加法", "text": "若 A 与 B 不能同时发生，交集项为零。", "formula": "A\\cap B=\\varnothing\\Rightarrow P(A\\cup B)=P(A)+P(B)" },
+      { "label": "三事件加法", "text": "两两交集要减去，三重交集再补回。", "formula": "P(A\\cup B\\cup C)=\\sum P(A)-\\sum P(A\\cap B)+P(A\\cap B\\cap C)" },
+      { "label": "差事件", "text": "当 B⊆A 时可直接相减。", "formula": "B\\subseteq A\\Rightarrow P(A\\setminus B)=P(A)-P(B)" },
+      { "label": "上下界", "text": "概率不会超出基本界限。", "formula": "0\\le P(A)\\le1" }
+    ],
+    "exams": [
+      "已知单事件及交集概率，求并集、仅一个发生或都不发生。",
+      "多次试验中的“至少一次”优先使用对立事件。",
+      "容斥原理计算三个事件至少一个发生的概率。"
+    ],
+    "mistakes": [
+      "一般加法公式漏减交集。",
+      "只有互斥时才能直接 P(A∪B)=P(A)+P(B)。",
+      "“A、B 不同时发生”可能表示互斥；“不全发生”是 (A∩B)ᶜ，二者不同。"
+    ],
+    "prerequisites": [
+      { "title": "概率的定义", "slug": "probability-definition", "note": "常用性质由概率公理推出。" },
+      { "title": "事件运算", "slug": "random-events", "note": "先正确翻译并、交、差、补。" }
+    ],
+    "connections": [
+      { "title": "条件概率", "slug": "conditional-probability", "note": "在缩小的样本空间中继续使用这些规则。" },
+      { "title": "事件独立性", "slug": "event-independence", "note": "独立性帮助计算交集概率。" }
+    ]
+  },
+  {
+    "slug": "conditional-probability",
+    "chapter": "第一章 · 随机事件与概率",
+    "title": "条件概率与乘法公式",
+    "englishTitle": "Conditional Probability & Multiplication Law",
+    "summary": "获得信息 B 后，把样本空间缩小到 B，并在新的范围内重新计算 A 的概率。",
+    "readTime": 9,
+    "updatedAt": "2026.08",
+    "core": [
+      "条件概率回答“已知 B 已发生，A 发生的可能性是多少”。新信息会改变可比较的全部结果，因此分母必须从 1 改成 P(B)。",
+      "乘法公式是条件概率定义的变形，用于把联合事件拆成“先发生一个，再在此条件下发生另一个”。"
+    ],
+    "definition": {
+      "intro": "当 P(B)>0 时，A 在 B 条件下的条件概率定义为交集概率相对于 B 的比例。",
+      "formulas": ["P(A\\mid B)=\\frac{P(A\\cap B)}{P(B)}", "P(A\\cap B)=P(B)P(A\\mid B)=P(A)P(B\\mid A)", "P\\!\\left(\\bigcap_{i=1}^{n}A_i\\right)=P(A_1)\\prod_{i=2}^{n}P\\!\\left(A_i\\mid\\bigcap_{j=1}^{i-1}A_j\\right)"]
+    },
+    "intuition": [
+      "把 B 当作新的全集，A∩B 是新全集里满足 A 的部分；除以 P(B) 完成重新归一化。",
+      "不放回抽样中，前一次结果改变剩余组成，因此后一步概率必须写成条件概率。"
+    ],
+    "visual": { "type": "sets", "caption": "知道 B 发生后，只保留 B 区域；其中与 A 重叠的比例就是 P(A|B)。" },
+    "properties": [
+      { "label": "条件概率仍是概率", "text": "对固定 B，P(·|B) 满足三条概率公理。" },
+      { "label": "乘法公式", "text": "联合概率可按事件发生顺序逐层展开。", "formula": "P(AB)=P(A)P(B\\mid A)" },
+      { "label": "条件的方向", "text": "条件事件决定分母，P(A|B) 与 P(B|A) 一般不同。" },
+      { "label": "树状图原则", "text": "沿路径相乘，互斥路径相加。" }
+    ],
+    "exams": [
+      "不放回抽样、连续抽取与分步试验中的乘法公式。",
+      "由 P(A)、P(B)、P(AB) 计算两个方向的条件概率。",
+      "树状图或事件链计算多个事件依次发生的概率。"
+    ],
+    "mistakes": [
+      "颠倒 P(A|B) 与 P(B|A)。",
+      "分母误写成 P(A)，或忽略条件事件概率必须大于 0。",
+      "不放回问题仍把各步概率当成不变。"
+    ],
+    "prerequisites": [
+      { "title": "概率性质与加法公式", "slug": "probability-properties", "note": "需要熟悉交集和概率运算。" }
+    ],
+    "connections": [
+      { "title": "全概率公式", "slug": "total-probability", "note": "按条件来源拆分目标概率。" },
+      { "title": "贝叶斯公式", "slug": "bayes-theorem", "note": "交换条件方向，完成反推。" },
+      { "title": "事件独立性", "slug": "event-independence", "note": "独立意味着条件信息不改变概率。" }
+    ]
+  },
+  {
+    "slug": "total-probability",
+    "chapter": "第一章 · 随机事件与概率",
+    "title": "全概率公式",
+    "englishTitle": "Law of Total Probability",
+    "summary": "把一个目标事件按照所有可能来源拆开计算，再将各条互斥路径相加。",
+    "readTime": 8,
+    "updatedAt": "2026.08",
+    "core": [
+      "当事件 B 可能由若干互斥原因 A₁,…,Aₙ 引起时，直接计算 B 往往困难。全概率公式把 B 分解成 B∩Aᵢ 的并。",
+      "它解决的是“从原因到结果”的正向计算：已知各种来源的占比和各来源下结果出现率，求总体结果概率。"
+    ],
+    "definition": {
+      "intro": "若 A₁,…,Aₙ 两两互斥、并集为 Ω，且 P(Aᵢ)>0，则它们构成 Ω 的一个完备事件组。",
+      "formulas": ["A_i\\cap A_j=\\varnothing\\ (i\\ne j),\\quad\\bigcup_{i=1}^nA_i=\\Omega", "P(B)=\\sum_{i=1}^{n}P(A_i)P(B\\mid A_i)"]
+    },
+    "intuition": [
+      "总体次品可以来自甲、乙、丙三个车间。每个车间贡献的次品概率等于“来自该车间的概率 × 该车间次品率”，再把三项相加。",
+      "树状图上，从根到 B 的每条路径相乘；所有到达 B 的互斥路径相加。"
+    ],
+    "visual": { "type": "tree", "caption": "完备事件组把样本空间切成互斥分支；沿分支相乘，抵达目标 B 的路径相加。" },
+    "properties": [
+      { "label": "先验权重", "text": "P(Aᵢ) 表示第 i 种来源在总体中的占比。" },
+      { "label": "条件发生率", "text": "P(B|Aᵢ) 表示来源确定后 B 的发生率。" },
+      { "label": "加权平均", "text": "P(B) 是各条件概率按先验概率加权后的平均。", "formula": "P(B)=E[P(B\\mid A)]" },
+      { "label": "完备性", "text": "分支必须互斥且覆盖所有可能来源，否则会重复或遗漏。" }
+    ],
+    "exams": [
+      "多工厂生产、多人射击、疾病分组等来源混合问题。",
+      "根据总体发生率反求某个未知条件概率。",
+      "先画树状图识别完备事件组，再列全概率公式。"
+    ],
+    "mistakes": [
+      "分组没有覆盖 Ω，遗漏一类来源。",
+      "Aᵢ 之间不互斥却直接相加，造成重复计算。",
+      "把 P(Aᵢ) 与 P(B|Aᵢ) 的角色颠倒。"
+    ],
+    "prerequisites": [
+      { "title": "条件概率与乘法公式", "slug": "conditional-probability", "note": "每条路径使用乘法公式。" },
+      { "title": "事件运算", "slug": "random-events", "note": "需要理解互斥与完备划分。" }
+    ],
+    "connections": [
+      { "title": "贝叶斯公式", "slug": "bayes-theorem", "note": "全概率给出贝叶斯公式的分母。" },
+      { "title": "混合分布", "slug": "distribution-function", "note": "分布也可以按潜在类别加权混合。" }
+    ]
+  },
+  {
+    "slug": "bayes-theorem",
+    "chapter": "第一章 · 随机事件与概率",
+    "title": "贝叶斯公式",
+    "englishTitle": "Bayes' Theorem",
+    "summary": "观察到结果后，综合先验概率和证据强度，更新对原因的判断。",
+    "readTime": 9,
+    "updatedAt": "2026.08",
+    "core": [
+      "贝叶斯公式解决“从结果反推原因”：已知 B 已发生，重新评估它来自各原因 Aᵢ 的概率。",
+      "后验概率不仅取决于 P(B|Aᵢ) 的大小，还取决于原因本身的先验概率 P(Aᵢ)。这正是医学检测中不能只看准确率的原因。"
+    ],
+    "definition": {
+      "intro": "对完备事件组 A₁,…,Aₙ 和 P(B)>0，后验概率由先验与似然的乘积归一化得到。",
+      "formulas": ["P(A_i\\mid B)=\\frac{P(A_i)P(B\\mid A_i)}{\\sum_{j=1}^{n}P(A_j)P(B\\mid A_j)}", "\\text{后验}\\propto\\text{先验}\\times\\text{似然}"]
+    },
+    "intuition": [
+      "先验 P(Aᵢ) 是看到证据前对原因的相信程度；似然 P(B|Aᵢ) 衡量该原因产生证据 B 的能力；分母让所有原因的后验概率重新加总为 1。",
+      "罕见病即使检测灵敏度很高，阳性者真正患病的比例也可能不高，因为未患病人群的基数远大。"
+    ],
+    "visual": { "type": "tree", "caption": "先沿原因→结果方向计算联合概率，再在所有产生同一结果的路径中重新分配权重。" },
+    "properties": [
+      { "label": "两事件形式", "text": "交换条件方向的基本公式。", "formula": "P(A\\mid B)=\\frac{P(B\\mid A)P(A)}{P(B)}" },
+      { "label": "归一化常数", "text": "分母 P(B) 由全概率公式计算。" },
+      { "label": "后验和为 1", "text": "对完备原因组，更新后的概率仍构成分布。", "formula": "\\sum_iP(A_i\\mid B)=1" },
+      { "label": "证据更新", "text": "似然比大于 1 的证据会相对提高对应原因的后验权重。" }
+    ],
+    "exams": [
+      "医学检测、产品来源、报警系统等由结果反推类别的问题。",
+      "给出灵敏度、特异度和患病率，求阳性预测值。",
+      "区分全概率的正向计算与贝叶斯的反向推断。"
+    ],
+    "mistakes": [
+      "把 P(B|A) 直接当成 P(A|B)。",
+      "只比较似然，忽略先验概率。",
+      "分母只写某一条路径，而没有汇总所有可能原因。"
+    ],
+    "prerequisites": [
+      { "title": "条件概率", "slug": "conditional-probability", "note": "贝叶斯公式来自两个方向的乘法公式。" },
+      { "title": "全概率公式", "slug": "total-probability", "note": "用于计算证据概率 P(B)。" }
+    ],
+    "connections": [
+      { "title": "事件独立性", "slug": "event-independence", "note": "独立证据可以分解似然。" },
+      { "title": "机器学习概率模型", "slug": "machine-learning", "note": "分类、朴素贝叶斯和贝叶斯推断的基础。", "type": "data-science" }
+    ]
+  },
+  {
+    "slug": "event-independence",
+    "chapter": "第一章 · 随机事件与概率",
+    "title": "事件独立性",
+    "englishTitle": "Independence of Events",
+    "summary": "一个事件是否发生不改变另一个事件的概率时，两事件独立。",
+    "readTime": 8,
+    "updatedAt": "2026.08",
+    "core": [
+      "独立性描述随机机制之间没有概率影响。它不是事件集合在几何上没有交集，而是交集概率恰好等于各自概率的乘积。",
+      "独立让复杂联合概率可以拆成乘积，是重复试验、随机变量和极限定理中的核心假设。"
+    ],
+    "definition": {
+      "intro": "事件 A、B 独立，当且仅当联合发生概率可以分解为边缘概率乘积。若概率为正，也等价于条件概率不变。",
+      "formulas": ["A\\perp B\\iff P(A\\cap B)=P(A)P(B)", "P(B)>0\\Rightarrow A\\perp B\\iff P(A\\mid B)=P(A)"]
+    },
+    "intuition": [
+      "抛两枚独立硬币，知道第一枚为正面不会改变第二枚为正面的概率。",
+      "互斥意味着 A 发生后 B 不可能发生，通常反而有强烈影响；当 P(A),P(B)>0 时，互斥事件一定不独立。"
+    ],
+    "visual": { "type": "probability", "caption": "独立不是“不相交”，而是条件信息没有改变另一个事件的概率刻度。" },
+    "properties": [
+      { "label": "补事件保持独立", "text": "若 A、B 独立，则 A 与 Bᶜ、Aᶜ 与 B、Aᶜ 与 Bᶜ 也独立。" },
+      { "label": "两两独立", "text": "任意两事件独立，不一定推出多个事件相互独立。" },
+      { "label": "相互独立", "text": "任意子组的交集概率均等于概率乘积。", "formula": "P(\\bigcap_{i\\in I}A_i)=\\prod_{i\\in I}P(A_i)" },
+      { "label": "重复试验", "text": "伯努利试验要求各次结果相互独立且成功概率相同。" }
+    ],
+    "exams": [
+      "根据概率表或已知概率判断两事件是否独立。",
+      "比较互斥、对立、独立三个概念。",
+      "独立重复试验中用乘法计算指定结果序列的概率。"
+    ],
+    "mistakes": [
+      "把互斥当成独立。正概率互斥事件不独立。",
+      "由两两独立直接推出相互独立。",
+      "仅凭现实语言判断独立，未检验概率乘积条件。"
+    ],
+    "prerequisites": [
+      { "title": "条件概率", "slug": "conditional-probability", "note": "独立等价于条件概率不变。" }
+    ],
+    "connections": [
+      { "title": "二项分布", "slug": "binomial", "note": "建立在独立重复伯努利试验上。", "type": "distribution" },
+      { "title": "随机变量独立性", "slug": "random-variable-independence", "note": "从事件独立推广到变量生成的全部事件。" },
+      { "title": "大数定律", "slug": "law-of-large-numbers", "note": "常见定理依赖独立性条件。" }
+    ]
+  }
+]

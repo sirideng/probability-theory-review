@@ -1,0 +1,75 @@
+[
+  {
+    "slug": "conditional-probability",
+    "chapter": "第一章 · 随机事件与概率",
+    "title": "条件概率",
+    "englishTitle": "Conditional Probability",
+    "summary": "当我们获得了新的信息，原本的概率空间就被缩小了；条件概率是在这个新范围里重新计算可能性。",
+    "readTime": 6,
+    "updatedAt": "2026.08",
+    "sections": [
+      {
+        "id": "intuition",
+        "label": "01",
+        "title": "一句话理解",
+        "content": "已知事件 B 已经发生，只在 B 所包含的结果中，判断事件 A 发生的比例。",
+        "tone": "blue"
+      },
+      {
+        "id": "definition",
+        "label": "02",
+        "title": "数学定义",
+        "content": "当 P(B) > 0 时，事件 A 在事件 B 发生条件下的条件概率定义为：",
+        "formula": "P(A | B) = P(A ∩ B) / P(B)",
+        "tone": "violet"
+      },
+      {
+        "id": "visual",
+        "label": "03",
+        "title": "直观解释",
+        "content": "把整个样本空间想成一张地图。知道 B 发生后，我们裁掉 B 以外的区域，再看 A 与 B 的重叠部分占 B 的多少。分母 P(B) 完成了对新样本空间的重新归一化。",
+        "tone": "orange"
+      },
+      {
+        "id": "scenes",
+        "label": "04",
+        "title": "什么时候想到它",
+        "items": [
+          "题目出现“已知、在……条件下、若已经”等信息限定词",
+          "抽样过程中前一次结果会改变后一次的样本空间",
+          "需要由联合概率拆解事件发生的先后关系",
+          "从检测结果反推患病可能性，为贝叶斯公式做准备"
+        ],
+        "tone": "green"
+      },
+      {
+        "id": "problems",
+        "label": "05",
+        "title": "典型题型",
+        "items": [
+          "不放回抽样：已知第一件合格，求第二件合格的概率",
+          "产品分类：已知来自某车间，求产品为次品的概率",
+          "事件链：利用乘法公式计算多个事件依次发生的概率"
+        ],
+        "tone": "blue"
+      },
+      {
+        "id": "mistakes",
+        "label": "06",
+        "title": "易错点",
+        "items": [
+          "P(A | B) 与 P(B | A) 通常不相等，不要颠倒条件",
+          "分母是条件事件 P(B)，不是目标事件 P(A)",
+          "只有 P(B) > 0 时，P(A | B) 才有定义",
+          "独立时 P(A | B) = P(A)，但不能因此把条件直接忽略"
+        ],
+        "tone": "rose"
+      }
+    ],
+    "connections": [
+      { "title": "全概率公式", "slug": "total-probability", "note": "把复杂来源拆开计算" },
+      { "title": "贝叶斯公式", "slug": "bayes-theorem", "note": "由结果反推原因" },
+      { "title": "事件独立性", "slug": "independence", "note": "判断新信息是否改变概率" }
+    ]
+  }
+]

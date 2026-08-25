@@ -1,0 +1,814 @@
+[
+  {
+    "slug": "random-experiment",
+    "lectureSummary": [
+      "做题先确定随机试验 E 的观察对象，再写样本空间 Ω；观察口径不同，样本空间可能不同。",
+      "样本点必须互斥且无遗漏；有限或可列取值属于离散样本空间，区间或平面区域通常属于连续样本空间。"
+    ],
+    "problemTypes": [
+      {
+        "title": "由实际试验写样本空间",
+        "features": "题目给出一次观察过程，要求写出全部可能结果或判断样本空间类型。",
+        "method": "先明确一次试验记录什么，再按最小且完备的结果单位列举。",
+        "steps": ["确定试验的一次输出", "判断结果是否需要保留顺序", "检查样本点是否互斥、完备"]
+      }
+    ],
+    "examples": [
+      {
+        "title": "播放量的样本空间",
+        "problem": "观察某短视频一小时内的播放次数，写出样本空间并判断其类型。",
+        "analysis": "播放次数只能是非负整数，理论上没有固定上界。",
+        "steps": [
+          { "text": "把一次试验的输出定义为一小时内的播放次数。" },
+          { "text": "所有可能结果为 0,1,2,…。", "formula": "\\Omega=\\{0,1,2,\\ldots\\}" },
+          { "text": "该集合可列，因此是离散样本空间。" }
+        ],
+        "answer": "样本空间为非负整数集，属于离散样本空间。",
+        "answerFormula": "\\Omega=\\mathbb{Z}_{\\ge 0}",
+        "source": "讲义第一章随机试验示例（PDF 第5页）"
+      }
+    ]
+  },
+  {
+    "slug": "random-events",
+    "lectureSummary": [
+      "事件是样本空间的子集；和、积、差、补分别对应“至少一个”“同时”“A 发生而 B 不发生”“A 不发生”。",
+      "互斥只要求不能同时发生；对立还要求两事件覆盖整个样本空间。"
+    ],
+    "problemTypes": [
+      {
+        "title": "文字事件翻译",
+        "features": "出现“至少、恰有、只有、都不”等关键词。",
+        "method": "先逐次写发生与不发生，再用并集汇总互斥情形。",
+        "steps": ["定义基本事件", "逐个写出满足条件的交事件", "用并集连接所有互斥情况"]
+      }
+    ],
+    "examples": [
+      {
+        "title": "三次抽取中恰有一次正品",
+        "problem": "设 A、B、C 分别表示前三次抽到正品。用事件运算表示“恰有一次抽到正品”。",
+        "analysis": "恰有一次意味着三种互斥情况：仅第一次、仅第二次或仅第三次为正品。",
+        "steps": [
+          { "text": "仅第一次为正品。", "formula": "A\\cap\\bar B\\cap\\bar C" },
+          { "text": "仅第二次或仅第三次为正品。", "formula": "\\bar A\\cap B\\cap\\bar C,\\quad \\bar A\\cap\\bar B\\cap C" },
+          { "text": "把三种互斥情况取并。" }
+        ],
+        "answer": "三种仅一次成功的情形之并。",
+        "answerFormula": "(A\\cap\\bar B\\cap\\bar C)\\cup(\\bar A\\cap B\\cap\\bar C)\\cup(\\bar A\\cap\\bar B\\cap C)",
+        "source": "讲义例1.1（PDF 第8页），按复习模板整理"
+      }
+    ]
+  },
+  {
+    "slug": "probability-definition",
+    "lectureSummary": [
+      "古典概型的前提是有限且等可能；几何概型要求随机点在区域内均匀。",
+      "公式使用前必须先验证模型条件，不能看到“计数”就默认等可能。"
+    ],
+    "problemTypes": [
+      {
+        "title": "几何概型面积比",
+        "features": "在区间或平面区域内均匀取点，事件可画成子区域。",
+        "method": "建立坐标系，将概率转化为有利区域与总区域的测度之比。",
+        "steps": ["写总区域", "把事件不等式画成有利区域", "计算长度或面积之比"]
+      }
+    ],
+    "examples": [
+      {
+        "title": "单位正方形中的和事件",
+        "problem": "在 (0,1) 内独立均匀取两个数 X、Y，求 P(X+Y<6/5)。",
+        "analysis": "样本点 (X,Y) 在单位正方形内均匀，补事件 X+Y≥6/5 是右上角直角三角形。",
+        "steps": [
+          { "text": "总区域面积为 1。" },
+          { "text": "补区域两直角边长度均为 4/5，其面积为。", "formula": "S_{\\bar A}=\\frac12\\left(\\frac45\\right)^2=\\frac8{25}" },
+          { "text": "用 1 减去补区域面积。", "formula": "P(A)=1-\\frac8{25}=\\frac{17}{25}" }
+        ],
+        "answer": "所求概率为 17/25。",
+        "answerFormula": "P(X+Y<6/5)=\\frac{17}{25}",
+        "source": "讲义例1.3（PDF 第10页）"
+      }
+    ]
+  },
+  {
+    "slug": "probability-properties",
+    "lectureSummary": [
+      "加法公式的减项用于消除交集的重复计数；至少一次问题优先考虑补事件。",
+      "P(AB)=0 只说明交集是零概率事件，不必然说明 AB 是空集。"
+    ],
+    "problemTypes": [
+      {
+        "title": "并、交、仅一个发生",
+        "features": "已知 P(A)、P(B)、P(AB)，要求至少一个、都不或仅一个发生。",
+        "method": "先用加法公式求并集，再用差事件或补事件。",
+        "steps": ["画两事件区域", "列加法公式", "根据目标做补集或扣除交集"]
+      }
+    ],
+    "examples": [
+      {
+        "title": "由交集求并集与仅一个发生",
+        "problem": "已知 P(A)=0.6，P(B)=0.5，P(AB)=0.3，求 P(A∪B) 及恰有一个事件发生的概率。",
+        "analysis": "并集包含仅 A、仅 B 和交集；恰有一个发生需从并集中去掉交集。",
+        "steps": [
+          { "text": "使用一般加法公式。", "formula": "P(A\\cup B)=0.6+0.5-0.3=0.8" },
+          { "text": "恰有一个发生等于并集减去交集。", "formula": "P(A\\triangle B)=0.8-0.3=0.5" }
+        ],
+        "answer": "并集概率为 0.8，恰有一个发生的概率为 0.5。",
+        "source": "讲义概率加法、减法公式与例1.5-1.6（PDF 第11-12页）改编"
+      }
+    ]
+  },
+  {
+    "slug": "conditional-probability",
+    "lectureSummary": [
+      "条件事件写在竖线右侧并决定分母；P(A|B) 与 P(B|A) 通常不同。",
+      "乘法公式适合分阶段试验：沿同一路径的条件概率相乘。"
+    ],
+    "problemTypes": [
+      {
+        "title": "条件事件的区域比",
+        "features": "目标形如 P(C|D)，且 C、D 可由 A、B 的并交表示。",
+        "method": "先化简条件事件和联合事件，再用定义计算。",
+        "steps": ["写出分母 P(D)", "化简 C∩D", "代入条件概率定义"]
+      }
+    ],
+    "examples": [
+      {
+        "title": "并集条件下的交集概率",
+        "problem": "已知 P(A)=0.4，P(B)=0.2，P(AB)=0.1，求 P(AB | A∪B)。",
+        "analysis": "因为 AB⊆A∪B，条件概率的分子仍为 P(AB)。",
+        "steps": [
+          { "text": "先求条件事件概率。", "formula": "P(A\\cup B)=0.4+0.2-0.1=0.5" },
+          { "text": "应用条件概率定义。", "formula": "P(AB\\mid A\\cup B)=\\frac{0.1}{0.5}=0.2" }
+        ],
+        "answer": "条件概率为 0.2。",
+        "answerFormula": "P(AB\\mid A\\cup B)=0.2",
+        "source": "讲义例1.8（PDF 第13页）"
+      }
+    ]
+  },
+  {
+    "slug": "total-probability",
+    "lectureSummary": [
+      "出现多个互斥来源和一个共同结果时，先把来源设为完备事件组。",
+      "全概率是正向计算：来源占比 × 来源下结果率，再对所有来源求和。"
+    ],
+    "problemTypes": [
+      {
+        "title": "多来源混合概率",
+        "features": "总体由若干工厂、人群或方案组成，每类具有不同发生率。",
+        "method": "来源作第一层，目标事件作第二层，沿路径相乘后相加。",
+        "steps": ["设完备事件组", "写各条件概率", "逐项相乘并求和"]
+      }
+    ],
+    "examples": [
+      {
+        "title": "三家工厂的总体次品率",
+        "problem": "甲、乙、丙市场占有率为 1/4、1/4、1/2，次品率为 2%、1%、3%。随机买一件产品，求次品概率。",
+        "analysis": "产品必来自且仅来自一家工厂，三家来源构成完备事件组。",
+        "steps": [
+          { "text": "按来源列全概率公式。", "formula": "P(D)=\\sum_{i=1}^3P(B_i)P(D\\mid B_i)" },
+          { "text": "代入数据。", "formula": "P(D)=\\frac14(0.02)+\\frac14(0.01)+\\frac12(0.03)=0.0225" }
+        ],
+        "answer": "买到次品的概率为 2.25%。",
+        "answerFormula": "P(D)=0.0225=\\frac9{400}",
+        "source": "讲义例1.14（PDF 第15页）"
+      }
+    ]
+  },
+  {
+    "slug": "bayes-theorem",
+    "lectureSummary": [
+      "贝叶斯公式是反向追因：分子是一条来源路径的联合概率，分母是所有可能来源路径之和。",
+      "后验大小同时受先验占比和条件发生率影响。"
+    ],
+    "problemTypes": [
+      {
+        "title": "观察结果后反推来源",
+        "features": "题目已知结果发生，问它来自某一类别的概率。",
+        "method": "先用全概率求证据概率，再用贝叶斯公式归一化目标来源。",
+        "steps": ["确定先验与似然", "求证据总概率", "目标路径除以证据总概率"]
+      }
+    ],
+    "examples": [
+      {
+        "title": "次品来自甲厂的后验概率",
+        "problem": "沿用三家工厂数据。已知买到的是次品，求它来自甲厂的概率。",
+        "analysis": "甲厂次品路径概率为 1/4×2%，证据概率已由全概率求得为 2.25%。",
+        "steps": [
+          { "text": "计算目标联合路径。", "formula": "P(B_1D)=\\frac14\\times0.02=0.005" },
+          { "text": "除以次品总概率。", "formula": "P(B_1\\mid D)=\\frac{0.005}{0.0225}=\\frac29" }
+        ],
+        "answer": "次品来自甲厂的概率为 2/9。",
+        "answerFormula": "P(B_1\\mid D)=\\frac29",
+        "source": "讲义例1.14（PDF 第15页）"
+      }
+    ]
+  },
+  {
+    "slug": "event-independence",
+    "lectureSummary": [
+      "独立性的计算判据是 P(AB)=P(A)P(B)，不是“没有交集”。",
+      "两两独立不等于相互独立；正概率互斥事件一定不独立。"
+    ],
+    "problemTypes": [
+      {
+        "title": "独立性判定与联合概率",
+        "features": "给出边缘概率与交集概率，或明确各次试验独立。",
+        "method": "先检验乘积等式；多事件题要区分两两独立和相互独立。",
+        "steps": ["计算 P(A)P(B)", "与 P(AB) 比较", "必要时继续检验三重交集"]
+      }
+    ],
+    "examples": [
+      {
+        "title": "独立事件的条件概率",
+        "problem": "设 A、B 独立，P(A)=1/3，P(B)=2/5，求 P(A|B) 与 P(AB)。",
+        "analysis": "独立意味着知道 B 发生不会改变 A 的概率。",
+        "steps": [
+          { "text": "直接使用独立性的条件概率等价形式。", "formula": "P(A\\mid B)=P(A)=\\frac13" },
+          { "text": "联合概率分解为乘积。", "formula": "P(AB)=P(A)P(B)=\\frac{2}{15}" }
+        ],
+        "answer": "P(A|B)=1/3，P(AB)=2/15。",
+        "source": "讲义事件独立性与例1.9（PDF 第13-14页）改编"
+      }
+    ]
+  },
+  {
+    "slug": "random-variable",
+    "lectureSummary": [
+      "随机变量是样本空间上的实值单值函数，随机的是取值，不是映射规则。",
+      "先确定取值范围，再讨论与取值有关的事件概率。"
+    ],
+    "problemTypes": [
+      {
+        "title": "由随机试验定义随机变量",
+        "features": "试验结果不是数值，需提取计数、时间或最大值等数量特征。",
+        "method": "写出 X(ω) 的含义，并列出所有可能取值。",
+        "steps": ["确定样本点", "定义数值映射", "检查取值范围是否完整"]
+      }
+    ],
+    "examples": [
+      {
+        "title": "抽样中的废品数",
+        "problem": "50 件产品中有 5 件废品，随机抽取 3 件，令 X 为抽到的废品数。写出 X 的可能取值。",
+        "analysis": "抽取 3 件，所以废品数最少为 0、最多为 3；总体有 5 件废品，不构成更紧的上界。",
+        "steps": [
+          { "text": "最少可能一件废品也没有。" },
+          { "text": "最多三件全为废品。" },
+          { "text": "中间整数值均可能。", "formula": "X\\in\\{0,1,2,3\\}" }
+        ],
+        "answer": "X 的可能取值为 0、1、2、3。",
+        "source": "讲义第二章随机变量引例1（PDF 第18页）"
+      }
+    ]
+  },
+  {
+    "slug": "distribution-function",
+    "lectureSummary": [
+      "所有随机变量都有分布函数；F(x) 包含全部概率信息。",
+      "点概率等于跳跃值，区间端点是否计入要用 F(a) 与 F(a-) 区分。"
+    ],
+    "problemTypes": [
+      {
+        "title": "分段分布函数求点概率",
+        "features": "F(x) 在某点左右表达式不同，要求 P(X=a)。",
+        "method": "用右连续值减左极限。",
+        "steps": ["求 F(a)", "求 F(a-)", "计算跳跃 F(a)-F(a-)"]
+      }
+    ],
+    "examples": [
+      {
+        "title": "由跳跃求点概率",
+        "problem": "设 F(x)=0(x<0)，F(x)=1/2(0≤x<1)，F(x)=1-e^{-x}(x≥1)。求 P(X=1)。",
+        "analysis": "点概率就是分布函数在 x=1 处的跳跃大小。",
+        "steps": [
+          { "text": "右连续值为。", "formula": "F(1)=1-e^{-1}" },
+          { "text": "左极限为。", "formula": "F(1^-)=\\frac12" },
+          { "text": "两者相减。", "formula": "P(X=1)=\\frac12-e^{-1}" }
+        ],
+        "answer": "P(X=1)=1/2-e^{-1}。",
+        "answerFormula": "P(X=1)=\\frac12-e^{-1}",
+        "source": "讲义例2.1（PDF 第20页）"
+      }
+    ]
+  },
+  {
+    "slug": "discrete-random-variable",
+    "lectureSummary": [
+      "分布律必须同时满足非负性和归一性；离散分布函数在每个取值处向上跳跃对应概率。",
+      "求最大值、最小值的分布时，先确定真实取值范围，再逐点计数。"
+    ],
+    "problemTypes": [
+      {
+        "title": "计数组合得到分布律",
+        "features": "从有限总体抽样，随机变量取最大值、成功数或某类个数。",
+        "method": "对每个可能取值计数，再除以总的等可能样本数。",
+        "steps": ["列取值范围", "逐值计算有利组合数", "检查概率和为 1"]
+      }
+    ],
+    "examples": [
+      {
+        "title": "三个号码的最大值",
+        "problem": "从编号 1,2,3,4,5 的五个球中同时取 3 个，X 为最大号码，求 X 的分布律。",
+        "analysis": "总组合数为 C(5,3)=10。若最大值为 k，必须取 k，再从 1,…,k-1 中取两个。",
+        "steps": [
+          { "text": "X 的可能取值为 3,4,5。" },
+          { "text": "一般概率为。", "formula": "P(X=k)=\\frac{\\binom{k-1}{2}}{\\binom53},\\quad k=3,4,5" },
+          { "text": "代入得到 1/10、3/10、6/10，和为 1。" }
+        ],
+        "answer": "P(X=3,4,5) 分别为 1/10、3/10、6/10。",
+        "source": "讲义例2.3（PDF 第21页）"
+      }
+    ]
+  },
+  {
+    "slug": "continuous-random-variable",
+    "lectureSummary": [
+      "密度值不是概率，区间概率必须积分；密度可以大于 1，但总面积必须为 1。",
+      "连续型分布函数连续，单点概率为 0，区间端点开闭不影响概率。"
+    ],
+    "problemTypes": [
+      {
+        "title": "分段密度的归一化与分布函数",
+        "features": "密度含未知常数并分段给出。",
+        "method": "先由总积分为 1 求参数，再从负无穷到 x 分段积分。",
+        "steps": ["确定支持集", "归一化求参数", "按分界点逐段累积并检查连续性"]
+      }
+    ],
+    "examples": [
+      {
+        "title": "三角形密度的归一化",
+        "problem": "设 f(x)=x(0<x<1)，f(x)=k(2-x)(1≤x<2)，其他处为 0。求 k 及分布函数。",
+        "analysis": "两段面积之和必须为 1；分布函数按 0、1、2 三个分界点累积。",
+        "steps": [
+          { "text": "归一化。", "formula": "\\int_0^1x\\,dx+k\\int_1^2(2-x)\\,dx=\\frac12+\\frac{k}{2}=1" },
+          { "text": "得到 k=1。" },
+          { "text": "中间两段累计积分。", "formula": "F(x)=\\begin{cases}0,&x\\le0,\\\\x^2/2,&0<x<1,\\\\2x-x^2/2-1,&1\\le x<2,\\\\1,&x\\ge2.\\end{cases}" }
+        ],
+        "answer": "k=1，分布函数如分段式所示。",
+        "source": "讲义例2.8（PDF 第26页）"
+      }
+    ]
+  },
+  {
+    "slug": "bivariate-random-variable",
+    "lectureSummary": [
+      "二维随机变量把同一次试验中的两个数量作为随机点 (X,Y) 研究。",
+      "联合分布不仅包含两个边缘分布，还包含 X、Y 之间的依赖关系。"
+    ],
+    "problemTypes": [
+      {
+        "title": "确定二维随机变量的支持集",
+        "features": "X、Y 由同一次抽样或几何位置共同定义。",
+        "method": "列出所有可同时出现的数对，排除单独可能但不能共同出现的组合。",
+        "steps": ["分别列 X、Y 范围", "加入共同约束", "画表格或平面支持集"]
+      }
+    ],
+    "examples": [
+      {
+        "title": "抽取两球的取值区域",
+        "problem": "盒中有 2 黑、2 红、2 白球，任取 2 球。X 为黑球数，Y 为红球数，写出 (X,Y) 的可能取值。",
+        "analysis": "两球中黑球数与红球数均为 0,1,2，但总数不能超过 2。",
+        "steps": [
+          { "text": "写出非负整数约束。", "formula": "X,Y\\in\\{0,1,2\\}" },
+          { "text": "加入总抽取数约束。", "formula": "X+Y\\le2" },
+          { "text": "列出满足约束的六个数对。" }
+        ],
+        "answer": "可能取值为 (0,0),(0,1),(0,2),(1,0),(1,1),(2,0)。",
+        "source": "讲义例3.2（PDF 第38页）"
+      }
+    ]
+  },
+  {
+    "slug": "joint-distribution-function",
+    "lectureSummary": [
+      "F(x,y) 是随机点落在点 (x,y) 左下方无穷矩形内的概率。",
+      "有限矩形概率使用二维容斥：右上减两条边，再加回左下。"
+    ],
+    "problemTypes": [
+      {
+        "title": "由联合分布函数求矩形概率",
+        "features": "要求 P(x1<X≤x2, y1<Y≤y2)。",
+        "method": "把矩形四个角代入 F，按“右上-左上-右下+左下”组合。",
+        "steps": ["标出四个角", "写二维差分", "检查结果非负"]
+      }
+    ],
+    "examples": [
+      {
+        "title": "矩形区域的四角差分",
+        "problem": "已知联合分布函数 F，求 P(0<X≤1, 1<Y≤2)。",
+        "analysis": "目标是半开矩形，需要对两个方向各做一次差分。",
+        "steps": [
+          { "text": "先对 X 方向作差，再对 Y 方向作差。" },
+          { "text": "按四角组合。", "formula": "P=F(1,2)-F(0,2)-F(1,1)+F(0,1)" }
+        ],
+        "answer": "所求概率等于四个角的二维差分。",
+        "source": "讲义二维分布函数矩形公式（PDF 第34-35页）"
+      }
+    ]
+  },
+  {
+    "slug": "joint-probability-mass",
+    "lectureSummary": [
+      "联合分布律把概率质量分配到数对 (xi,yj) 上；全部单元格非负且总和为 1。",
+      "二维离散题优先画联合分布表，行列求和自然得到边缘分布。"
+    ],
+    "problemTypes": [
+      {
+        "title": "组合计数填写联合分布表",
+        "features": "有限总体抽样，同时记录两类数量。",
+        "method": "每个单元格按两类组合数和剩余类别组合数计数。",
+        "steps": ["确定有效单元格", "逐格计算有利组合数", "除以总组合数并核对总和"]
+      }
+    ],
+    "examples": [
+      {
+        "title": "黑球数与红球数的联合概率",
+        "problem": "盒中 2 黑、2 红、2 白，任取 2 球。求 P(X=1,Y=1) 与 P(X=0,Y=0)。",
+        "analysis": "总取法为 C(6,2)=15；不同颜色数量由组合数直接计数。",
+        "steps": [
+          { "text": "一黑一红的取法数为 C(2,1)C(2,1)=4。", "formula": "P(X=1,Y=1)=\\frac4{15}" },
+          { "text": "无黑无红意味着两球都白。", "formula": "P(X=0,Y=0)=\\frac{\\binom22}{\\binom62}=\\frac1{15}" }
+        ],
+        "answer": "两个联合概率分别为 4/15 和 1/15。",
+        "source": "讲义例3.2（PDF 第38页）"
+      }
+    ]
+  },
+  {
+    "slug": "joint-density",
+    "lectureSummary": [
+      "联合密度必须非负且在整个平面上的二重积分为 1。",
+      "区域概率是密度在该区域上的二重积分；积分区域必须与密度支持集取交。"
+    ],
+    "problemTypes": [
+      {
+        "title": "联合密度区域积分",
+        "features": "给出 f(x,y) 与不等式事件。",
+        "method": "先画支持集和事件区域，再选择竖条或横条确定积分限。",
+        "steps": ["画支持集", "取事件与支持集的交", "写累次积分并计算"]
+      }
+    ],
+    "examples": [
+      {
+        "title": "单位正方形内的三角区域",
+        "problem": "联合密度 f(x,y)=4xy，0≤x≤1、0≤y≤1，其他为 0。求 P(X+Y<1)。",
+        "analysis": "事件区域是单位正方形中直线 x+y=1 下方的三角形。",
+        "steps": [
+          { "text": "按竖条写积分限：0≤x≤1，0≤y≤1-x。" },
+          { "text": "积分计算。", "formula": "P=\\int_0^1\\int_0^{1-x}4xy\\,dy\\,dx=\\frac16" }
+        ],
+        "answer": "区域概率为 1/6。",
+        "answerFormula": "P(X+Y<1)=\\frac16",
+        "source": "讲义例3.3（PDF 第39页）"
+      }
+    ]
+  },
+  {
+    "slug": "marginal-distribution",
+    "lectureSummary": [
+      "边缘分布是把另一个变量的所有可能性汇总掉：离散型按行列求和，连续型对另一个变量积分。",
+      "积分上下限由联合密度的支持集决定，通常会随保留变量变化。"
+    ],
+    "problemTypes": [
+      {
+        "title": "由联合密度求边缘密度",
+        "features": "联合支持集为矩形或斜边区域。",
+        "method": "固定保留变量，找另一个变量在支持集内的范围并积分。",
+        "steps": ["画支持集", "固定 x 或 y 截线", "对被消去变量积分"]
+      }
+    ],
+    "examples": [
+      {
+        "title": "乘积型密度的边缘化",
+        "problem": "设 f(x,y)=4xy，0<x<1、0<y<1。求 fX(x) 与 fY(y)。",
+        "analysis": "支持集为矩形，另一个变量的积分限固定为 0 到 1。",
+        "steps": [
+          { "text": "对 y 积分。", "formula": "f_X(x)=\\int_0^1 4xy\\,dy=2x,\\quad0<x<1" },
+          { "text": "对 x 积分。", "formula": "f_Y(y)=\\int_0^1 4xy\\,dx=2y,\\quad0<y<1" }
+        ],
+        "answer": "边缘密度分别为 2x 和 2y（各自在 0 到 1 上）。",
+        "source": "讲义边缘概率密度与例3.4（PDF 第40页）改编"
+      }
+    ]
+  },
+  {
+    "slug": "conditional-distribution",
+    "lectureSummary": [
+      "条件分布等于联合分布除以对应边缘分布，是在固定一个变量后重新归一化。",
+      "连续型条件密度只在分母边缘密度为正时定义。"
+    ],
+    "problemTypes": [
+      {
+        "title": "联合分布归一化为条件分布",
+        "features": "给定联合表或联合密度，固定 Y=y 或 X=x。",
+        "method": "先求条件值的边缘概率/密度，再逐项相除。",
+        "steps": ["求分母边缘分布", "确定条件支持集", "联合量除以边缘量并核对归一性"]
+      }
+    ],
+    "examples": [
+      {
+        "title": "由联合密度求条件密度",
+        "problem": "沿用 f(x,y)=4xy（0<x,y<1），求 fX|Y(x|y)，其中 0<y<1。",
+        "analysis": "先求 fY(y)=2y，再把联合密度除以它。",
+        "steps": [
+          { "text": "边缘密度为。", "formula": "f_Y(y)=2y" },
+          { "text": "条件密度为。", "formula": "f_{X\\mid Y}(x\\mid y)=\\frac{4xy}{2y}=2x,\\quad0<x<1" },
+          { "text": "对 x 从 0 到 1 积分等于 1。" }
+        ],
+        "answer": "给定任意 0<y<1，X 的条件密度均为 2x。",
+        "source": "讲义条件概率密度定义（PDF 第41页）"
+      }
+    ]
+  },
+  {
+    "slug": "random-variable-independence",
+    "lectureSummary": [
+      "独立要求联合分布等于边缘分布乘积；连续型只需几乎处处成立。",
+      "边缘分布相同不能推出联合分布相同，更不能推出独立。"
+    ],
+    "problemTypes": [
+      {
+        "title": "由联合密度判断独立",
+        "features": "已知联合密度，要求判断 X、Y 是否独立。",
+        "method": "先求两个边缘密度，再检查支持集和乘积是否同时匹配。",
+        "steps": ["求边缘密度", "比较 f 与 fXfY", "检查联合支持集能否写成直积"]
+      }
+    ],
+    "examples": [
+      {
+        "title": "密度因子分解",
+        "problem": "设 f(x,y)=4xy，0<x<1、0<y<1。判断 X、Y 是否独立。",
+        "analysis": "边缘密度为 fX(x)=2x、fY(y)=2y，支持集也是两个区间的直积。",
+        "steps": [
+          { "text": "计算边缘乘积。", "formula": "f_X(x)f_Y(y)=(2x)(2y)=4xy" },
+          { "text": "该乘积在整个联合支持集上等于 f(x,y)。" }
+        ],
+        "answer": "X 与 Y 相互独立。",
+        "source": "讲义二维连续型独立性判据与例3.6（PDF 第42页）改编"
+      }
+    ]
+  },
+  {
+    "slug": "bivariate-region-integral",
+    "lectureSummary": [
+      "二重积分题的核心不是先积分，而是先把事件区域与密度支持集画清楚。",
+      "竖条法先写 x 外层范围和给定 x 下的 y 范围；横条法反之。"
+    ],
+    "problemTypes": [
+      {
+        "title": "不规则区域概率",
+        "features": "事件由 x+y<c、y>x² 等不等式给出。",
+        "method": "画边界、找交点、选择分段最少的扫描方向。",
+        "steps": ["画支持集", "叠加事件区域", "找交点并写积分限", "检查积分结果在 0 到 1 之间"]
+      }
+    ],
+    "examples": [
+      {
+        "title": "三角区域积分限",
+        "problem": "在单位正方形支持集上，写出事件 D={x+y<1} 的两种累次积分形式。",
+        "analysis": "区域是顶点 (0,0),(1,0),(0,1) 的三角形，可竖切也可横切。",
+        "steps": [
+          { "text": "竖条法。", "formula": "\\iint_D f\\,dxdy=\\int_0^1\\int_0^{1-x}f(x,y)\\,dy\\,dx" },
+          { "text": "横条法。", "formula": "\\iint_D f\\,dxdy=\\int_0^1\\int_0^{1-y}f(x,y)\\,dx\\,dy" }
+        ],
+        "answer": "两种积分形式等价，选择计算更简单的一种。",
+        "source": "讲义二维区域概率与例3.3（PDF 第39页）"
+      }
+    ]
+  },
+  {
+    "slug": "expectation",
+    "lectureSummary": [
+      "期望是按概率权重形成的平均趋势；离散型用求和，连续型用积分。",
+      "求 E[g(X)] 不必先求 Y=g(X) 的分布，可直接使用 LOTUS 公式。"
+    ],
+    "problemTypes": [
+      {
+        "title": "随机变量函数的期望",
+        "features": "要求 E[g(X)] 或线性组合的期望。",
+        "method": "直接把 g 代入期望公式；线性函数优先使用期望线性性。",
+        "steps": ["确认分布类型", "写加权求和或积分", "能用线性性时先拆开"]
+      }
+    ],
+    "examples": [
+      {
+        "title": "离散分布的函数期望",
+        "problem": "X 取 -2、0、2 的概率分别为 4/10、3/10、3/10。求 E(X) 与 E(3X²+5)。",
+        "analysis": "先求一阶、二阶原点矩，再利用期望线性性。",
+        "steps": [
+          { "text": "计算均值。", "formula": "E(X)=-2\\cdot\\frac4{10}+2\\cdot\\frac3{10}=-\\frac15" },
+          { "text": "计算二阶矩。", "formula": "E(X^2)=4\\left(\\frac4{10}+\\frac3{10}\\right)=\\frac{14}{5}" },
+          { "text": "应用线性性。", "formula": "E(3X^2+5)=3\\cdot\\frac{14}{5}+5=\\frac{67}{5}" }
+        ],
+        "answer": "E(X)=-1/5，E(3X²+5)=67/5。",
+        "source": "讲义例4.1（PDF 第49页）"
+      }
+    ]
+  },
+  {
+    "slug": "variance",
+    "lectureSummary": [
+      "方差衡量围绕均值的平方偏离，计算时优先用 D(X)=E(X²)-[E(X)]²。",
+      "平移不改变方差，缩放会使方差乘缩放系数的平方。"
+    ],
+    "problemTypes": [
+      {
+        "title": "由密度求方差",
+        "features": "给出对称或分段密度。",
+        "method": "先利用对称性或积分求 E(X)，再求 E(X²)。",
+        "steps": ["判断对称性", "求一阶与二阶矩", "使用计算公式相减"]
+      }
+    ],
+    "examples": [
+      {
+        "title": "对称三角密度的方差",
+        "problem": "f(x)=1+x(-1<x<0)，f(x)=1-x(0≤x<1)，其他为 0。求 D(X)。",
+        "analysis": "密度关于 0 对称，所以 E(X)=0，只需求二阶矩。",
+        "steps": [
+          { "text": "由对称性得到 E(X)=0。" },
+          { "text": "计算二阶矩。", "formula": "E(X^2)=2\\int_0^1x^2(1-x)\\,dx=\\frac16" },
+          { "text": "代入方差公式。", "formula": "D(X)=E(X^2)-[E(X)]^2=\\frac16" }
+        ],
+        "answer": "方差为 1/6。",
+        "answerFormula": "D(X)=\\frac16",
+        "source": "讲义例4.4（PDF 第51页）"
+      }
+    ]
+  },
+  {
+    "slug": "covariance",
+    "lectureSummary": [
+      "协方差的快捷公式是 Cov(X,Y)=E(XY)-E(X)E(Y)。",
+      "计算和差的方差时必须保留 ±2Cov(X,Y)；只有不相关时该项为 0。"
+    ],
+    "problemTypes": [
+      {
+        "title": "线性关系下的协方差",
+        "features": "Y 是 X 的线性函数，或要求 D(X±Y)。",
+        "method": "使用协方差的双线性性质，避免重新展开积分。",
+        "steps": ["识别线性关系", "提出常数系数", "代入 Cov(X,X)=D(X)"]
+      }
+    ],
+    "examples": [
+      {
+        "title": "线性变换的协方差",
+        "problem": "已知 D(X)=3，Y=2X+1，求 Cov(X,Y)。",
+        "analysis": "常数项与任何随机变量协方差为 0。",
+        "steps": [
+          { "text": "展开第二个变量。", "formula": "\\operatorname{Cov}(X,Y)=\\operatorname{Cov}(X,2X+1)" },
+          { "text": "利用双线性和 Cov(X,X)=D(X)。", "formula": "\\operatorname{Cov}(X,Y)=2D(X)=6" }
+        ],
+        "answer": "协方差为 6。",
+        "answerFormula": "\\operatorname{Cov}(X,Y)=6",
+        "source": "讲义协方差性质（PDF 第53页）改编"
+      }
+    ]
+  },
+  {
+    "slug": "correlation-coefficient",
+    "lectureSummary": [
+      "相关系数是标准化协方差，消除了量纲，取值在 [-1,1]。",
+      "|ρ|=1 表示以概率 1 完全线性相关；ρ=0 只表示不相关，不一定独立。"
+    ],
+    "problemTypes": [
+      {
+        "title": "确定线性关系的相关系数",
+        "features": "两个随机变量满足 Y=aX+b。",
+        "method": "无需积分，相关系数的符号由斜率 a 决定。",
+        "steps": ["写出确定线性关系", "判断斜率正负", "给出 ρ=sign(a)"]
+      }
+    ],
+    "examples": [
+      {
+        "title": "随机截棒的完全负相关",
+        "problem": "长度 1 的木棒随机截成两段，X、Y 为两段长度。求相关系数。",
+        "analysis": "两段长度满足确定关系 Y=1-X，斜率为 -1。",
+        "steps": [
+          { "text": "写出线性约束。", "formula": "Y=1-X" },
+          { "text": "这是斜率为负的完全线性关系，因此相关系数为 -1。" }
+        ],
+        "answer": "两段长度完全负相关。",
+        "answerFormula": "\\rho_{XY}=-1",
+        "source": "讲义例4.9（PDF 第54页）"
+      }
+    ]
+  },
+  {
+    "slug": "moments",
+    "lectureSummary": [
+      "一阶原点矩是期望，二阶中心矩是方差；矩把数字特征统一到 E(X^k) 与 E[(X-EX)^k]。",
+      "常见考法是由 E(X²)=D(X)+[E(X)]² 反求分布参数。"
+    ],
+    "problemTypes": [
+      {
+        "title": "由二阶矩反求参数",
+        "features": "已知 E(X²) 和常见分布，要求参数。",
+        "method": "先写该分布的均值和方差，再组成二阶原点矩。",
+        "steps": ["写 E(X) 与 D(X)", "计算 E(X²)", "解参数并检查取值范围"]
+      }
+    ],
+    "examples": [
+      {
+        "title": "泊松分布的二阶矩",
+        "problem": "X 服从参数 λ 的泊松分布，且 E(X²)=6，求 λ。",
+        "analysis": "泊松分布的均值和方差都等于 λ。",
+        "steps": [
+          { "text": "写二阶矩。", "formula": "E(X^2)=D(X)+[E(X)]^2=\\lambda+\\lambda^2" },
+          { "text": "解方程 λ²+λ-6=0，并保留正参数。", "formula": "\\lambda=2" }
+        ],
+        "answer": "泊松参数 λ=2。",
+        "answerFormula": "\\lambda=2",
+        "source": "讲义例4.6（PDF 第52页）"
+      }
+    ]
+  },
+  {
+    "slug": "chebyshev-inequality",
+    "lectureSummary": [
+      "切比雪夫不等式只使用均值和方差，为偏离均值的尾概率提供通用上界。",
+      "先求目标随机变量的均值与方差，再把偏离事件改写成 |Z-EZ|≥ε。"
+    ],
+    "problemTypes": [
+      {
+        "title": "线性组合的尾概率上界",
+        "features": "给出多个变量的均值、方差、相关系数，要求概率上界。",
+        "method": "先用协方差求线性组合方差，再代切比雪夫不等式。",
+        "steps": ["求协方差", "求线性组合均值与方差", "识别 ε 并代入 σ²/ε²"]
+      }
+    ],
+    "examples": [
+      {
+        "title": "X-Y 的偏离概率",
+        "problem": "EX=EY=2，DX=1，DY=4，ρXY=0.5。用切比雪夫不等式估计 P(|X-Y|≥6)。",
+        "analysis": "先由相关系数得到协方差，再求 X-Y 的方差。",
+        "steps": [
+          { "text": "协方差为。", "formula": "\\operatorname{Cov}(X,Y)=0.5\\sqrt{1\\cdot4}=1" },
+          { "text": "差的均值为 0，方差为。", "formula": "D(X-Y)=1+4-2\\cdot1=3" },
+          { "text": "应用切比雪夫。", "formula": "P(|X-Y|\\ge6)\\le\\frac{3}{36}=\\frac1{12}" }
+        ],
+        "answer": "所求概率不超过 1/12。",
+        "answerFormula": "P(|X-Y|\\ge6)\\le\\frac1{12}",
+        "source": "讲义例5.1（PDF 第57页）"
+      }
+    ]
+  },
+  {
+    "slug": "law-of-large-numbers",
+    "lectureSummary": [
+      "大数定律说明样本平均在概率意义下趋近期望；伯努利大数定律说明频率趋近成功概率。",
+      "做题先认出“1/n 的和”，再确定被平均变量的期望。"
+    ],
+    "problemTypes": [
+      {
+        "title": "样本平均的依概率极限",
+        "features": "Xi 独立同分布，目标是 1/n∑g(Xi) 的极限。",
+        "method": "把 g(Xi) 看作新的独立同分布变量，计算 E[g(X)]。",
+        "steps": ["识别平均结构", "验证期望存在", "计算单项期望并写依概率极限"]
+      }
+    ],
+    "examples": [
+      {
+        "title": "指数变量平方的样本平均",
+        "problem": "Xi 独立同分布且服从参数 2 的指数分布。求 Yn=(1/n)∑Xi² 的依概率极限。",
+        "analysis": "对 Zi=Xi² 使用大数定律，极限是 E(X²)。",
+        "steps": [
+          { "text": "指数分布均值 1/2、方差 1/4。" },
+          { "text": "计算二阶矩。", "formula": "E(X^2)=D(X)+[E(X)]^2=\\frac14+\\frac14=\\frac12" },
+          { "text": "由大数定律。", "formula": "Y_n\\xrightarrow{P}\\frac12" }
+        ],
+        "answer": "依概率收敛到 1/2。",
+        "answerFormula": "Y_n\\xrightarrow{P}\\frac12",
+        "source": "讲义例5.2（PDF 第58页）"
+      }
+    ]
+  },
+  {
+    "slug": "central-limit-theorem",
+    "lectureSummary": [
+      "中心极限定理研究标准化和的分布近似；必须先减去 nμ，再除以 √nσ。",
+      "二项分布近似正态时使用均值 np、方差 np(1-p)，整数区间建议做连续性修正。"
+    ],
+    "problemTypes": [
+      {
+        "title": "二项分布的正态近似",
+        "features": "n 较大，求成功次数落在某个整数区间的概率。",
+        "method": "用 N(np,npq) 近似并做 ±0.5 连续性修正。",
+        "steps": ["计算 np 与 npq", "修正整数端点", "标准化并查 Φ"]
+      }
+    ],
+    "examples": [
+      {
+        "title": "百次抛硬币的正态近似",
+        "problem": "公平硬币独立抛 100 次，X 为正面次数。近似计算 P(45≤X≤55)。",
+        "analysis": "X~B(100,0.5)，均值 50、标准差 5；对整数区间使用 44.5 与 55.5。",
+        "steps": [
+          { "text": "连续性修正并标准化。", "formula": "P(45\\le X\\le55)\\approx P\\left(-1.1\\le Z\\le1.1\\right)" },
+          { "text": "利用标准正态对称性。", "formula": "2\\Phi(1.1)-1\\approx0.7286" }
+        ],
+        "answer": "近似概率为 0.7286。",
+        "answerFormula": "P(45\\le X\\le55)\\approx0.7286",
+        "source": "讲义棣莫弗-拉普拉斯定理（PDF 第59页），按期末常考题改编"
+      }
+    ]
+  }
+]

@@ -1,0 +1,117 @@
+[
+  {
+    "slug": "expectation",
+    "chapter": "第四章 · 随机变量的数字特征",
+    "title": "数学期望与函数期望",
+    "englishTitle": "Expectation",
+    "summary": "用概率加权平均概括随机变量长期重复时的平均趋势。",
+    "readTime": 11,
+    "updatedAt": "2026.08",
+    "core": ["数学期望是分布的重心，而不是一次试验最可能出现的值。重复大量同类试验时，样本平均通常趋近理论期望。", "函数期望公式允许不先求 Y=g(X) 的分布，直接在 X 的原分布上对 g(X) 加权。"],
+    "definition": { "intro": "离散型取值按概率求和，连续型取值按密度积分；绝对收敛或可积时期望存在。", "formulas": ["E(X)=\\sum_i x_ip_i\\quad\\text{（离散）}", "E(X)=\\int_{-\\infty}^{+\\infty}x f_X(x)\\,dx\\quad\\text{（连续）}", "E[g(X)]=\\sum_i g(x_i)p_i\\;\\text{或}\\;\\int g(x)f_X(x)\\,dx"] },
+    "intuition": ["在数轴每个取值处放置与概率成比例的质量，期望就是这套质量系统的平衡点。", "期望可能不是随机变量可取的值，例如公平骰子的期望是 3.5。"],
+    "visual": { "type": "expectation", "caption": "期望是概率质量或密度的重心，表示长期平均位置而非必然结果。" },
+    "properties": [
+      { "label": "线性性", "text": "无论随机变量是否独立，期望都可逐项拆开。", "formula": "E(aX+bY+c)=aE(X)+bE(Y)+c" },
+      { "label": "常数期望", "text": "常数没有随机性。", "formula": "E(c)=c" },
+      { "label": "乘积期望", "text": "X、Y 独立且可积时才能通常分解。", "formula": "E(XY)=E(X)E(Y)" },
+      { "label": "二维函数期望", "text": "对联合分布加权。", "formula": "E[g(X,Y)]=\\iint g(x,y)f(x,y)\\,dx\\,dy" }
+    ],
+    "exams": ["由分布律或密度直接计算期望。", "使用函数期望求 E(X²)、E(eˣ) 或 E[g(X,Y)]。", "利用线性性快速求随机和的期望，不需要独立条件。"],
+    "mistakes": ["误以为期望必须是可能取值。", "未检查级数或积分是否绝对收敛。", "认为 E(g(X))=g(E(X))；一般不成立。", "期望线性性错误地附加独立条件。"],
+    "prerequisites": [{ "title": "离散型随机变量", "slug": "discrete-random-variable", "note": "离散期望是概率加权和。" }, { "title": "连续型随机变量", "slug": "continuous-random-variable", "note": "连续期望是密度加权积分。" }],
+    "connections": [{ "title": "方差", "slug": "variance", "note": "方差以期望为中心刻画波动。" }, { "title": "协方差", "slug": "covariance", "note": "研究两个变量离均差的乘积期望。" }, { "title": "大数定律", "slug": "law-of-large-numbers", "note": "解释样本均值为何接近期望。" }]
+  },
+  {
+    "slug": "variance",
+    "chapter": "第四章 · 随机变量的数字特征",
+    "title": "方差",
+    "englishTitle": "Variance",
+    "summary": "用到均值的平方距离衡量随机变量围绕平均趋势的波动程度。",
+    "readTime": 10,
+    "updatedAt": "2026.08",
+    "core": ["期望相同的分布可以有完全不同的稳定程度。方差补充描述取值离均值通常有多远。", "直接平均离差会因正负抵消为 0，所以使用平方离差；标准差再开平方，恢复与 X 相同的单位。"],
+    "definition": { "intro": "若二阶矩存在，X 的方差是其相对均值的平方离差的期望。", "formulas": ["\\operatorname{Var}(X)=E[(X-E X)^2]", "\\operatorname{Var}(X)=E(X^2)-[E(X)]^2", "\\sigma_X=\\sqrt{\\operatorname{Var}(X)}"] },
+    "intuition": ["把均值看成中心，方差计算每个取值到中心距离的平方，再按概率加权。距离远的值被平方后惩罚更强。", "方差越小，概率更集中在均值附近；方差越大，分布通常更分散。"],
+    "visual": { "type": "variance", "caption": "两组分布可拥有相同均值，但到中心的典型距离不同，方差因此不同。" },
+    "properties": [
+      { "label": "非负性", "text": "方差永远非负，等于 0 当且仅当 X 几乎处处为常数。", "formula": "\\operatorname{Var}(X)\\ge0" },
+      { "label": "线性变换", "text": "平移不改变方差，缩放使方差乘以平方。", "formula": "\\operatorname{Var}(aX+b)=a^2\\operatorname{Var}(X)" },
+      { "label": "和的方差", "text": "一般要包含协方差项。", "formula": "\\operatorname{Var}(X+Y)=\\operatorname{Var}(X)+\\operatorname{Var}(Y)+2\\operatorname{Cov}(X,Y)" },
+      { "label": "独立可加", "text": "独立时协方差为 0，和的方差相加。" }
+    ],
+    "exams": ["用 E(X²)−[E(X)]² 快速计算方差。", "利用线性变换和独立性求随机变量和的方差。", "由均值、方差反求分布参数或应用切比雪夫不等式。"],
+    "mistakes": ["误写 Var(aX+b)=aVar(X)+b。", "随机变量不独立时仍直接把方差相加。", "混淆方差 σ² 与标准差 σ。"],
+    "prerequisites": [{ "title": "数学期望", "slug": "expectation", "note": "方差是平方离差的期望。" }],
+    "connections": [{ "title": "协方差", "slug": "covariance", "note": "和的方差由协方差修正。" }, { "title": "切比雪夫不等式", "slug": "chebyshev-inequality", "note": "仅凭方差控制偏离均值的概率。" }, { "title": "正态分布", "slug": "normal", "note": "σ² 是正态分布的尺度参数。", "type": "distribution" }]
+  },
+  {
+    "slug": "covariance",
+    "chapter": "第四章 · 随机变量的数字特征",
+    "title": "协方差",
+    "englishTitle": "Covariance",
+    "summary": "衡量两个变量偏离各自均值时倾向于同向还是反向变化。",
+    "readTime": 9,
+    "updatedAt": "2026.08",
+    "core": ["当 X 高于均值时 Y 也常高于均值，离差乘积多为正，协方差为正；若一高一低，协方差为负。", "协方差大小受变量单位影响，因此适合判断方向，不适合直接比较不同量纲下的相关强弱。"],
+    "definition": { "intro": "若二阶矩存在，协方差定义为两个中心化变量乘积的期望。", "formulas": ["\\operatorname{Cov}(X,Y)=E[(X-E X)(Y-E Y)]", "\\operatorname{Cov}(X,Y)=E(XY)-E(X)E(Y)"] },
+    "intuition": ["散点落在右上—左下方向时，两个离差大多同号，协方差为正；落在左上—右下方向时多为异号。", "协方差只捕捉线性共同变化。强烈的 U 形关系也可能协方差为 0。"],
+    "visual": { "type": "relationship", "caption": "同向散点产生正协方差，反向散点产生负协方差；无明显线性方向时接近 0。" },
+    "properties": [
+      { "label": "对称性", "text": "交换变量不改变协方差。", "formula": "\\operatorname{Cov}(X,Y)=\\operatorname{Cov}(Y,X)" },
+      { "label": "自身协方差", "text": "变量与自身的协方差就是方差。", "formula": "\\operatorname{Cov}(X,X)=\\operatorname{Var}(X)" },
+      { "label": "双线性", "text": "常数平移不影响协方差，缩放系数可提出。", "formula": "\\operatorname{Cov}(aX+b,cY+d)=ac\\operatorname{Cov}(X,Y)" },
+      { "label": "独立推出零协方差", "text": "二阶矩存在且独立时 Cov(X,Y)=0。" }
+    ],
+    "exams": ["由联合分布计算 E(XY) 后求协方差。", "利用协方差展开随机变量和的方差。", "判断独立、不相关与相关之间的逻辑关系。"],
+    "mistakes": ["由 Cov=0 推出独立；除特殊分布外一般不成立。", "忽略 E(XY) 需要联合分布，不能只靠边缘分布。", "用协方差绝对值直接比较不同单位变量的相关强弱。"],
+    "prerequisites": [{ "title": "数学期望", "slug": "expectation", "note": "协方差是乘积的期望。" }, { "title": "方差", "slug": "variance", "note": "协方差推广了方差。" }],
+    "connections": [{ "title": "相关系数", "slug": "correlation-coefficient", "note": "将协方差标准化以消除单位。" }, { "title": "随机变量独立性", "slug": "random-variable-independence", "note": "独立是比不相关更强的条件。" }]
+  },
+  {
+    "slug": "correlation-coefficient",
+    "chapter": "第四章 · 随机变量的数字特征",
+    "title": "相关系数",
+    "englishTitle": "Correlation Coefficient",
+    "summary": "把协方差除以两个标准差，得到无量纲的线性相关方向与强度。",
+    "readTime": 9,
+    "updatedAt": "2026.08",
+    "core": ["相关系数 ρ 是标准化协方差，始终位于 −1 与 1 之间，因此可以跨量纲比较线性关联。", "ρ 接近 ±1 表示点接近一条直线；ρ 接近 0 只表示无线性相关，不表示没有任何关系。"],
+    "definition": { "intro": "当 Var(X)>0、Var(Y)>0 时，X、Y 的相关系数定义为协方差与标准差乘积之比。", "formulas": ["\\rho_{XY}=\\frac{\\operatorname{Cov}(X,Y)}{\\sigma_X\\sigma_Y}", "-1\\le\\rho_{XY}\\le1"] },
+    "intuition": ["先把 X、Y 都变成均值 0、标准差 1 的标准化变量，再计算它们乘积的平均，得到相关系数。", "正负号给方向，绝对值给线性贴合程度；非线性关系需要散点图等其他工具识别。"],
+    "visual": { "type": "relationship", "caption": "ρ 从 −1 到 1 描述散点沿下降或上升直线聚集的程度。" },
+    "properties": [
+      { "label": "无量纲", "text": "改变测量单位不会改变相关系数的绝对值。" },
+      { "label": "完全线性", "text": "|ρ|=1 当且仅当 Y=aX+b 几乎处处成立。" },
+      { "label": "独立关系", "text": "方差存在时，独立 ⇒ ρ=0；反向一般不成立。" },
+      { "label": "仿射变换", "text": "正比例缩放不改变 ρ，负比例缩放改变符号。" }
+    ],
+    "exams": ["由 E(X)、E(Y)、E(XY) 和方差计算相关系数。", "利用 |ρ|≤1 检查计算结果或求参数范围。", "判断零相关、独立与线性关系的区别。"],
+    "mistakes": ["把相关理解为因果。", "ρ=0 就断定 X、Y 独立。", "忽略方差为 0 时相关系数无定义。"],
+    "prerequisites": [{ "title": "协方差", "slug": "covariance", "note": "相关系数是标准化协方差。" }, { "title": "方差", "slug": "variance", "note": "标准差用于消除尺度。" }],
+    "connections": [{ "title": "回归分析", "slug": "linear-regression", "note": "线性回归进一步建模条件均值。", "type": "data-science" }, { "title": "二维正态分布", "slug": "joint-density", "note": "二维正态中零相关可推出独立。" }]
+  },
+  {
+    "slug": "moments",
+    "chapter": "第四章 · 随机变量的数字特征",
+    "title": "矩",
+    "englishTitle": "Moments",
+    "summary": "用不同阶的幂期望系统概括分布的位置、离散程度和形状。",
+    "readTime": 8,
+    "updatedAt": "2026.08",
+    "core": ["矩是一族数字特征。原点矩围绕 0 计算，中心矩围绕均值计算。", "一阶原点矩是期望，二阶中心矩是方差；更高阶中心矩与偏度、峰度有关。"],
+    "definition": { "intro": "若相应期望存在，X 的 k 阶原点矩与 k 阶中心矩分别定义如下。", "formulas": ["\\mu_k'=E(X^k)", "\\mu_k=E[(X-E X)^k]", "\\mu_1'=E(X),\\quad\\mu_2=\\operatorname{Var}(X)"] },
+    "intuition": ["阶数越高，远离中心的极端取值被赋予越大权重，因此高阶矩对尾部更敏感。", "奇数阶中心矩保留方向信息，偶数阶中心矩主要刻画离散与尾部。"],
+    "visual": { "type": "expectation", "caption": "矩从不同阶数观察同一分布：中心、波动、偏斜和尾部逐层显现。" },
+    "properties": [
+      { "label": "低阶对应", "text": "一阶原点矩为均值，二阶中心矩为方差。" },
+      { "label": "中心一阶矩", "text": "围绕均值的一阶离差期望恒为 0。", "formula": "E[X-E(X)]=0" },
+      { "label": "存在性", "text": "高阶矩存在通常蕴含较低阶绝对矩存在，但反向不一定。" },
+      { "label": "矩生成函数", "text": "若原点附近存在，可通过求导产生各阶原点矩。", "formula": "M_X(t)=E(e^{tX}),\\quad M_X^{(k)}(0)=E(X^k)" }
+    ],
+    "exams": ["识别原点矩、中心矩与均值方差的关系。", "由分布计算低阶矩或利用矩生成函数求矩。", "用矩判断参数或比较分布形状。"],
+    "mistakes": ["混淆二阶原点矩 E(X²) 与方差。", "默认所有分布的任意阶矩都存在。", "中心矩展开时漏掉均值项。"],
+    "prerequisites": [{ "title": "数学期望", "slug": "expectation", "note": "矩是幂函数的期望。" }, { "title": "方差", "slug": "variance", "note": "方差是二阶中心矩。" }],
+    "connections": [{ "title": "中心极限定理", "slug": "central-limit-theorem", "note": "经典形式要求有限方差。" }, { "title": "抽样分布", "slug": "sampling-distribution", "note": "样本矩用于估计总体矩。", "type": "data-science" }]
+  }
+]

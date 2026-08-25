@@ -1,0 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "PingFang SC", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  color: #1d1d1f;
+  background: #f2f6fb;
+  color-scheme: light;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: auto; }
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  font-size: 16px;
+  line-height: 1.5;
+  background:
+    radial-gradient(circle at 8% 8%, rgba(38, 132, 255, .13), transparent 30rem),
+    radial-gradient(circle at 88% 14%, rgba(173, 92, 255, .10), transparent 28rem),
+    radial-gradient(circle at 65% 92%, rgba(78, 203, 255, .09), transparent 32rem),
+    linear-gradient(180deg, #f8fbff 0%, #f1f5fa 48%, #f7f8fb 100%);
+  background-attachment: fixed;
+}
+button, input, textarea, select { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+a { color: inherit; text-decoration: none; }
+button { border: 0; }
+svg { display: block; }
+::selection { background: rgba(0, 113, 227, .16); }
+:focus-visible { outline: 3px solid rgba(0, 113, 227, .28); outline-offset: 3px; }
+
+@layer components {
+  .page-container { @apply mx-auto w-full max-w-[1360px] px-5 sm:px-8 lg:px-12 xl:px-16; }
+  .page-container-narrow { @apply mx-auto w-full max-w-[1060px] px-5 sm:px-8 lg:px-14; }
+  .eyebrow { @apply text-[12px] font-semibold uppercase tracking-[0.16em] text-black/40; }
+  .search-pill { @apply flex w-full max-w-[360px] items-center gap-3 rounded-[16px] border px-4 py-3.5 transition duration-200 xl:w-[360px]; background: linear-gradient(135deg, rgba(255,255,255,.76), rgba(255,255,255,.48)); border-color: rgba(255,255,255,.78); box-shadow: inset 0 1px 0 rgba(255,255,255,.92), 0 10px 30px rgba(40,74,120,.09); -webkit-backdrop-filter: blur(24px) saturate(180%); backdrop-filter: blur(24px) saturate(180%); }
+  .icon-tile { @apply grid h-11 w-11 shrink-0 place-items-center rounded-[14px]; }
+  .icon-blue { @apply bg-blue/10 text-blue; }
+  .icon-violet { @apply bg-violet-500/10 text-violet-600; }
+  .icon-orange { @apply bg-orange-500/10 text-orange-500; }
+  .icon-green { @apply bg-green-500/10 text-green-600; }
+  .icon-rose { @apply bg-rose-500/10 text-rose-500; }
+  .map-card { @apply flex items-center gap-4 rounded-[22px] border p-5 transition-all duration-200 hover:-translate-y-0.5; background: rgba(255,255,255,.84); border-color: rgba(255,255,255,.78); box-shadow: inset 0 1px 0 rgba(255,255,255,.96), 0 14px 38px rgba(45,72,112,.075); -webkit-backdrop-filter: blur(16px) saturate(130%); backdrop-filter: blur(16px) saturate(130%); }
+  .knowledge-section { @apply min-w-0 rounded-[28px] border p-6 sm:p-9; background: rgba(255,255,255,.88); border-color: rgba(255,255,255,.82); box-shadow: inset 0 1px 0 rgba(255,255,255,.98), 0 18px 48px rgba(40,67,105,.075), 0 2px 8px rgba(40,67,105,.035); -webkit-backdrop-filter: blur(16px) saturate(125%); backdrop-filter: blur(16px) saturate(125%); }
+  .section-number { @apply grid h-10 w-10 shrink-0 place-items-center rounded-[13px] text-[11px] font-bold; }
+  .knowledge-body { @apply text-[17px] leading-[1.9] text-black/60 sm:text-[18px]; }
+  .formula-display { @apply min-w-0 max-w-full overflow-x-auto rounded-[18px] border border-black/[0.045] bg-[#f8f8fa] px-5 py-8 text-center text-[19px] text-black/80 sm:px-8 sm:text-[22px]; }
+  .property-formula { @apply min-w-0 max-w-full overflow-x-auto rounded-[14px] border border-black/[0.04] bg-[#f8f8fa] px-4 py-5 text-[17px] text-black/75; }
+  .connection-card { @apply flex items-start justify-between gap-4 rounded-[18px] border p-5 transition duration-200 hover:border-blue/20 hover:bg-blue/[0.035] hover:shadow-sm; background: rgba(250,252,255,.78); border-color: rgba(255,255,255,.84); box-shadow: inset 0 1px 0 rgba(255,255,255,.92), 0 7px 18px rgba(45,72,112,.045); }
+  .distribution-card { @apply h-full min-w-0 rounded-[24px] border p-6 transition-all duration-200; background: rgba(255,255,255,.86); border-color: rgba(255,255,255,.82); box-shadow: inset 0 1px 0 rgba(255,255,255,.96), 0 14px 38px rgba(45,72,112,.075); -webkit-backdrop-filter: blur(16px) saturate(125%); backdrop-filter: blur(16px) saturate(125%); }
+  .info-card { @apply min-h-[165px] min-w-0 rounded-[24px] border p-6 text-[16px] leading-7 text-black/60; background: rgba(255,255,255,.86); border-color: rgba(255,255,255,.82); box-shadow: inset 0 1px 0 rgba(255,255,255,.96), 0 14px 38px rgba(45,72,112,.07); -webkit-backdrop-filter: blur(16px) saturate(125%); backdrop-filter: blur(16px) saturate(125%); }
+  .info-label { @apply text-[11px] font-semibold uppercase tracking-[0.14em] text-black/35; }
+
+  .app-liquid-background {
+    background:
+      radial-gradient(circle at 7% 10%, rgba(41, 141, 255, .12), transparent 31rem),
+      radial-gradient(circle at 92% 12%, rgba(176, 91, 255, .09), transparent 29rem),
+      radial-gradient(circle at 66% 86%, rgba(80, 205, 255, .075), transparent 34rem),
+      linear-gradient(180deg, rgba(249,252,255,.96), rgba(241,245,250,.96) 50%, rgba(247,248,251,.98));
+    background-attachment: fixed;
+  }
+
+  .liquid-sidebar {
+    background: linear-gradient(160deg, rgba(248,251,255,.74), rgba(238,244,251,.58));
+    border-color: rgba(255,255,255,.76);
+    box-shadow: inset -1px 0 0 rgba(255,255,255,.58), 12px 0 42px rgba(43,71,108,.07);
+    -webkit-backdrop-filter: blur(34px) saturate(185%);
+    backdrop-filter: blur(34px) saturate(185%);
+  }
+
+  .liquid-toolbar {
+    background: linear-gradient(135deg, rgba(255,255,255,.78), rgba(242,247,253,.58));
+    border-color: rgba(255,255,255,.82);
+    box-shadow: inset 0 -1px 0 rgba(255,255,255,.55), 0 8px 28px rgba(43,71,108,.07);
+    -webkit-backdrop-filter: blur(30px) saturate(185%);
+    backdrop-filter: blur(30px) saturate(185%);
+  }
+
+  .liquid-control {
+    position: relative;
+    background: linear-gradient(135deg, rgba(255,255,255,.76), rgba(255,255,255,.48));
+    border-color: rgba(255,255,255,.82) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.96), inset 0 -1px 0 rgba(255,255,255,.34), 0 9px 28px rgba(41,68,105,.10);
+    -webkit-backdrop-filter: blur(24px) saturate(190%);
+    backdrop-filter: blur(24px) saturate(190%);
+  }
+
+  .liquid-nav-active {
+    background: linear-gradient(135deg, rgba(255,255,255,.78), rgba(223,238,255,.55));
+    border: 1px solid rgba(255,255,255,.82);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.96), 0 8px 22px rgba(0,113,227,.09);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
+  }
+
+  .liquid-content-card {
+    background: linear-gradient(145deg, rgba(255,255,255,.91), rgba(250,252,255,.80)) !important;
+    border-color: rgba(255,255,255,.84) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.98), 0 16px 44px rgba(43,70,108,.075), 0 2px 8px rgba(43,70,108,.035) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(125%);
+    backdrop-filter: blur(16px) saturate(125%);
+  }
+}
+
+.katex-display { margin: 0; max-width: 100%; }
+.katex { line-height: 1.45; }
+
+.range-slider {
+  --progress: 50%;
+  appearance: none;
+  height: 4px;
+  border-radius: 999px;
+  outline: none;
+  background: linear-gradient(to right, var(--range-color, #5856d6) 0%, var(--range-color, #5856d6) var(--progress), rgba(0,0,0,.09) var(--progress), rgba(0,0,0,.09) 100%);
+}
+.range-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: white;
+  border: 5px solid var(--range-color, #5856d6);
+  box-shadow: 0 2px 8px rgba(88, 86, 214, .25);
+  cursor: grab;
+}
+.range-slider::-moz-range-thumb {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: white;
+  border: 5px solid var(--range-color, #5856d6);
+  box-shadow: 0 2px 8px rgba(88, 86, 214, .25);
+  cursor: grab;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .liquid-sidebar, .liquid-toolbar, .liquid-control, .liquid-nav-active, .liquid-content-card,
+  .knowledge-section, .distribution-card, .info-card, .search-pill {
+    background: #fff !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+}

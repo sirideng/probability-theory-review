@@ -1,0 +1,468 @@
+[
+  {
+    "id": "events-probability",
+    "number": "01",
+    "title": "随机事件与概率",
+    "englishTitle": "Random Events & Probability",
+    "summary": "从随机现象、事件语言与概率规则出发，建立整门课程的逻辑起点。",
+    "tone": "blue",
+    "status": "active",
+    "topics": [
+      {
+        "slug": "random-experiment",
+        "title": "随机试验",
+        "englishTitle": "Random Experiment",
+        "summary": "识别随机现象，并用样本空间列出全部可能结果。",
+        "subtopics": ["随机现象", "随机试验特点", "样本空间"],
+        "status": "ready",
+        "prerequisites": [],
+        "next": ["random-events"]
+      },
+      {
+        "slug": "random-events",
+        "title": "随机事件",
+        "englishTitle": "Random Events",
+        "summary": "把关心的结果表示为样本空间的子集，并进行集合运算。",
+        "subtopics": ["基本事件", "复合事件", "事件关系", "事件运算"],
+        "status": "ready",
+        "prerequisites": ["random-experiment"],
+        "next": ["probability-definition"]
+      },
+      {
+        "slug": "probability-definition",
+        "title": "概率定义",
+        "englishTitle": "Definitions of Probability",
+        "summary": "从等可能、几何测度和公理化三个角度刻画可能性。",
+        "subtopics": ["古典概率", "几何概率", "概率公理"],
+        "status": "ready",
+        "prerequisites": ["random-events"],
+        "next": ["probability-properties"]
+      },
+      {
+        "slug": "probability-properties",
+        "title": "概率性质",
+        "englishTitle": "Properties of Probability",
+        "summary": "由概率公理推导考试中高频使用的基本计算规则。",
+        "subtopics": ["加法公式", "减法公式", "对立事件"],
+        "status": "ready",
+        "prerequisites": ["probability-definition"],
+        "next": ["conditional-probability"]
+      },
+      {
+        "slug": "conditional-probability",
+        "title": "条件概率",
+        "englishTitle": "Conditional Probability",
+        "summary": "获得新信息后，在缩小的样本空间中重新计算概率。",
+        "subtopics": ["定义", "乘法公式", "直观理解"],
+        "status": "ready",
+        "route": "/knowledge/conditional-probability",
+        "prerequisites": ["probability-properties"],
+        "next": ["total-probability", "bayes-theorem", "event-independence"]
+      },
+      {
+        "slug": "total-probability",
+        "title": "全概率公式",
+        "englishTitle": "Law of Total Probability",
+        "summary": "按互斥且完备的来源拆分一个复杂事件。",
+        "subtopics": ["完备事件组", "分情况计算", "树状图"],
+        "status": "ready",
+        "prerequisites": ["conditional-probability"],
+        "next": ["bayes-theorem"]
+      },
+      {
+        "slug": "bayes-theorem",
+        "title": "贝叶斯公式",
+        "englishTitle": "Bayes' Theorem",
+        "summary": "由观察到的结果反推原因，完成先验到后验的更新。",
+        "subtopics": ["先验概率", "似然", "后验概率"],
+        "status": "ready",
+        "prerequisites": ["conditional-probability", "total-probability"],
+        "next": ["event-independence", "maximum-likelihood"]
+      },
+      {
+        "slug": "event-independence",
+        "title": "事件独立性",
+        "englishTitle": "Independence of Events",
+        "summary": "判断一个事件的发生是否会改变另一个事件的概率。",
+        "subtopics": ["两事件独立", "多个事件独立", "互斥与独立"],
+        "status": "ready",
+        "prerequisites": ["conditional-probability"],
+        "next": ["random-variable"]
+      }
+    ]
+  },
+  {
+    "id": "random-variables",
+    "number": "02",
+    "title": "随机变量及其分布",
+    "englishTitle": "Random Variables & Distributions",
+    "summary": "把随机结果数值化，再用函数、表格和图像描述数值出现的规律。",
+    "tone": "violet",
+    "status": "active",
+    "topics": [
+      {
+        "slug": "random-variable",
+        "title": "随机变量概念",
+        "englishTitle": "Random Variable",
+        "summary": "用实值函数把样本点转换成可以分析的数值。",
+        "subtopics": ["映射关系", "离散与连续", "取值空间"],
+        "status": "ready",
+        "prerequisites": ["random-events"],
+        "next": ["distribution-function"]
+      },
+      {
+        "slug": "distribution-function",
+        "title": "分布函数",
+        "englishTitle": "CDF",
+        "summary": "用累计概率统一描述离散型与连续型随机变量。",
+        "subtopics": ["定义", "四条性质", "图像理解"],
+        "status": "ready",
+        "prerequisites": ["random-variable"],
+        "next": ["discrete-random-variable", "continuous-random-variable"]
+      },
+      {
+        "slug": "discrete-random-variable",
+        "title": "离散型随机变量",
+        "englishTitle": "Discrete Random Variable",
+        "summary": "用可列取值及其概率描述随机变量。",
+        "subtopics": ["概率质量函数", "分布律", "常见离散分布"],
+        "status": "ready",
+        "prerequisites": ["distribution-function"],
+        "next": ["bernoulli-distribution", "binomial-distribution", "poisson-distribution", "geometric-distribution"]
+      },
+      {
+        "slug": "continuous-random-variable",
+        "title": "连续型随机变量",
+        "englishTitle": "Continuous Random Variable",
+        "summary": "用密度曲线下面积表示随机变量落入区间的概率。",
+        "subtopics": ["概率密度函数", "密度函数性质", "分布函数与密度关系"],
+        "status": "ready",
+        "prerequisites": ["distribution-function", "calculus-basics"],
+        "next": ["uniform-distribution", "exponential-distribution", "normal-distribution"]
+      },
+      {
+        "slug": "bernoulli-distribution",
+        "title": "0-1 分布",
+        "englishTitle": "Bernoulli Distribution",
+        "summary": "只记录一次试验成功或失败，是二项分布的最小单元。",
+        "subtopics": ["成功概率 p", "两点分布律", "一次试验"],
+        "status": "ready",
+        "route": "/distributions",
+        "prerequisites": ["discrete-random-variable"],
+        "next": ["binomial-distribution"]
+      },
+      {
+        "slug": "binomial-distribution",
+        "title": "二项分布",
+        "englishTitle": "Binomial Distribution",
+        "summary": "统计 n 次独立重复试验中的成功次数。",
+        "subtopics": ["参数 n 与 p", "概率质量函数", "独立重复试验"],
+        "status": "ready",
+        "route": "/distributions",
+        "prerequisites": ["bernoulli-distribution", "event-independence"],
+        "next": ["poisson-distribution", "law-of-large-numbers"]
+      },
+      {
+        "slug": "poisson-distribution",
+        "title": "泊松分布",
+        "englishTitle": "Poisson Distribution",
+        "summary": "描述固定时间或空间范围内稀有事件的发生次数。",
+        "subtopics": ["参数 λ", "稀有事件", "二项分布近似"],
+        "status": "ready",
+        "route": "/distributions",
+        "prerequisites": ["discrete-random-variable", "binomial-distribution"],
+        "next": ["exponential-distribution"]
+      },
+      {
+        "slug": "geometric-distribution",
+        "title": "几何分布",
+        "englishTitle": "Geometric Distribution",
+        "summary": "描述首次成功出现前需要进行的试验次数。",
+        "subtopics": ["首次成功", "无记忆性", "参数 p"],
+        "status": "ready",
+        "route": "/distributions",
+        "prerequisites": ["bernoulli-distribution", "event-independence"],
+        "next": ["exponential-distribution"]
+      },
+      {
+        "slug": "uniform-distribution",
+        "title": "均匀分布",
+        "englishTitle": "Uniform Distribution",
+        "summary": "区间内等长子区间拥有相同的发生机会。",
+        "subtopics": ["区间 [a,b]", "常数密度", "几何概率"],
+        "status": "ready",
+        "route": "/distributions",
+        "prerequisites": ["continuous-random-variable"],
+        "next": ["expectation"]
+      },
+      {
+        "slug": "exponential-distribution",
+        "title": "指数分布",
+        "englishTitle": "Exponential Distribution",
+        "summary": "描述下一次事件发生前的连续等待时间。",
+        "subtopics": ["参数 λ", "等待时间", "无记忆性"],
+        "status": "ready",
+        "route": "/distributions",
+        "prerequisites": ["continuous-random-variable", "poisson-distribution"],
+        "next": ["expectation"]
+      },
+      {
+        "slug": "normal-distribution",
+        "title": "正态分布",
+        "englishTitle": "Normal Distribution",
+        "summary": "大量微小独立影响叠加后最常见的钟形分布。",
+        "subtopics": ["参数 μ 与 σ", "标准正态", "标准化"],
+        "status": "ready",
+        "route": "/distributions/normal",
+        "prerequisites": ["continuous-random-variable"],
+        "next": ["central-limit-theorem", "sampling-distribution"]
+      }
+    ]
+  },
+  {
+    "id": "multivariate",
+    "number": "03",
+    "title": "多维随机变量",
+    "englishTitle": "Multivariate Random Variables",
+    "summary": "从单个变量扩展到多个变量，研究它们如何共同分布、相互影响。",
+    "tone": "orange",
+    "status": "active",
+    "topics": [
+      {
+        "slug": "bivariate-random-variable",
+        "title": "二维随机变量",
+        "englishTitle": "Bivariate Random Variable",
+        "summary": "用有序对 (X,Y) 同时记录一次试验的两个数值特征。",
+        "subtopics": ["二维取值", "平面样本点", "离散与连续"],
+        "status": "ready",
+        "prerequisites": ["random-variable"],
+        "next": ["joint-distribution-function"]
+      },
+      {
+        "slug": "joint-distribution-function",
+        "title": "联合分布函数",
+        "englishTitle": "Joint CDF",
+        "summary": "描述 (X,Y) 同时落在左下矩形区域内的累计概率。",
+        "subtopics": ["定义", "二维累计概率", "性质"],
+        "status": "ready",
+        "prerequisites": ["bivariate-random-variable", "distribution-function"],
+        "next": ["joint-probability-mass", "joint-density"]
+      },
+      {
+        "slug": "joint-probability-mass",
+        "title": "联合分布律",
+        "englishTitle": "Joint PMF",
+        "summary": "用二维概率表描述离散型变量对的全部可能取值。",
+        "subtopics": ["二维概率表", "非负性", "归一性"],
+        "status": "ready",
+        "prerequisites": ["discrete-random-variable", "joint-distribution-function"],
+        "next": ["marginal-distribution", "conditional-distribution"]
+      },
+      {
+        "slug": "joint-density",
+        "title": "联合概率密度函数",
+        "englishTitle": "Joint PDF",
+        "summary": "用曲面下方指定平面区域上的体积表示概率。",
+        "subtopics": ["非负性", "二重积分为 1", "区域概率"],
+        "status": "ready",
+        "prerequisites": ["continuous-random-variable", "joint-distribution-function"],
+        "next": ["marginal-distribution", "bivariate-region-integral"]
+      },
+      {
+        "slug": "marginal-distribution",
+        "title": "边缘分布",
+        "englishTitle": "Marginal Distribution",
+        "summary": "忽略另一个变量，通过求和或积分得到单个变量的分布。",
+        "subtopics": ["离散求和", "连续积分", "从联合到边缘"],
+        "status": "ready",
+        "prerequisites": ["joint-probability-mass", "joint-density"],
+        "next": ["conditional-distribution", "random-variable-independence"]
+      },
+      {
+        "slug": "conditional-distribution",
+        "title": "条件分布",
+        "englishTitle": "Conditional Distribution",
+        "summary": "已知一个变量的取值后，重新描述另一个变量的分布。",
+        "subtopics": ["条件分布律", "条件密度", "归一化"],
+        "status": "ready",
+        "prerequisites": ["conditional-probability", "marginal-distribution"],
+        "next": ["random-variable-independence"]
+      },
+      {
+        "slug": "random-variable-independence",
+        "title": "随机变量独立性",
+        "englishTitle": "Independence of Random Variables",
+        "summary": "联合分布可以拆成边缘分布乘积时，变量之间相互独立。",
+        "subtopics": ["分布函数判定", "分布律判定", "密度判定"],
+        "status": "ready",
+        "prerequisites": ["marginal-distribution", "conditional-distribution"],
+        "next": ["covariance", "law-of-large-numbers"]
+      },
+      {
+        "slug": "bivariate-region-integral",
+        "title": "二维连续型概率计算",
+        "englishTitle": "Probability over a Region",
+        "summary": "把事件翻译成平面区域，再在该区域上对联合密度积分。",
+        "subtopics": ["区域面积", "积分范围", "概率体积", "积分次序"],
+        "status": "ready",
+        "prerequisites": ["joint-density", "double-integral"],
+        "next": ["expectation"]
+      }
+    ]
+  },
+  {
+    "id": "numerical-characteristics",
+    "number": "04",
+    "title": "随机变量的数字特征",
+    "englishTitle": "Numerical Characteristics",
+    "summary": "不必掌握完整分布，也能用少量数字概括中心、波动与共同变化。",
+    "tone": "green",
+    "status": "active",
+    "topics": [
+      {
+        "slug": "expectation",
+        "title": "数学期望",
+        "englishTitle": "Expectation",
+        "summary": "用概率加权平均刻画随机变量长期重复后的平均趋势。",
+        "subtopics": ["离散型期望", "连续型期望", "函数期望"],
+        "status": "ready",
+        "prerequisites": ["discrete-random-variable", "continuous-random-variable"],
+        "next": ["variance", "covariance"]
+      },
+      {
+        "slug": "variance",
+        "title": "方差",
+        "englishTitle": "Variance",
+        "summary": "用到均值的平方距离刻画随机变量的波动程度。",
+        "subtopics": ["定义", "计算公式", "物理意义"],
+        "status": "ready",
+        "prerequisites": ["expectation"],
+        "next": ["chebyshev-inequality", "covariance"]
+      },
+      {
+        "slug": "covariance",
+        "title": "协方差",
+        "englishTitle": "Covariance",
+        "summary": "判断两个变量倾向于同向变化还是反向变化。",
+        "subtopics": ["定义", "正负号意义", "计算性质"],
+        "status": "ready",
+        "prerequisites": ["expectation", "variance"],
+        "next": ["correlation-coefficient"]
+      },
+      {
+        "slug": "correlation-coefficient",
+        "title": "相关系数",
+        "englishTitle": "Correlation Coefficient",
+        "summary": "把协方差标准化为无量纲的线性相关强度指标。",
+        "subtopics": ["标准化", "取值范围", "线性相关"],
+        "status": "ready",
+        "prerequisites": ["covariance", "variance"],
+        "next": ["linear-regression"]
+      },
+      {
+        "slug": "moments",
+        "title": "矩",
+        "englishTitle": "Moments",
+        "summary": "用不同阶的幂期望系统描述分布的形状特征。",
+        "subtopics": ["原点矩", "中心矩", "阶数与分布形状"],
+        "status": "ready",
+        "prerequisites": ["expectation"],
+        "next": ["sampling-distribution"]
+      }
+    ]
+  },
+  {
+    "id": "limit-theorems",
+    "number": "05",
+    "title": "大数定律与中心极限定理",
+    "englishTitle": "Limit Theorems",
+    "summary": "解释大量重复试验为何会呈现稳定规律，以及正态分布为何普遍出现。",
+    "tone": "rose",
+    "status": "active",
+    "topics": [
+      {
+        "slug": "chebyshev-inequality",
+        "title": "切比雪夫不等式",
+        "englishTitle": "Chebyshev's Inequality",
+        "summary": "只知道均值和方差时，对偏离均值的概率给出通用上界。",
+        "subtopics": ["偏差概率", "方差上界", "适用条件"],
+        "status": "ready",
+        "prerequisites": ["expectation", "variance"],
+        "next": ["law-of-large-numbers"]
+      },
+      {
+        "slug": "law-of-large-numbers",
+        "title": "大数定律",
+        "englishTitle": "Law of Large Numbers",
+        "summary": "样本量增大时，随机平均会逐渐接近稳定的理论平均。",
+        "subtopics": ["伯努利大数定律", "弱大数定律", "频率稳定性"],
+        "status": "ready",
+        "prerequisites": ["chebyshev-inequality", "event-independence", "expectation"],
+        "next": ["central-limit-theorem", "parameter-estimation"]
+      },
+      {
+        "slug": "central-limit-theorem",
+        "title": "中心极限定理",
+        "englishTitle": "Central Limit Theorem",
+        "summary": "大量独立小影响的标准化和，在适当条件下趋近正态分布。",
+        "subtopics": ["独立同分布", "标准化", "正态近似", "模拟可视化"],
+        "status": "ready",
+        "prerequisites": ["normal-distribution", "expectation", "variance", "law-of-large-numbers"],
+        "next": ["sampling-distribution", "hypothesis-testing"]
+      }
+    ]
+  },
+  {
+    "id": "statistics-bridge",
+    "number": "06",
+    "title": "数理统计连接",
+    "englishTitle": "Bridge to Statistics",
+    "summary": "预留从概率模型走向样本推断、数据分析和机器学习的下一段路径。",
+    "tone": "violet",
+    "status": "future",
+    "route": "/data-science",
+    "topics": [
+      {
+        "slug": "sampling-distribution",
+        "title": "抽样分布",
+        "englishTitle": "Sampling Distribution",
+        "summary": "研究统计量在重复抽样中的概率分布。",
+        "subtopics": ["样本均值", "卡方分布", "t 分布", "F 分布"],
+        "status": "future",
+        "prerequisites": ["normal-distribution", "central-limit-theorem"],
+        "next": ["parameter-estimation", "hypothesis-testing"]
+      },
+      {
+        "slug": "parameter-estimation",
+        "title": "参数估计",
+        "englishTitle": "Parameter Estimation",
+        "summary": "用样本信息估计未知总体参数。",
+        "subtopics": ["点估计", "区间估计", "最大似然"],
+        "status": "future",
+        "prerequisites": ["sampling-distribution"],
+        "next": ["hypothesis-testing"]
+      },
+      {
+        "slug": "hypothesis-testing",
+        "title": "假设检验",
+        "englishTitle": "Hypothesis Testing",
+        "summary": "用样本证据判断关于总体的假设是否合理。",
+        "subtopics": ["原假设", "显著性水平", "P 值"],
+        "status": "future",
+        "prerequisites": ["sampling-distribution", "parameter-estimation"],
+        "next": ["linear-regression"]
+      },
+      {
+        "slug": "linear-regression",
+        "title": "回归分析",
+        "englishTitle": "Regression Analysis",
+        "summary": "建立变量之间的概率关系并服务于解释与预测。",
+        "subtopics": ["条件期望", "误差分布", "最小二乘"],
+        "status": "future",
+        "prerequisites": ["correlation-coefficient", "normal-distribution", "hypothesis-testing"],
+        "next": ["machine-learning"]
+      }
+    ]
+  }
+]
+

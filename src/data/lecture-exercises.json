@@ -1,0 +1,720 @@
+[
+  {
+    "slug": "random-experiment",
+    "sourceRange": "讲义 PDF 第 72 页",
+    "exercises": [
+      {
+        "id": "re-01",
+        "title": "用寿命变量描述更换事件",
+        "difficulty": "基础",
+        "source": "讲义 PDF 第 72 页·选择题 1（整理）",
+        "problem": "某系统依次使用同型号元件，损坏后立即换新。设第 i 个元件的寿命为 X_i。用 X_1、X_2 和时刻 T 表示“截至 T 恰好更换过一次元件”。",
+        "focus": "把随机试验的自然语言翻译为样本点条件。",
+        "method": "“恰好更换一次”意味着第一个元件已经损坏，而第二个元件尚未损坏。",
+        "steps": [
+          { "text": "第一次更换已经发生，所以第一个元件寿命不超过 T。", "formula": "X_1\\le T" },
+          { "text": "第二次更换尚未发生，所以前两个元件的总寿命超过 T。", "formula": "T<X_1+X_2" }
+        ],
+        "answer": "事件由两个条件同时成立构成。",
+        "answerFormula": "\\{X_1\\le T<X_1+X_2\\}"
+      }
+    ]
+  },
+  {
+    "slug": "random-events",
+    "sourceRange": "讲义 PDF 第 74 页",
+    "exercises": [
+      {
+        "id": "re-02",
+        "title": "复合事件的集合表达",
+        "difficulty": "基础",
+        "source": "讲义 PDF 第 74 页·填空题 1（整理）",
+        "problem": "用事件运算表示：A 发生，但 B 与 C 不同时发生。",
+        "focus": "“不同时发生”是否定交事件，而不是要求 B、C 都不发生。",
+        "method": "先写出 B、C 同时发生的事件 B∩C，再取对立并与 A 求交。",
+        "steps": [
+          { "text": "B 与 C 同时发生是 B∩C。" },
+          { "text": "B 与 C 不同时发生是其对立事件。", "formula": "\\overline{B\\cap C}=\\bar B\\cup\\bar C" },
+          { "text": "再加入 A 发生这一条件。" }
+        ],
+        "answer": "A 发生且 B、C 不同时发生。",
+        "answerFormula": "A\\cap\\overline{B\\cap C}=A\\cap(\\bar B\\cup\\bar C)"
+      }
+    ]
+  },
+  {
+    "slug": "probability-definition",
+    "sourceRange": "讲义 PDF 第 78 页",
+    "exercises": [
+      {
+        "id": "re-03",
+        "title": "有放回抽取中的古典概率",
+        "difficulty": "基础",
+        "source": "讲义 PDF 第 78 页·填空题 11",
+        "problem": "编号 1 至 10 的十张卡片，有放回地抽取 4 次，求四次抽到的卡片编号各不相同的概率。",
+        "focus": "有放回使总结果数为 10^4，但“各不相同”要用排列计数。",
+        "method": "按抽取顺序计数：第一张任意，之后分别剩 9、8、7 种不同选择。",
+        "steps": [
+          { "text": "全部等可能有序结果数。", "formula": "10^4" },
+          { "text": "满足编号各不相同的有序结果数。", "formula": "10\\times9\\times8\\times7" },
+          { "text": "用有利结果数除以总结果数。" }
+        ],
+        "answer": "概率为 0.504。",
+        "answerFormula": "\\frac{10\\cdot9\\cdot8\\cdot7}{10^4}=\\frac{63}{125}"
+      }
+    ]
+  },
+  {
+    "slug": "probability-properties",
+    "sourceRange": "讲义 PDF 第 74 页",
+    "exercises": [
+      {
+        "id": "re-04",
+        "title": "减法公式给出的概率下界",
+        "difficulty": "基础",
+        "source": "讲义 PDF 第 74 页·选择题 7（整理）",
+        "problem": "证明对任意事件 A、B，都有 P(A-B)≥P(A)-P(B)。",
+        "focus": "把事件差写成 A 去掉交集后的剩余部分。",
+        "method": "先用减法公式，再利用 A∩B⊆B 的单调性。",
+        "steps": [
+          { "text": "事件 A 可分为互斥的 A-B 与 A∩B。", "formula": "P(A-B)=P(A)-P(A\\cap B)" },
+          { "text": "由单调性，交事件的概率不超过 B。", "formula": "P(A\\cap B)\\le P(B)" },
+          { "text": "代回即可得到下界。" }
+        ],
+        "answer": "不等式恒成立。",
+        "answerFormula": "P(A-B)\\ge P(A)-P(B)"
+      }
+    ]
+  },
+  {
+    "slug": "conditional-probability",
+    "sourceRange": "讲义 PDF 第 77 页",
+    "exercises": [
+      {
+        "id": "re-05",
+        "title": "由条件概率还原交概率",
+        "difficulty": "基础",
+        "source": "讲义 PDF 第 77 页·填空题 8",
+        "problem": "已知 P(A)=0.6，P(B)=0.4，P(A|B)=0.3，求 P(A∩B)。",
+        "focus": "条件概率是交概率相对于条件事件概率的比例。",
+        "method": "直接使用乘法公式 P(A∩B)=P(B)P(A|B)。",
+        "steps": [
+          { "text": "写出条件概率定义。", "formula": "P(A|B)=\\frac{P(A\\cap B)}{P(B)}" },
+          { "text": "移项并代入数据。", "formula": "P(A\\cap B)=0.4\\times0.3" }
+        ],
+        "answer": "交事件概率为 0.12。",
+        "answerFormula": "P(A\\cap B)=0.12"
+      }
+    ]
+  },
+  {
+    "slug": "total-probability",
+    "sourceRange": "讲义 PDF 第 82 页",
+    "exercises": [
+      {
+        "id": "re-06",
+        "title": "按产品来源分情况计算",
+        "difficulty": "基础",
+        "source": "讲义 PDF 第 82 页·解答题 7（第一问整理）",
+        "problem": "四箱产品被等可能选中，次品率依次为 0.1、0.2、0.3、0.4。从选中的箱中取一件，求它为合格品的概率。",
+        "focus": "产品来自哪一箱未知，四个来源构成完备事件组。",
+        "method": "对四种来源的条件概率按先验概率 1/4 加权。",
+        "steps": [
+          { "text": "四箱合格率分别为 0.9、0.8、0.7、0.6。" },
+          { "text": "应用全概率公式。", "formula": "P(G)=\\sum_{i=1}^4P(B_i)P(G|B_i)" },
+          { "text": "四箱等可能，代入并求和。", "formula": "P(G)=\\frac14(0.9+0.8+0.7+0.6)" }
+        ],
+        "answer": "抽到合格品的概率为 0.75。",
+        "answerFormula": "P(G)=\\frac34"
+      }
+    ]
+  },
+  {
+    "slug": "bayes-theorem",
+    "sourceRange": "讲义 PDF 第 82 页",
+    "exercises": [
+      {
+        "id": "re-07",
+        "title": "观察合格品后的后验预测",
+        "difficulty": "强化",
+        "source": "讲义 PDF 第 82 页·解答题 7",
+        "problem": "沿用四箱产品问题。第一次取到合格品后将其放回原箱，再从同一箱取一件，求第二件为次品的概率。",
+        "focus": "第一次合格会改变“选中了哪箱”的概率，不能仍把四箱看成等可能。",
+        "method": "先用贝叶斯更新箱号的后验概率，再对第二次次品率求后验加权平均。",
+        "steps": [
+          { "text": "第一次合格的总概率。", "formula": "P(G)=\\frac34" },
+          { "text": "若次品率为 q_i，则选中该箱且第一次合格、第二次次品的概率为四类路径之和。", "formula": "P(GD)=\\frac14\\sum_{i=1}^4(1-q_i)q_i" },
+          { "text": "代入 q_i=0.1,0.2,0.3,0.4。", "formula": "P(GD)=\\frac14(0.09+0.16+0.21+0.24)=0.175" },
+          { "text": "条件于第一次合格。", "formula": "P(D_2|G_1)=\\frac{P(G_1D_2)}{P(G_1)}" }
+        ],
+        "answer": "第二件为次品的后验预测概率为 7/30。",
+        "answerFormula": "P(D_2|G_1)=\\frac{0.175}{0.75}=\\frac7{30}"
+      }
+    ]
+  },
+  {
+    "slug": "event-independence",
+    "sourceRange": "讲义 PDF 第 73、79 页",
+    "exercises": [
+      {
+        "id": "re-08",
+        "title": "两两独立不等于相互独立",
+        "difficulty": "强化",
+        "source": "讲义 PDF 第 73 页·选择题 6（同型构造）",
+        "problem": "连续抛两次公平硬币。令 A=“第一次为正面”，B=“第二次为正面”，C=“两次结果相同”。判断 A、B、C 的独立性。",
+        "focus": "三事件相互独立还必须检查三重交概率。",
+        "method": "先逐对验证乘积公式，再比较 P(A∩B∩C) 与 P(A)P(B)P(C)。",
+        "steps": [
+          { "text": "三个事件的概率都为 1/2，任意两事件的交概率均为 1/4，因此两两独立。" },
+          { "text": "三事件同时发生仅对应 HH。", "formula": "P(A\\cap B\\cap C)=\\frac14" },
+          { "text": "三个边缘概率的乘积。", "formula": "P(A)P(B)P(C)=\\frac18" }
+        ],
+        "answer": "A、B、C 两两独立，但不相互独立。",
+        "answerFormula": "\\frac14\\ne\\frac18"
+      }
+    ]
+  },
+  {
+    "slug": "random-variable",
+    "sourceRange": "讲义 PDF 第 72 页",
+    "exercises": [
+      {
+        "id": "rv-01",
+        "title": "区分计数变量与时间变量",
+        "difficulty": "基础",
+        "source": "讲义 PDF 第 72 页·选择题 1（概念延伸）",
+        "problem": "在元件连续更换模型中，令 N(T) 表示时刻 T 前的更换次数，X_1 表示首个元件寿命。判断二者通常属于哪类随机变量。",
+        "focus": "分类依据是可能取值是否可列，而不是实验是否随机。",
+        "method": "分别写出两个量的取值集合。",
+        "steps": [
+          { "text": "N(T) 只能取 0、1、2、…，取值可列。" },
+          { "text": "寿命 X_1 通常可在正实数区间连续取值。" }
+        ],
+        "answer": "N(T) 是离散型随机变量；X_1 通常是连续型随机变量。"
+      }
+    ]
+  },
+  {
+    "slug": "distribution-function",
+    "sourceRange": "讲义 PDF 第 83 页",
+    "exercises": [
+      {
+        "id": "rv-02",
+        "title": "判断复合函数能否作为分布函数",
+        "difficulty": "基础",
+        "source": "讲义 PDF 第 83 页·选择题 1（整理）",
+        "problem": "设 F 是某随机变量的分布函数，判断 G(x)=F(2x-1) 是否一定仍为分布函数。",
+        "focus": "检查单调性、右连续性和两端极限。",
+        "method": "线性函数 2x-1 严格递增且覆盖整个实数轴，因此保留 F 的四条性质。",
+        "steps": [
+          { "text": "x 增大时 2x-1 增大，所以 G 非减。" },
+          { "text": "F 右连续且内层函数连续，所以 G 右连续。" },
+          { "text": "当 x 趋于正负无穷时，2x-1 同样趋于正负无穷。", "formula": "G(-\\infty)=0,\\quad G(+\\infty)=1" }
+        ],
+        "answer": "G(x)=F(2x-1) 一定是分布函数。"
+      }
+    ]
+  },
+  {
+    "slug": "discrete-random-variable",
+    "sourceRange": "讲义 PDF 第 88 页",
+    "exercises": [
+      {
+        "id": "rv-03",
+        "title": "不同命中率下的命中人数分布",
+        "difficulty": "强化",
+        "source": "讲义 PDF 第 88 页·解答题 2",
+        "problem": "甲、乙、丙独立射击一次，命中率分别为 0.4、0.5、0.7。令 X 为命中人数，求 X 的分布律。",
+        "focus": "成功概率不同，X 不是普通二项分布，需要逐类枚举。",
+        "method": "按命中人数 0、1、2、3 分别求互斥路径概率并求和。",
+        "steps": [
+          { "text": "无人命中。", "formula": "P(X=0)=0.6\\times0.5\\times0.3=0.09" },
+          { "text": "恰有一人命中。", "formula": "P(X=1)=0.4\\cdot0.5\\cdot0.3+0.6\\cdot0.5\\cdot0.3+0.6\\cdot0.5\\cdot0.7=0.36" },
+          { "text": "恰有两人命中。", "formula": "P(X=2)=0.4\\cdot0.5\\cdot0.3+0.4\\cdot0.5\\cdot0.7+0.6\\cdot0.5\\cdot0.7=0.41" },
+          { "text": "三人全部命中。", "formula": "P(X=3)=0.4\\times0.5\\times0.7=0.14" }
+        ],
+        "answer": "分布律依次为 0.09、0.36、0.41、0.14，概率和为 1。",
+        "answerFormula": "P(X=k)=(0.09,0.36,0.41,0.14),\\quad k=0,1,2,3"
+      }
+    ]
+  },
+  {
+    "slug": "continuous-random-variable",
+    "sourceRange": "讲义 PDF 第 90、93 页",
+    "exercises": [
+      {
+        "id": "rv-04",
+        "title": "单调变换后的密度",
+        "difficulty": "基础",
+        "source": "讲义 PDF 第 90 页·解答题 6",
+        "problem": "设 X 在 [0,1] 上服从均匀分布，令 Y=2(1-X)，求 Y 的概率密度。",
+        "focus": "先确定变换后的取值范围，再使用反函数与雅可比。",
+        "method": "由 x=1-y/2 得 |dx/dy|=1/2。",
+        "steps": [
+          { "text": "X∈[0,1] 对应 Y∈[0,2]。" },
+          { "text": "写出反函数及导数。", "formula": "x=1-\\frac y2,\\quad\\left|\\frac{dx}{dy}\\right|=\\frac12" },
+          { "text": "代入密度变换公式。", "formula": "f_Y(y)=f_X(1-y/2)\\cdot\\frac12" }
+        ],
+        "answer": "Y 在 [0,2] 上均匀分布。",
+        "answerFormula": "f_Y(y)=\\begin{cases}\\frac12,&0<y<2,\\\\0,&\\text{其他}.\\end{cases}"
+      },
+      {
+        "id": "rv-05",
+        "title": "泊松计数与指数等待时间",
+        "difficulty": "强化",
+        "source": "讲义 PDF 第 93 页·解答题 12（第一问）",
+        "problem": "若设备在长度为 t 的时间内故障次数 N(t) 服从参数 2t 的泊松分布，求相邻两次故障的等待时间 T 的分布。",
+        "focus": "等待时间超过 t 等价于长度 t 的区间内没有故障。",
+        "method": "先求生存函数 P(T>t)，再得到分布函数与密度。",
+        "steps": [
+          { "text": "无故障事件。", "formula": "P(T>t)=P(N(t)=0)=e^{-2t},\\quad t\\ge0" },
+          { "text": "由生存函数得到分布函数。", "formula": "F_T(t)=1-e^{-2t}" },
+          { "text": "对分布函数求导。", "formula": "f_T(t)=2e^{-2t},\\quad t>0" }
+        ],
+        "answer": "等待时间服从参数为 2 的指数分布。",
+        "answerFormula": "T\\sim E(2)"
+      }
+    ]
+  },
+  {
+    "slug": "bivariate-random-variable",
+    "sourceRange": "讲义 PDF 第 99 页",
+    "exercises": [
+      {
+        "id": "mv-01",
+        "title": "由同一试验构造两个随机变量",
+        "difficulty": "基础",
+        "source": "讲义 PDF 第 99 页·解答题 1（同型整理）",
+        "problem": "公平硬币独立抛掷 3 次。令 X 为三次正面总数，Y 为第一次是否出现正面的示性变量。写出 (X,Y) 的可能取值。",
+        "focus": "二维随机变量的两个分量来自同一次随机试验，取值并非任意组合。",
+        "method": "分别固定 Y=0 与 Y=1，再考察剩余两次抛掷贡献的正面数。",
+        "steps": [
+          { "text": "若第一次为反面，Y=0，X 可取 0、1、2。" },
+          { "text": "若第一次为正面，Y=1，X 可取 1、2、3。" }
+        ],
+        "answer": "联合取值共有六个。",
+        "answerFormula": "(0,0),(1,0),(2,0),(1,1),(2,1),(3,1)"
+      }
+    ]
+  },
+  {
+    "slug": "joint-distribution-function",
+    "sourceRange": "讲义 PDF 第 94 页",
+    "exercises": [
+      {
+        "id": "mv-02",
+        "title": "由联合分布函数求右上区域概率",
+        "difficulty": "基础",
+        "source": "讲义 PDF 第 94 页·选择题 1",
+        "problem": "设联合分布函数为 F(x,y)，边缘分布函数为 F_X(x)、F_Y(y)。用它们表示 P(X>x,Y>y)。",
+        "focus": "联合分布函数直接给出左下区域，右上区域应用容斥。",
+        "method": "从全集中去掉 {X≤x} 与 {Y≤y}，再补回它们的交集。",
+        "steps": [
+          { "text": "写成两个事件对立的交。", "formula": "\\{X>x,Y>y\\}=\\overline{\\{X\\le x\\}}\\cap\\overline{\\{Y\\le y\\}}" },
+          { "text": "应用容斥公式。", "formula": "1-P(X\\le x)-P(Y\\le y)+P(X\\le x,Y\\le y)" }
+        ],
+        "answer": "右上矩形概率为 1-F_X(x)-F_Y(y)+F(x,y)。",
+        "answerFormula": "P(X>x,Y>y)=1-F_X(x)-F_Y(y)+F(x,y)"
+      }
+    ]
+  },
+  {
+    "slug": "joint-probability-mass",
+    "sourceRange": "讲义 PDF 第 99 页",
+    "exercises": [
+      {
+        "id": "mv-03",
+        "title": "建立二维离散分布律",
+        "difficulty": "强化",
+        "source": "讲义 PDF 第 99 页·解答题 1（同型整理）",
+        "problem": "沿用三次抛硬币模型：X 为正面总数，Y 为第一次是否正面。求联合分布律的一般表达。",
+        "focus": "固定第一次结果后，剩余两次正面数服从 B(2,1/2)。",
+        "method": "按 Y=0 与 Y=1 分两行填写二维概率表。",
+        "steps": [
+          { "text": "Y=0 时第一次为反面，剩余两次出现 k 个正面。", "formula": "P(X=k,Y=0)=\\frac{\\binom2k}{8},\\quad k=0,1,2" },
+          { "text": "Y=1 时第一次为正面，剩余两次出现 k-1 个正面。", "formula": "P(X=k,Y=1)=\\frac{\\binom2{k-1}}{8},\\quad k=1,2,3" }
+        ],
+        "answer": "非零概率依次为 1/8、2/8、1/8 与 1/8、2/8、1/8，总和为 1。"
+      }
+    ]
+  },
+  {
+    "slug": "joint-density",
+    "sourceRange": "讲义 PDF 第 143 页",
+    "exercises": [
+      {
+        "id": "mv-04",
+        "title": "三角形区域上的均匀联合密度",
+        "difficulty": "基础",
+        "source": "讲义 PDF 第 143 页·第 3 章题 10",
+        "problem": "二维随机变量 (X,Y) 在顶点为 (0,0)、(1,-1)、(1,1) 的三角形上均匀分布，求联合密度常数。",
+        "focus": "区域上均匀意味着密度等于区域面积的倒数。",
+        "method": "先求三角形面积，再令密度在区域上的二重积分等于 1。",
+        "steps": [
+          { "text": "三角形底长为 2、高为 1。", "formula": "S_D=\\frac12\\times2\\times1=1" },
+          { "text": "若区域内密度为 c，则 cS_D=1。" }
+        ],
+        "answer": "区域内密度为 1，区域外为 0。",
+        "answerFormula": "f(x,y)=\\begin{cases}1,&0<x<1,-x<y<x,\\\\0,&\\text{其他}.\\end{cases}"
+      }
+    ]
+  },
+  {
+    "slug": "marginal-distribution",
+    "sourceRange": "讲义 PDF 第 143 页",
+    "exercises": [
+      {
+        "id": "mv-05",
+        "title": "由三角形联合密度求边缘密度",
+        "difficulty": "强化",
+        "source": "讲义 PDF 第 143 页·第 3 章题 10（第一问）",
+        "problem": "沿用三角形均匀分布，求 X 与 Y 的边缘密度。",
+        "focus": "固定一个坐标后，积分范围由三角形截线决定。",
+        "method": "求 f_X 时固定 x，y 从 -x 到 x；求 f_Y 时固定 y，x 从 |y| 到 1。",
+        "steps": [
+          { "text": "对 y 积分得到 X 的边缘密度。", "formula": "f_X(x)=\\int_{-x}^{x}1\\,dy=2x,\\quad0<x<1" },
+          { "text": "对 x 积分得到 Y 的边缘密度。", "formula": "f_Y(y)=\\int_{|y|}^{1}1\\,dx=1-|y|,\\quad |y|<1" }
+        ],
+        "answer": "两个边缘密度分别为 2x 与 1-|y|，各自在其支持集外为 0。"
+      }
+    ]
+  },
+  {
+    "slug": "conditional-distribution",
+    "sourceRange": "讲义 PDF 第 143 页",
+    "exercises": [
+      {
+        "id": "mv-06",
+        "title": "三角形区域上的条件密度",
+        "difficulty": "强化",
+        "source": "讲义 PDF 第 143 页·第 3 章题 10（第一问）",
+        "problem": "沿用三角形均匀分布，求 f_{Y|X}(y|x) 与 f_{X|Y}(x|y)。",
+        "focus": "条件密度等于联合密度除以相应边缘密度，并保留条件支持集。",
+        "method": "先使用上一题的边缘密度，再分别归一化。",
+        "steps": [
+          { "text": "给定 0<x<1 时，Y 只能落在 (-x,x)。", "formula": "f_{Y|X}(y|x)=\\frac1{2x},\\quad -x<y<x" },
+          { "text": "给定 |y|<1 时，X 只能落在 (|y|,1)。", "formula": "f_{X|Y}(x|y)=\\frac1{1-|y|},\\quad |y|<x<1" }
+        ],
+        "answer": "两个条件密度都是对应截线区间上的均匀密度。"
+      }
+    ]
+  },
+  {
+    "slug": "random-variable-independence",
+    "sourceRange": "讲义 PDF 第 143 页",
+    "exercises": [
+      {
+        "id": "mv-07",
+        "title": "从支持集判断不独立",
+        "difficulty": "基础",
+        "source": "讲义 PDF 第 143 页·第 3 章题 10（第一问）",
+        "problem": "三角形均匀分布中的 X 与 Y 是否相互独立？",
+        "focus": "独立连续变量的联合支持集在常见非退化情形下应能写成两个边缘支持集的直积。",
+        "method": "任选边缘密度均为正、但联合密度为零的点即可否定乘积关系。",
+        "steps": [
+          { "text": "例如 x=0.2、y=0.8 时，f_X(0.2)>0 且 f_Y(0.8)>0。" },
+          { "text": "该点不在 |y|<x 的三角形内，所以 f(0.2,0.8)=0。" },
+          { "text": "于是联合密度不等于边缘密度乘积。" }
+        ],
+        "answer": "X 与 Y 不独立。",
+        "answerFormula": "f(x,y)\\ne f_X(x)f_Y(y)"
+      }
+    ]
+  },
+  {
+    "slug": "bivariate-region-integral",
+    "sourceRange": "讲义 PDF 第 103、143 页",
+    "exercises": [
+      {
+        "id": "mv-08",
+        "title": "圆盘均匀分布的面积比",
+        "difficulty": "基础",
+        "source": "讲义 PDF 第 103 页·解答题 9（同型整理）",
+        "problem": "(X,Y) 在单位圆盘 x²+y²≤1 上均匀分布，求 P(X²+Y²≤1/4)。",
+        "focus": "均匀联合密度下，概率等于事件区域面积与总面积之比。",
+        "method": "事件区域是半径 1/2 的同心圆盘。",
+        "steps": [
+          { "text": "总区域面积为 π。" },
+          { "text": "事件区域面积为 π(1/2)²=π/4。" },
+          { "text": "两面积作比。" }
+        ],
+        "answer": "所求概率为 1/4。",
+        "answerFormula": "P(X^2+Y^2\\le\\tfrac14)=\\frac{\\pi/4}{\\pi}=\\frac14"
+      },
+      {
+        "id": "mv-09",
+        "title": "三角形内重新划分积分区域",
+        "difficulty": "强化",
+        "source": "讲义 PDF 第 143 页·第 3 章题 10（区域计算改编）",
+        "problem": "在三角形 D={0<x<1,-x<y<x} 上均匀分布，求 P(X+Y<1)。",
+        "focus": "直线 y=1-x 在 x=1/2 处与上边界 y=x 相交，因此需要分段积分。",
+        "method": "先画出事件半平面与支持集交集，再按 x=1/2 分段。",
+        "steps": [
+          { "text": "0<x≤1/2 时整条截线 -x<y<x 都满足条件。", "formula": "\\int_0^{1/2}\\int_{-x}^{x}1\\,dy\\,dx=\\frac14" },
+          { "text": "1/2<x<1 时上界变为 1-x。", "formula": "\\int_{1/2}^{1}\\int_{-x}^{1-x}1\\,dy\\,dx=\\frac12" },
+          { "text": "两部分相加。" }
+        ],
+        "answer": "所求概率为 3/4。",
+        "answerFormula": "P(X+Y<1)=\\frac14+\\frac12=\\frac34"
+      }
+    ]
+  },
+  {
+    "slug": "expectation",
+    "sourceRange": "讲义 PDF 第 105、113、148 页",
+    "exercises": [
+      {
+        "id": "nc-01",
+        "title": "截断函数的期望",
+        "difficulty": "强化",
+        "source": "讲义 PDF 第 148 页·第 4 章题 1",
+        "problem": "设 X 服从参数为 1 的指数分布，令 Y=max{X,1}，求 E(Y)。",
+        "focus": "max 会在 X≤1 与 X>1 两个区域采用不同表达式。",
+        "method": "按分段函数直接计算函数期望。",
+        "steps": [
+          { "text": "X≤1 时 Y=1。", "formula": "E(Y)=P(X\\le1)+\\int_1^\\infty xe^{-x}dx" },
+          { "text": "指数分布尾概率为 e^{-1}。", "formula": "P(X\\le1)=1-e^{-1}" },
+          { "text": "分部积分得到尾部一阶矩。", "formula": "\\int_1^\\infty xe^{-x}dx=2e^{-1}" }
+        ],
+        "answer": "E(Y)=1+e^{-1}。",
+        "answerFormula": "E(Y)=1+e^{-1}"
+      },
+      {
+        "id": "nc-02",
+        "title": "不求分布直接利用期望线性性",
+        "difficulty": "基础",
+        "source": "讲义 PDF 第 105 页·选择题 1",
+        "problem": "10 张奖券中 8 张奖金 2 元、2 张奖金 5 元，不放回抽取 3 张。求总奖金的期望。",
+        "focus": "抽取不独立不影响期望的线性性。",
+        "method": "每次抽取奖金的边缘分布相同，先求一次抽取的期望再乘 3。",
+        "steps": [
+          { "text": "一次抽取奖金的期望。", "formula": "E(X_1)=2\\cdot\\frac8{10}+5\\cdot\\frac2{10}=\\frac{13}{5}" },
+          { "text": "总奖金为三次奖金之和。", "formula": "E(X_1+X_2+X_3)=3E(X_1)" }
+        ],
+        "answer": "总奖金期望为 7.8 元。",
+        "answerFormula": "E(S)=\\frac{39}{5}"
+      },
+      {
+        "id": "nc-08",
+        "title": "二维离散型：由联合分布表计算函数期望",
+        "difficulty": "强化",
+        "source": "讲义 PDF 第 113 页·第四讲解答题 3",
+        "problem": "二维离散型随机变量 (X,Y) 在 (0,0)、(1,1)、(0,2)、(2,0)、(2,2) 处的概率依次为 1/4、1/3、1/4、1/12、1/12。求 Cov(X-Y,Y)。",
+        "focus": "二维离散型函数期望使用联合概率加权；不能只用 X、Y 的边缘分布计算交叉项 E(XY)。",
+        "method": "先由联合分布表分别计算 E(X)、E(Y)、E(XY)、E(Y²)，再代入协方差定义。",
+        "steps": [
+          { "text": "按联合概率分别计算两个一阶矩。", "formula": "E(X)=\\sum_{x,y}x p(x,y)=\\frac23,\\qquad E(Y)=\\sum_{x,y}y p(x,y)=1" },
+          { "text": "交叉项必须在联合取值点上加权。", "formula": "E(XY)=\\sum_{x,y}xy p(x,y)=1\\cdot1\\cdot\\frac13+2\\cdot2\\cdot\\frac1{12}=\\frac23" },
+          { "text": "计算 Y 的二阶矩。", "formula": "E(Y^2)=1^2\\cdot\\frac13+2^2\\cdot\\frac14+2^2\\cdot\\frac1{12}=\\frac53" },
+          { "text": "展开目标协方差并代入各期望。", "formula": "\\operatorname{Cov}(X-Y,Y)=E(XY)-E(Y^2)-[E(X)-E(Y)]E(Y)" },
+          { "text": "完成数值化简。", "formula": "\\frac23-\\frac53-\\left(\\frac23-1\\right)\\cdot1=-\\frac23" }
+        ],
+        "answer": "Cov(X-Y,Y)=-2/3。",
+        "answerFormula": "\\operatorname{Cov}(X-Y,Y)=-\\frac23"
+      },
+      {
+        "id": "nc-09",
+        "title": "二维连续型：三角形区域上的联合积分",
+        "difficulty": "强化",
+        "source": "讲义 PDF 第 113 页·第四讲解答题 4",
+        "problem": "二维随机变量 (X,Y) 在区域 D={x≥0，y≥0，x+2y≤2} 上服从均匀分布，求相关系数 ρ_XY。",
+        "focus": "二维连续型期望要先画出支持区域，再根据斜边写出随 x 变化的积分上限。",
+        "method": "区域面积为 1，因此联合密度为 1；在 0≤x≤2、0≤y≤1-x/2 上依次计算一阶矩、二阶矩和交叉矩。",
+        "steps": [
+          { "text": "三角形顶点为 (0,0)、(2,0)、(0,1)，面积为 1，所以区域内联合密度为 1。", "formula": "f(x,y)=1,\\qquad 0\\le x\\le2,\\ 0\\le y\\le1-\\frac x2" },
+          { "text": "计算两个一阶矩。", "formula": "E(X)=\\int_0^2\\int_0^{1-x/2}x\\,dy\\,dx=\\frac23,\\qquad E(Y)=\\int_0^2\\int_0^{1-x/2}y\\,dy\\,dx=\\frac13" },
+          { "text": "计算两个二阶矩。", "formula": "E(X^2)=\\frac23,\\qquad E(Y^2)=\\frac16" },
+          { "text": "计算联合分布中最关键的交叉矩。", "formula": "E(XY)=\\int_0^2\\int_0^{1-x/2}xy\\,dy\\,dx=\\frac16" },
+          { "text": "由矩得到方差与协方差。", "formula": "D(X)=\\frac29,\\quad D(Y)=\\frac1{18},\\quad\\operatorname{Cov}(X,Y)=\\frac16-\\frac23\\cdot\\frac13=-\\frac1{18}" },
+          { "text": "将协方差标准化。", "formula": "\\rho_{XY}=\\frac{-1/18}{\\sqrt{(2/9)(1/18)}}=-\\frac12" }
+        ],
+        "answer": "X 与 Y 的相关系数为 -1/2，负号反映了三角形约束下一个变量增大时另一个变量可取范围会缩小。",
+        "answerFormula": "\\rho_{XY}=-\\frac12"
+      }
+    ]
+  },
+  {
+    "slug": "variance",
+    "sourceRange": "讲义 PDF 第 108、111 页",
+    "exercises": [
+      {
+        "id": "nc-03",
+        "title": "正态变量多项式的方差",
+        "difficulty": "强化",
+        "source": "讲义 PDF 第 108 页·选择题 10（延伸）",
+        "problem": "设 X~N(0,1)，Y=2X²+X+3，求 D(Y)。",
+        "focus": "需要使用标准正态分布的三、四阶矩。",
+        "method": "将常数项去掉，展开方差并利用奇数阶矩为 0。",
+        "steps": [
+          { "text": "标准正态矩：E(X²)=1，E(X³)=0，E(X⁴)=3。" },
+          { "text": "因此 D(X²)=3-1²=2，Cov(X²,X)=0。" },
+          { "text": "展开线性组合方差。", "formula": "D(Y)=4D(X^2)+D(X)+4\\operatorname{Cov}(X^2,X)=8+1" }
+        ],
+        "answer": "Y 的方差为 9。",
+        "answerFormula": "D(Y)=9"
+      },
+      {
+        "id": "nc-04",
+        "title": "样本观测与样本均值之差的方差",
+        "difficulty": "强化",
+        "source": "讲义 PDF 第 111 页·填空题 8（整理）",
+        "problem": "X_1,…,X_n 相互独立且方差均为 σ²，记样本均值为 X̄。求 D(X_1-X̄)。",
+        "focus": "X_1 与 X̄ 不独立，必须保留协方差项。",
+        "method": "使用 D(U-V)=D(U)+D(V)-2Cov(U,V)。",
+        "steps": [
+          { "text": "样本均值的方差。", "formula": "D(\\bar X)=\\frac{\\sigma^2}{n}" },
+          { "text": "X_1 与样本均值的协方差。", "formula": "\\operatorname{Cov}(X_1,\\bar X)=\\frac{\\sigma^2}{n}" },
+          { "text": "代入差的方差公式。" }
+        ],
+        "answer": "方差为 σ²(1-1/n)。",
+        "answerFormula": "D(X_1-\\bar X)=\\sigma^2\\left(1-\\frac1n\\right)"
+      }
+    ]
+  },
+  {
+    "slug": "covariance",
+    "sourceRange": "讲义 PDF 第 108 页",
+    "exercises": [
+      {
+        "id": "nc-05",
+        "title": "正态变量与其多项式的协方差",
+        "difficulty": "基础",
+        "source": "讲义 PDF 第 108 页·选择题 10（计算化）",
+        "problem": "设 X~N(0,1)，Y=2X²+X+3，求 Cov(X,Y)，并判断二者是否相关。",
+        "focus": "不相关要检查协方差，而不是只看 Y 是否由 X 构成。",
+        "method": "利用协方差线性性和标准正态奇数阶矩为 0。",
+        "steps": [
+          { "text": "展开协方差。", "formula": "\\operatorname{Cov}(X,Y)=2\\operatorname{Cov}(X,X^2)+D(X)" },
+          { "text": "标准正态下 Cov(X,X²)=E(X³)=0，D(X)=1。" }
+        ],
+        "answer": "协方差为 1，所以 X 与 Y 相关。",
+        "answerFormula": "\\operatorname{Cov}(X,Y)=1"
+      }
+    ]
+  },
+  {
+    "slug": "correlation-coefficient",
+    "sourceRange": "讲义 PDF 第 154 页",
+    "exercises": [
+      {
+        "id": "nc-06",
+        "title": "多项分布计数的负相关",
+        "difficulty": "强化",
+        "source": "讲义 PDF 第 154 页·第 4 章题 11",
+        "problem": "一次试验有三个互斥结果 A₁、A₂、A₃，概率均为 1/3。独立重复 2 次，令 X、Y 分别为 A₁、A₂ 出现次数，求相关系数 ρ_{XY}。",
+        "focus": "同一次试验中 A₁ 与 A₂ 互斥，使两个计数产生负协方差。",
+        "method": "把 X、Y 写成两次试验示性变量之和，或直接使用多项分布矩公式。",
+        "steps": [
+          { "text": "两个计数的方差相同。", "formula": "D(X)=D(Y)=2\\cdot\\frac13\\cdot\\frac23=\\frac49" },
+          { "text": "多项分布中不同类别计数的协方差。", "formula": "\\operatorname{Cov}(X,Y)=-2\\cdot\\frac13\\cdot\\frac13=-\\frac29" },
+          { "text": "标准化协方差。" }
+        ],
+        "answer": "相关系数为 -1/2。",
+        "answerFormula": "\\rho_{XY}=\\frac{-2/9}{\\sqrt{(4/9)(4/9)}}=-\\frac12"
+      }
+    ]
+  },
+  {
+    "slug": "moments",
+    "sourceRange": "讲义 PDF 第 149 页",
+    "exercises": [
+      {
+        "id": "nc-07",
+        "title": "由均值与方差得到二阶原点矩",
+        "difficulty": "基础",
+        "source": "讲义 PDF 第 149 页·第 4 章题 3（整理）",
+        "problem": "设 X 服从以 p 为成功概率、取值从 1 开始的几何分布，求二阶原点矩 E(X²)。",
+        "focus": "二阶原点矩不等于方差，两者相差均值平方。",
+        "method": "使用 E(X²)=D(X)+[E(X)]²。",
+        "steps": [
+          { "text": "几何分布的均值与方差。", "formula": "E(X)=\\frac1p,\\quad D(X)=\\frac{1-p}{p^2}" },
+          { "text": "代入二阶矩恒等式。", "formula": "E(X^2)=D(X)+[E(X)]^2" }
+        ],
+        "answer": "二阶原点矩为 (2-p)/p²。",
+        "answerFormula": "E(X^2)=\\frac{2-p}{p^2}"
+      }
+    ]
+  },
+  {
+    "slug": "chebyshev-inequality",
+    "sourceRange": "讲义 PDF 第 116 页",
+    "exercises": [
+      {
+        "id": "lt-01",
+        "title": "仅用均值方差估计电话次数",
+        "difficulty": "基础",
+        "source": "讲义 PDF 第 116 页·填空题 1",
+        "problem": "某办公室每天电话呼叫次数 X 的均值为 10，并按泊松模型取 D(X)=10。用切比雪夫不等式估计 P(5<X<15) 的下界。",
+        "focus": "区间可写成偏离均值不超过 5。",
+        "method": "对补事件使用切比雪夫上界，再取 1 减去该上界。",
+        "steps": [
+          { "text": "将目标事件写成中心区间。", "formula": "P(5<X<15)=P(|X-10|<5)" },
+          { "text": "切比雪夫不等式。", "formula": "P(|X-10|\\ge5)\\le\\frac{10}{25}" },
+          { "text": "转为中心区间概率下界。" }
+        ],
+        "answer": "下界为 0.6。",
+        "answerFormula": "P(5<X<15)\\ge1-\\frac{10}{25}=0.6"
+      }
+    ]
+  },
+  {
+    "slug": "law-of-large-numbers",
+    "sourceRange": "讲义 PDF 第 160 页",
+    "exercises": [
+      {
+        "id": "lt-02",
+        "title": "样本二阶矩的依概率极限",
+        "difficulty": "强化",
+        "source": "讲义 PDF 第 160 页·第 5 章题 1",
+        "problem": "X₁,X₂,… 是来自参数为 2 的指数分布的简单随机样本。求 (1/n)ΣX_i² 的依概率极限。",
+        "focus": "大数定律作用于新的随机变量 Y_i=X_i²。",
+        "method": "先计算 E(X²)，再将弱大数定律用于 X_i²。",
+        "steps": [
+          { "text": "参数为 2 的指数分布有 E(X)=1/2、D(X)=1/4。" },
+          { "text": "计算二阶矩。", "formula": "E(X^2)=D(X)+[E(X)]^2=\\frac12" },
+          { "text": "由大数定律，样本二阶矩依概率收敛到总体二阶矩。", "formula": "\\frac1n\\sum_{i=1}^nX_i^2\\xrightarrow{P}E(X^2)" }
+        ],
+        "answer": "依概率极限为 1/2。",
+        "answerFormula": "\\operatorname*{plim}_{n\\to\\infty}\\frac1n\\sum_{i=1}^nX_i^2=\\frac12"
+      }
+    ]
+  },
+  {
+    "slug": "central-limit-theorem",
+    "sourceRange": "讲义 PDF 第 116、162 页",
+    "exercises": [
+      {
+        "id": "lt-03",
+        "title": "均匀分布和的正态近似",
+        "difficulty": "基础",
+        "source": "讲义 PDF 第 116 页·填空题 2",
+        "problem": "X₁,…,X₄₈ 相互独立且均服从 U(0,2)，利用中心极限定理近似计算 P(ΣX_i≤50)。",
+        "focus": "先求单个变量均值方差，再对随机和标准化。",
+        "method": "随机和的均值为 48、方差为 16，标准差为 4。",
+        "steps": [
+          { "text": "单个变量的均值和方差。", "formula": "E(X_i)=1,\\quad D(X_i)=\\frac13" },
+          { "text": "随机和 S 的参数。", "formula": "E(S)=48,\\quad D(S)=16" },
+          { "text": "标准化阈值。", "formula": "P(S\\le50)\\approx\\Phi\\left(\\frac{50-48}{4}\\right)=\\Phi(0.5)" }
+        ],
+        "answer": "近似概率为 0.6915。",
+        "answerFormula": "P(S\\le50)\\approx0.6915"
+      },
+      {
+        "id": "lt-04",
+        "title": "保险利润的二项正态近似",
+        "difficulty": "强化",
+        "source": "讲义 PDF 第 162 页·第 5 章题 5",
+        "problem": "某保险公司承保 10000 辆车，每辆年保费 1.2 万元；每辆车以 0.006 的概率丢失，丢失赔付 100 万元。近似求年利润不少于 6000 万元的概率。",
+        "focus": "先把利润条件转化为丢失车辆数条件，再做二项分布的正态近似。",
+        "method": "令 N~B(10000,0.006)，利润为 12000-100N（万元）。",
+        "steps": [
+          { "text": "利润不少于 6000 万元等价于 N≤60。" },
+          { "text": "二项变量均值和方差。", "formula": "E(N)=60,\\quad D(N)=59.64" },
+          { "text": "采用连续性修正。", "formula": "P(N\\le60)\\approx\\Phi\\left(\\frac{60.5-60}{\\sqrt{59.64}}\\right)" }
+        ],
+        "answer": "采用连续性修正时约为 0.526；若课程不要求连续性修正，则近似为 0.5。",
+        "answerFormula": "P(N\\le60)\\approx\\Phi(0.0647)\\approx0.526"
+      }
+    ]
+  }
+]

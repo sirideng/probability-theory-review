@@ -1,0 +1,8 @@
+node_modules/
+dist/
+tmp/
+.pnpm-store/
+.codex-publish-state.json
+*.log
+.DS_Store
+Thumbs.db

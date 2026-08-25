@@ -1,0 +1,188 @@
+[
+  {
+    "slug": "random-variable",
+    "chapter": "第二章 · 随机变量及其分布",
+    "title": "随机变量",
+    "englishTitle": "Random Variable",
+    "summary": "把样本空间中的随机结果映射成实数，使概率问题能够使用函数和分析工具研究。",
+    "readTime": 8,
+    "updatedAt": "2026.08",
+    "core": [
+      "随机变量不是“会随机变化的普通变量”，而是定义在样本空间上的实值函数。随机性来自输入样本点 ω，映射规则 X 本身是确定的。",
+      "数值化以后，我们不再逐个研究复杂样本点，而研究 X 的取值及其概率分布。"
+    ],
+    "definition": {
+      "intro": "随机变量 X 将每个样本点 ω 映射到一个实数，并要求 {ω:X(ω)≤x} 对每个实数 x 都是事件。",
+      "formulas": ["X:\\Omega\\to\\mathbb{R},\\quad\\omega\\mapsto X(\\omega)", "\\{X\\le x\\}=\\{\\omega\\in\\Omega:X(\\omega)\\le x\\}"]
+    },
+    "intuition": [
+      "抛三枚硬币的样本点是 HHT、HTH 等字符串；定义 X=正面个数后，它们被压缩为 0、1、2、3。",
+      "不同随机变量可以观察同一试验的不同方面，例如同一次抽样可定义 X=合格品数、Y=总重量。"
+    ],
+    "visual": { "type": "mapping", "caption": "多个样本点可以被同一个随机变量映射到相同数值，概率随之汇总。" },
+    "properties": [
+      { "label": "离散型", "text": "取值集合有限或可列，如成功次数。" },
+      { "label": "连续型", "text": "取值充满某个区间，通常用密度描述。" },
+      { "label": "事件翻译", "text": "X 的数值条件会对应 Ω 中的事件。", "formula": "P(X\\in D)=P(\\{\\omega:X(\\omega)\\in D\\})" },
+      { "label": "函数变换", "text": "若 Y=g(X)，Y 仍是随机变量。" }
+    ],
+    "exams": [
+      "根据试验定义随机变量并写出全部可能取值。",
+      "把 {X≤x}、{a<X≤b} 翻译成样本事件。",
+      "由样本点概率归并得到随机变量的分布律。"
+    ],
+    "mistakes": [
+      "把随机变量 X 与其某个实现值 x 混用。",
+      "认为连续型随机变量可以取任意实数；其实际取值范围可能只是一个区间。",
+      "只列取值，不给出这些取值对应的概率规律。"
+    ],
+    "prerequisites": [
+      { "title": "随机试验与样本空间", "slug": "random-experiment", "note": "随机变量的定义域是样本空间。" }
+    ],
+    "connections": [
+      { "title": "分布函数", "slug": "distribution-function", "note": "统一描述随机变量的概率规律。" },
+      { "title": "二维随机变量", "slug": "bivariate-random-variable", "note": "同时研究两个随机变量。" }
+    ]
+  },
+  {
+    "slug": "distribution-function",
+    "chapter": "第二章 · 随机变量及其分布",
+    "title": "分布函数",
+    "englishTitle": "Cumulative Distribution Function",
+    "summary": "用“落在 x 左侧的累计概率”统一描述任何随机变量的分布。",
+    "readTime": 9,
+    "updatedAt": "2026.08",
+    "core": [
+      "分布函数 F(x) 记录随机变量不超过 x 的概率。随着 x 向右移动，累计进来的概率只能增加，最终从 0 走到 1。",
+      "无论随机变量离散、连续还是混合，分布函数都存在，因此它是最统一的分布描述。"
+    ],
+    "definition": {
+      "intro": "对任意实数 x，随机变量 X 的分布函数定义为左半轴事件的概率。",
+      "formulas": ["F_X(x)=P(X\\le x)", "P(a<X\\le b)=F_X(b)-F_X(a)", "P(X=x)=F_X(x)-F_X(x^-)"]
+    },
+    "intuition": [
+      "想象一条扫描线从 −∞ 向右移动：每越过一个离散取值，F 就跳跃相应概率；经过连续密度区域时，F 平滑上升。",
+      "F 的跳跃大小就是该点的概率。连续型随机变量没有跳跃，单点概率为 0。"
+    ],
+    "visual": { "type": "cdf", "caption": "分布函数从 0 单调累积到 1；离散分布呈阶梯状，连续分布通常平滑上升。" },
+    "properties": [
+      { "label": "单调不减", "text": "x 增大时事件 {X≤x} 只会扩大。", "formula": "x_1<x_2\\Rightarrow F(x_1)\\le F(x_2)" },
+      { "label": "右连续", "text": "F 在每一点都从右侧连续。", "formula": "F(x+0)=F(x)" },
+      { "label": "边界极限", "text": "累计概率最终覆盖空集到全集。", "formula": "F(-\\infty)=0,\\quad F(+\\infty)=1" },
+      { "label": "区间概率", "text": "注意开闭端点与跳跃概率。", "formula": "P(a\\le X\\le b)=F(b)-F(a^- )" }
+    ],
+    "exams": [
+      "由分布律或密度函数求分布函数，通常需要分段。",
+      "检验给定函数是否可能是分布函数。",
+      "利用 F 计算不同开闭区间概率和点概率。"
+    ],
+    "mistakes": [
+      "忘记 F 是右连续而不是左连续。",
+      "区间左端点含概率质量时，混淆 F(a) 与 F(a−)。",
+      "求连续型 F 时漏写取值范围外的 0 和 1 两段。"
+    ],
+    "prerequisites": [
+      { "title": "随机变量", "slug": "random-variable", "note": "F 描述随机变量的累计概率。" }
+    ],
+    "connections": [
+      { "title": "离散型随机变量", "slug": "discrete-random-variable", "note": "分布律决定阶梯形 F。" },
+      { "title": "连续型随机变量", "slug": "continuous-random-variable", "note": "密度积分得到 F。" },
+      { "title": "联合分布函数", "slug": "joint-distribution-function", "note": "把累计概率推广到二维。" }
+    ]
+  },
+  {
+    "slug": "discrete-random-variable",
+    "chapter": "第二章 · 随机变量及其分布",
+    "title": "离散型随机变量与分布律",
+    "englishTitle": "Discrete Random Variable & PMF",
+    "summary": "列出每个可能取值及其概率，用一张表或概率质量函数完整描述分布。",
+    "readTime": 9,
+    "updatedAt": "2026.08",
+    "core": [
+      "离散型随机变量的可能取值有限或可列。分布律告诉我们每个取值获得多少概率质量。",
+      "所谓“质量”强调概率直接放在一个个点上；所有柱子的高度相加必须等于 1。"
+    ],
+    "definition": {
+      "intro": "若 X 的取值为 x₁,x₂,…，定义概率质量函数 pᵢ=P(X=xᵢ)。",
+      "formulas": ["p_X(x_i)=P(X=x_i)=p_i", "p_i\\ge0,\\quad\\sum_i p_i=1", "F_X(x)=\\sum_{x_i\\le x}p_i"]
+    },
+    "intuition": [
+      "把总量为 1 的概率分配在若干数轴点上，每个点上柱子的高度就是该取值概率。",
+      "求区间概率就是把区间内所有点的概率相加，而不是计算区间长度。"
+    ],
+    "visual": { "type": "pmf", "caption": "离散概率集中在孤立取值上；所有概率柱的高度总和为 1。" },
+    "properties": [
+      { "label": "非负性", "text": "每个取值的概率不能为负。", "formula": "p_i\\ge0" },
+      { "label": "归一性", "text": "所有可能取值的概率必须加总为 1。", "formula": "\\sum_i p_i=1" },
+      { "label": "事件概率", "text": "对取值集合 D，把其中各点概率求和。", "formula": "P(X\\in D)=\\sum_{x_i\\in D}p_i" },
+      { "label": "分布函数", "text": "F 在每个有正质量的取值处向上跳跃 pᵢ。" }
+    ],
+    "exams": [
+      "由归一性确定分布律中的未知常数。",
+      "由分布律计算事件概率、分布函数和数字特征。",
+      "从实际试验识别 0-1、二项、泊松或几何分布。"
+    ],
+    "mistakes": [
+      "只检查概率非负，忘记总和为 1。",
+      "把概率质量函数的柱高当成密度面积。",
+      "对无限可列取值求和时忽略收敛范围。"
+    ],
+    "prerequisites": [
+      { "title": "分布函数", "slug": "distribution-function", "note": "分布律与阶梯形分布函数相互决定。" }
+    ],
+    "connections": [
+      { "title": "二项分布", "slug": "binomial", "note": "典型有限离散分布。", "type": "distribution" },
+      { "title": "泊松分布", "slug": "poisson", "note": "典型可列离散分布。", "type": "distribution" },
+      { "title": "数学期望", "slug": "expectation", "note": "对取值按概率加权求和。" }
+    ]
+  },
+  {
+    "slug": "continuous-random-variable",
+    "chapter": "第二章 · 随机变量及其分布",
+    "title": "连续型随机变量与概率密度",
+    "englishTitle": "Continuous Random Variable & PDF",
+    "summary": "概率不放在单点上，而由密度曲线在区间上的面积决定。",
+    "readTime": 10,
+    "updatedAt": "2026.08",
+    "core": [
+      "连续型随机变量通过概率密度函数 f(x) 描述。密度值不是点概率，只有在区间上积分得到的面积才是概率。",
+      "分布函数是密度从 −∞ 累积到 x 的面积；在可微处，密度又是分布函数的导数。"
+    ],
+    "definition": {
+      "intro": "若存在非负可积函数 f，使任意 x 的分布函数可表示为积分，则 X 为连续型随机变量。",
+      "formulas": ["F_X(x)=\\int_{-\\infty}^{x}f_X(t)\\,dt", "P(a<X\\le b)=\\int_a^b f_X(x)\\,dx", "f_X(x)=F_X'(x)\\quad\\text{（可导处）}"]
+    },
+    "intuition": [
+      "f(x) 表示 x 附近单位长度内概率聚集的快慢；小区间概率近似为 f(x)Δx。",
+      "单点没有宽度，因此曲线下单点面积为 0。P(X=x)=0 不意味着 x 不能被取到。"
+    ],
+    "visual": { "type": "density", "caption": "密度曲线在 [a,b] 上的面积等于随机变量落入该区间的概率。" },
+    "properties": [
+      { "label": "非负性", "text": "密度不能为负。", "formula": "f(x)\\ge0" },
+      { "label": "归一性", "text": "整条曲线下的总面积为 1。", "formula": "\\int_{-\\infty}^{+\\infty}f(x)\\,dx=1" },
+      { "label": "单点概率", "text": "连续型随机变量在任一点的概率为 0。", "formula": "P(X=x)=0" },
+      { "label": "端点无影响", "text": "区间开闭不改变连续型概率。", "formula": "P(a<X<b)=P(a\\le X\\le b)" },
+      { "label": "密度可大于 1", "text": "只要积分总面积为 1，局部柱高超过 1 完全合法。" }
+    ],
+    "exams": [
+      "由归一性求密度中的未知常数，再计算区间概率。",
+      "在分段密度上积分得到分布函数，并检查连续性。",
+      "由分布函数求导得到密度，注意不可导点和分段范围。"
+    ],
+    "mistakes": [
+      "把 f(x) 当成 P(X=x)。",
+      "认为密度必须不超过 1；真正受 0 到 1 限制的是概率。",
+      "积分时忽略密度的支持集或忘记分段。"
+    ],
+    "prerequisites": [
+      { "title": "分布函数", "slug": "distribution-function", "note": "密度和分布函数通过积分、求导联系。" },
+      { "title": "概率定义", "slug": "probability-definition", "note": "连续概率是几何测度思想的推广。" }
+    ],
+    "connections": [
+      { "title": "均匀分布", "slug": "uniform", "note": "常数密度的基础模型。", "type": "distribution" },
+      { "title": "指数分布", "slug": "exponential", "note": "等待时间模型。", "type": "distribution" },
+      { "title": "正态分布", "slug": "normal", "note": "最重要的钟形连续分布。", "type": "distribution" },
+      { "title": "联合概率密度", "slug": "joint-density", "note": "将区间面积推广为二维区域上的体积。" }
+    ]
+  }
+]
