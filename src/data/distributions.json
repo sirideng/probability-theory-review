@@ -108,9 +108,9 @@
     "parameterNotes": ["λ>0 是事件发生率", "λ 越大，平均等待时间越短，曲线下降越快"],
     "expectation": "1/\\lambda",
     "variance": "1/\\lambda^2",
-    "properties": ["连续无记忆性 P(X>s+t|X>s)=P(X>t)", "生存函数 P(X>x)=e^{-λx}", "与泊松计数过程互相对应"],
-    "examTips": ["等待超过 t 的概率直接用 e^{-λt}", "由平均等待时间反求 λ"],
-    "mistakes": ["把率参数 λ 与均值 1/λ 混淆", "忘记 x<0 时密度为 0"],
+    "properties": ["连续无记忆性 $P(X>s+t\\mid X>s)=P(X>t)$", "生存函数 $P(X>x)=e^{-\\lambda x}$", "独立指数变量的最小值仍服从指数分布：若 $X_i\\sim\\operatorname{Exp}(\\lambda_i)$，则 $\\min_iX_i\\sim\\operatorname{Exp}(\\sum_i\\lambda_i)$", "与泊松计数过程互相对应"],
+    "examTips": ["等待超过 $t$ 的概率直接用 $e^{-\\lambda t}$", "由平均等待时间 $1/\\lambda$ 反求 $\\lambda$"],
+    "mistakes": ["把率参数 $\\lambda$ 与均值 $1/\\lambda$ 混淆", "忘记 $x<0$ 时密度为 $0$"],
     "status": "ready"
   },
   {

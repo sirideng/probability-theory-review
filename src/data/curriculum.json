@@ -296,7 +296,17 @@
         "subtopics": ["分布函数判定", "分布律判定", "密度判定"],
         "status": "ready",
         "prerequisites": ["marginal-distribution", "conditional-distribution"],
-        "next": ["covariance", "law-of-large-numbers"]
+        "next": ["maximum-minimum-distributions", "covariance", "law-of-large-numbers"]
+      },
+      {
+        "slug": "maximum-minimum-distributions",
+        "title": "最大值与最小值分布",
+        "englishTitle": "Distributions of Maxima and Minima",
+        "summary": "把最大值和最小值事件改写为多个事件的交，用分布函数与独立性快速求分布。",
+        "subtopics": ["最大值分布", "最小值分布", "独立同分布情形"],
+        "status": "ready",
+        "prerequisites": ["distribution-function", "random-variable-independence"],
+        "next": ["bivariate-region-integral", "expectation"]
       },
       {
         "slug": "bivariate-region-integral",

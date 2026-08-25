@@ -58,8 +58,8 @@ function continuousConfig(slug: string, params: Params) {
     cdf: (x: number) => x < 0 ? 0 : 1 - Math.exp(-params.lambda * x),
   }
   if (slug === 'normal') return {
-    min: params.mean - 4.2 * params.sigma,
-    max: params.mean + 4.2 * params.sigma,
+    min: -10,
+    max: 10,
     fn: (x: number) => Math.exp(-0.5 * ((x - params.mean) / params.sigma) ** 2) / (params.sigma * Math.sqrt(2 * Math.PI)),
     cdf: (x: number) => standardNormalCdf((x - params.mean) / params.sigma),
   }
@@ -140,7 +140,11 @@ export default function DistributionChart({ slug, params, color, activeSeries, o
         {discrete ? points.map((point, index) => <g key={point.x}><rect x={xScale(point.x)-barWidth/2} y={yScale(point.y)} width={barWidth} height={baseline-yScale(point.y)} rx={Math.min(6,barWidth/4)} fill={color} fillOpacity=".72"/><text x={xScale(point.x)} y={baseline+19} textAnchor="middle" fontSize={points.length>18?'8':'10'} fill="#1d1d1f" fillOpacity={points.length>18 && index%2 ? 0 : .4}>{point.x}</text></g>) : <><path d={`${densityLine} L${xScale(config.max)},${baseline} L${xScale(config.min)},${baseline} Z`} fill={`url(#${gradientId})`}/><path d={densityLine} fill="none" stroke={color} strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/></>}
       </g>
       <path data-series="cdf" d={discrete ? discreteCdf : cdfLine} fill="none" stroke="#1d1d1f" strokeWidth="3.25" strokeDasharray="8 6" strokeLinecap="round" strokeLinejoin="round" className="transition-opacity duration-200" style={{ opacity: cdfOpacity }}/>
-      {!discrete && tickValues.map((tick) => <g key={tick}><line x1={xScale(tick)} x2={xScale(tick)} y1={baseline} y2={baseline+5} stroke="#1d1d1f" strokeOpacity=".18"/><text x={xScale(tick)} y={baseline+22} textAnchor="middle" fontSize="10" fill="#1d1d1f" fillOpacity=".4">{tick.toFixed(Math.abs(tick)<10?1:0)}</text></g>)}
+      {slug === 'normal' && <g data-guide="normal-mean" className="pointer-events-none">
+        <line x1={xScale(params.mean)} x2={xScale(params.mean)} y1={pad.top} y2={baseline} stroke={color} strokeWidth="1.5" strokeOpacity=".3" strokeDasharray="5 6"/>
+        <text x={xScale(params.mean) + 8} y={pad.top + 14} fontSize="11" fontWeight="600" fill={color}>μ = {params.mean.toFixed(1)}</text>
+      </g>}
+      {!discrete && tickValues.map((tick) => <g key={tick}><line x1={xScale(tick)} x2={xScale(tick)} y1={baseline} y2={baseline+5} stroke="#1d1d1f" strokeOpacity=".18"/><text data-axis-tick x={xScale(tick)} y={baseline+22} textAnchor="middle" fontSize="10" fill="#1d1d1f" fillOpacity=".4">{tick.toFixed(Math.abs(tick)<10?1:0)}</text></g>)}
       <text x={pad.left} y="15" fontSize="10" fill="#1d1d1f" fillOpacity=".34">纵轴统一刻度 · F(x) ∈ [0,1]</text>
     </svg>
   </div>

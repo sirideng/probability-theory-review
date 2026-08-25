@@ -157,7 +157,37 @@
     "exams": ["从联合分布表检验每格是否等于行和×列和。", "从联合密度及支持集判断独立。", "利用独立性计算和、积事件的概率或期望。"],
     "mistakes": ["只看密度公式能拆开，忽略支持区域不是矩形。", "由协方差为 0 推出独立；一般不成立。", "只验证少数点的乘积关系。"],
     "prerequisites": [{ "title": "事件独立性", "slug": "event-independence", "note": "变量独立要求其生成的全部事件独立。" }, { "title": "边缘分布", "slug": "marginal-distribution", "note": "独立判据使用边缘分布。" }],
-    "connections": [{ "title": "协方差", "slug": "covariance", "note": "独立变量协方差为零。" }, { "title": "中心极限定理", "slug": "central-limit-theorem", "note": "常见形式要求随机变量独立。" }]
+    "connections": [{ "title": "最大值与最小值分布", "slug": "maximum-minimum-distributions", "note": "独立性使多个分布函数或生存函数可以相乘。" }, { "title": "协方差", "slug": "covariance", "note": "独立变量协方差为零。" }, { "title": "中心极限定理", "slug": "central-limit-theorem", "note": "常见形式要求随机变量独立。" }]
+  },
+  {
+    "slug": "maximum-minimum-distributions",
+    "chapter": "第三章 · 多维随机变量",
+    "title": "最大值与最小值分布",
+    "englishTitle": "Distributions of Maxima and Minima",
+    "summary": "先把最大值或最小值的累计事件拆开，再利用独立性相乘，得到极值的分布函数。",
+    "readTime": 9,
+    "updatedAt": "2026.08",
+    "core": ["最大值不超过 z，等价于每一个随机变量都不超过 z；最小值超过 z，等价于每一个随机变量都超过 z。", "极值分布最稳妥的方法是从分布函数出发。最大值直接求累计概率，最小值通常先求补事件，再用 1 减去。"],
+    "definition": {
+      "intro": "设 X₁,…,Xₙ 相互独立，分布函数分别为 F₁,…,Fₙ。记 U 为这些变量的最大值，V 为这些变量的最小值。",
+      "formulas": [
+        "F_U(z)=P(U\\le z)=\\prod_{i=1}^{n}F_{X_i}(z)",
+        "F_V(z)=P(V\\le z)=1-\\prod_{i=1}^{n}\\left[1-F_{X_i}(z)\\right]",
+        "X_i\\overset{\\mathrm{iid}}{\\sim}F\\ \\Longrightarrow\\ F_U(z)=[F(z)]^n,\\quad F_V(z)=1-[1-F(z)]^n"
+      ]
+    },
+    "intuition": ["要让最高的一项仍不超过 z，所有项都必须不超过 z；相互独立时，这些概率可以相乘。", "要让最低的一项不超过 z，直接拆事件不方便。先算所有项都大于 z，再取补集，结构就变成生存概率的乘积。", "样本量 n 增大时，最大值整体更容易向右移动，最小值整体更容易向左移动。"],
+    "visual": { "type": "cdf", "caption": "最大值的分布函数由各分布函数相乘得到；最小值则由各生存函数相乘后取补得到。" },
+    "properties": [
+      { "label": "最大值事件", "text": "最大值不超过 z 当且仅当每个变量都不超过 z。", "formula": "\\{U\\le z\\}=\\bigcap_{i=1}^{n}\\{X_i\\le z\\}" },
+      { "label": "最小值补事件", "text": "最小值超过 z 当且仅当每个变量都超过 z。", "formula": "\\{V>z\\}=\\bigcap_{i=1}^{n}\\{X_i>z\\}" },
+      { "label": "最大值密度", "text": "若 X_i 独立同分布且公共分布函数 F 可导、密度为 f，则对分布函数求导。", "formula": "f_U(z)=n[F(z)]^{n-1}f(z)" },
+      { "label": "最小值密度", "text": "同样由最小值分布函数求导得到。", "formula": "f_V(z)=n[1-F(z)]^{n-1}f(z)" }
+    ],
+    "exams": ["已知若干独立随机变量的分布函数，求最大值或最小值的分布函数。", "独立同分布情形先写 [F(z)]^n 或 1-[1-F(z)]^n，再按原分布支持范围写成分段函数。", "连续型题目进一步对分布函数求导，得到最大值或最小值的密度。"],
+    "mistakes": ["没有确认相互独立就把概率直接相乘。", "求最小值时误写为 [F(z)]^n；这其实是最大值的分布函数。", "忘记最小值公式最外层的 1-，或把 1-F(z) 与 F(z) 混淆。", "只写支持集内部的表达式，漏写完整分布函数在支持集两侧的取值。"],
+    "prerequisites": [{ "title": "分布函数", "slug": "distribution-function", "note": "极值分布统一从累计概率 P(W\\le z) 出发。" }, { "title": "随机变量独立性", "slug": "random-variable-independence", "note": "把交事件概率化为乘积需要相互独立。" }],
+    "connections": [{ "title": "二维连续随机变量概率计算", "slug": "bivariate-region-integral", "note": "两个变量时，max(X,Y)\\le z 对应方形区域，min(X,Y)>z 对应右上区域。" }, { "title": "数学期望", "slug": "expectation", "note": "得到极值分布后可以继续计算其期望与方差。" }, { "title": "数理统计连接", "slug": "statistics-bridge", "note": "样本最大值、最小值和极差是次序统计量的基础。", "type": "data-science" }]
   },
   {
     "slug": "bivariate-region-integral",

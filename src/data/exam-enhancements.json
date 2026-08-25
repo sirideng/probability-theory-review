@@ -549,6 +549,34 @@
     ]
   },
   {
+    "slug": "maximum-minimum-distributions",
+    "lectureSummary": [
+      "对相互独立的随机变量，最大值不超过 z 的概率等于各变量不超过 z 的概率之积。",
+      "最小值的分布应从补事件计算：先求所有变量都大于 z 的概率，再用 1 减去。"
+    ],
+    "problemTypes": [
+      {
+        "title": "独立同分布变量的极值分布",
+        "features": "给出公共分布函数 F，要求求若干独立同分布变量最大值或最小值的分布。",
+        "method": "先写极值累计事件的等价交事件，再利用独立性相乘；若要求密度，最后对所得分布函数求导。",
+        "steps": ["定义 U=max 或 V=min", "改写 U≤z 或 V>z", "利用独立性求乘积", "补全分段范围，必要时求导"]
+      }
+    ],
+    "examples": [
+      {
+        "title": "两个独立同分布变量的最大值",
+        "problem": "设随机变量 X、Y 相互独立且具有相同的分布函数 F(x)，令 Z=max{X,Y}，求 Z 的分布函数。",
+        "analysis": "Z≤z 只有在 X≤z 与 Y≤z 同时成立时才成立；独立性把交事件概率化为乘积。",
+        "steps": [
+          { "text": "改写最大值事件。", "formula": "\\{Z\\le z\\}=\\{X\\le z,Y\\le z\\}" },
+          { "text": "使用独立性和同分布条件。", "formula": "F_Z(z)=P(X\\le z)P(Y\\le z)=[F(z)]^2" }
+        ],
+        "answer": "Z 的分布函数为 F_Z(z)=[F(z)]²。",
+        "source": "讲义例3.10（PDF 第46页）"
+      }
+    ]
+  },
+  {
     "slug": "bivariate-region-integral",
     "lectureSummary": [
       "二重积分题的核心不是先积分，而是先把事件区域与密度支持集画清楚。",

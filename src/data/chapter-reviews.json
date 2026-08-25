@@ -75,14 +75,15 @@
     "id": "chapter-3",
     "number": "03",
     "title": "多维随机变量",
-    "summary": "第三章的核心是从联合分布出发，通过求和或积分得到边缘与条件分布，并用乘积分解判断独立；连续题的关键是区域。",
+    "summary": "第三章的核心是从联合分布出发，通过求和或积分得到边缘与条件分布，并用乘积分解判断独立；极值分布与连续区域题都要先把事件准确改写。",
     "source": "知识讲解第 33–46 页；强化习题第 94–104、138–147 页",
-    "nodeSlugs": ["bivariate-random-variable", "joint-distribution-function", "joint-probability-mass", "joint-density", "marginal-distribution", "conditional-distribution", "random-variable-independence", "bivariate-region-integral"],
+    "nodeSlugs": ["bivariate-random-variable", "joint-distribution-function", "joint-probability-mass", "joint-density", "marginal-distribution", "conditional-distribution", "random-variable-independence", "maximum-minimum-distributions", "bivariate-region-integral"],
     "essentials": [
       { "title": "联合分布", "note": "描述随机点整体规律，既含边缘信息也含变量间关系。" },
       { "title": "边缘化", "note": "离散型对另一指标求和，连续型对另一变量积分。" },
       { "title": "条件分布", "note": "联合量除以对应边缘量，并在条件支持集上重新归一化。" },
       { "title": "独立性", "note": "联合分布能分解为边缘乘积；支持集形状也必须匹配直积。" },
+      { "title": "极值分布", "note": "最大值用全都不超过，最小值用全都超过后取补。" },
       { "title": "区域概率", "note": "先画支持集和事件区域的交，再决定二重积分限。" }
     ],
     "formulas": [
@@ -92,20 +93,24 @@
       { "label": "区域概率", "formula": "P((X,Y)\\in D)=\\iint_Df(x,y)\\,dx\\,dy", "note": "D 要与密度支持集取交。" },
       { "label": "边缘密度", "formula": "f_X(x)=\\int_{-\\infty}^{+\\infty}f(x,y)\\,dy", "note": "实际积分范围由支持集决定。" },
       { "label": "条件密度", "formula": "f_{X\\mid Y}(x\\mid y)=\\frac{f(x,y)}{f_Y(y)}", "note": "要求 fY(y)>0。" },
-      { "label": "独立判据", "formula": "f(x,y)=f_X(x)f_Y(y)\\quad\\text{a.e.}", "note": "连续型在几乎处处意义下成立。" }
+      { "label": "独立判据", "formula": "f(x,y)=f_X(x)f_Y(y)\\quad\\text{a.e.}", "note": "连续型在几乎处处意义下成立。" },
+      { "label": "独立同分布最大值", "formula": "F_{\\max}(z)=[F(z)]^n", "note": "最大值不超过 z 等价于所有变量都不超过 z。" },
+      { "label": "独立同分布最小值", "formula": "F_{\\min}(z)=1-[1-F(z)]^n", "note": "先求所有变量都超过 z 的概率，再取补。" }
     ],
     "problemTypes": [
       { "title": "二维离散联合表", "method": "先标有效数对，逐格计数，再用行列和求边缘并计算条件概率。" },
       { "title": "联合密度归一化", "method": "画支持集，二重积分求参数；边缘和条件分布沿支持集截线。" },
       { "title": "区域概率", "method": "画支持集与事件边界，找交点，选择分段最少的竖条或横条法。" },
-      { "title": "独立性判断", "method": "比较联合分布与边缘乘积，同时检查支持集是否为直积。" }
+      { "title": "独立性判断", "method": "比较联合分布与边缘乘积，同时检查支持集是否为直积。" },
+      { "title": "最大值与最小值分布", "method": "先把极值累计事件写成交事件，利用独立性相乘；最小值优先从补事件计算。" }
     ],
     "mistakes": [
       "矩形概率四项符号写错或漏加左下角。",
       "求边缘密度时仍使用固定积分限，忽略斜边支持集。",
       "联合密度能写成两个因子的乘积就直接判独立，没有检查支持集。",
       "二维均匀分布之外仍使用面积比代替密度积分。",
-      "把条件密度的分母写成错误方向的边缘密度。"
+      "把条件密度的分母写成错误方向的边缘密度。",
+      "求最小值分布时漏掉外层的 1-，或误用最大值公式。"
     ]
   },
   {

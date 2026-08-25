@@ -26,7 +26,7 @@ export default function DistributionLibraryPage() {
               <p className="mt-7 text-[11px] font-semibold uppercase tracking-[0.08em] text-black/35">{item.type} · {item.englishName}</p>
               <h3 className="mt-1.5 text-[22px] font-semibold tracking-[-0.025em]">{item.name}</h3>
               <p className="mt-3 min-h-[50px] text-[15px] leading-6 text-black/50">{item.summary}</p>
-              <div className="mt-5 flex items-center justify-between border-t border-black/[0.06] pt-4 text-xs"><span className="font-mono text-black/45">{item.symbol}</span>{isReady ? <ArrowRight size={16} className="text-blue" /> : <CircleDashed size={15} className="text-black/20" />}</div>
+              <div className="mt-5 flex items-center justify-between border-t border-black/[0.06] pt-4"><span className="font-mono text-[18px] font-medium tracking-tight text-black/55 sm:text-[20px]">{item.symbol}</span>{isReady ? <ArrowRight size={18} className="text-blue" /> : <CircleDashed size={17} className="text-black/20" />}</div>
             </div>
           )
           return isReady ? <Link key={item.slug} to={`/distributions/${item.slug}`}>{content}</Link> : <div key={item.slug}>{content}</div>
