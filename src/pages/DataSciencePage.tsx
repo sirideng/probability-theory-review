@@ -1,10 +1,12 @@
 import { ArrowRight, BrainCircuit, ChartNoAxesCombined, FlaskConical, GitCompareArrows, Goal, LibraryBig, Sigma } from 'lucide-react'
 import MathFormula from '../components/math/MathFormula'
 import PageHeader from '../components/ui/PageHeader'
+import machineLearningBridgeData from '../data/machine-learning-bridge.json'
 import bridgeData from '../data/statistics-bridge.json'
-import type { StatisticsBridgeTopic } from '../types/content'
+import type { MachineLearningBridgeTopic, StatisticsBridgeTopic } from '../types/content'
 
 const bridgeTopics = bridgeData as StatisticsBridgeTopic[]
+const machineLearningBridgeTopics = machineLearningBridgeData as MachineLearningBridgeTopic[]
 
 const dataScienceTopics = [
   { icon: ChartNoAxesCombined, title: '正态分布', question: '为什么在数据中反复出现？', link: '测量误差 · 中心极限定理' },
@@ -39,17 +41,19 @@ export default function DataSciencePage() {
         </div>
 
         <p className="mt-6 max-w-4xl text-[17px] leading-8 text-black/60">{topic.summary}</p>
-        <div className="mt-7 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-          <div>
+        <div className="mt-7 grid gap-7 lg:grid-cols-[1.25fr_0.75fr]">
+          <div className="min-w-0">
             <p className="text-xs font-semibold uppercase tracking-[0.12em] text-black/35">知识要点</p>
             <ul className="mt-4 space-y-3">{topic.keyPoints.map((item) => <li key={item} className="flex gap-3 text-[15px] leading-7 text-black/58"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-blue" />{item}</li>)}</ul>
-            <p className="mt-7 text-xs font-semibold uppercase tracking-[0.12em] text-black/35">考试关注</p>
+          </div>
+          <div className="min-w-0 lg:border-l lg:border-black/[0.06] lg:pl-7">
+            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-black/35">考试关注</p>
             <div className="mt-3 flex flex-wrap gap-2">{topic.examFocus.map((item) => <span key={item} className="rounded-full bg-blue/[0.055] px-3 py-1.5 text-[12px] font-medium text-blue/75">{item}</span>)}</div>
           </div>
-          <div className="min-w-0 rounded-[20px] border border-black/[0.055] bg-[#fbfbfd] p-4 sm:p-5">
-            <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.12em] text-violet-600"><Sigma size={15} />核心公式</div>
-            <div className="mt-3 divide-y divide-black/[0.06]">{topic.formulas.map((item) => <div key={item.label} className="min-w-0 py-4 first:pt-2"><h3 className="text-[14px] font-semibold">{item.label}</h3><MathFormula value={item.formula} block className="property-formula mt-3" /><p className="mt-2 text-[13px] leading-6 text-black/45">{item.note}</p></div>)}</div>
-          </div>
+        </div>
+        <div className="mt-7 min-w-0 rounded-[20px] border border-black/[0.055] bg-[#fbfbfd] p-4 sm:p-5">
+          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.12em] text-violet-600"><Sigma size={15} />核心公式</div>
+          <div className="mt-3 grid gap-x-6 xl:grid-cols-2">{topic.formulas.map((item) => <div key={item.label} className="min-w-0 border-t border-black/[0.06] py-5"><h3 className="text-[14px] font-semibold">{item.label}</h3><MathFormula value={item.formula} block className="property-formula mt-3" /><p className="mt-2 text-[13px] leading-6 text-black/45">{item.note}</p></div>)}</div>
         </div>
         <div className="mt-6 flex flex-wrap items-center gap-2 border-t border-black/[0.06] pt-5 text-[12px] text-black/40"><span className="font-semibold text-black/45">需要先会：</span>{topic.prerequisites.map((item) => <span key={item} className="rounded-full bg-black/[0.04] px-2.5 py-1">{item}</span>)}</div>
       </section>)}
@@ -61,6 +65,23 @@ export default function DataSciencePage() {
       <div className="mt-6 grid gap-5 md:grid-cols-3">{dataScienceTopics.map(({ icon: Icon, title, question, link }) => <article key={title} className="liquid-content-card rounded-[24px] border p-7"><div className="icon-tile icon-violet"><Icon size={19} /></div><h3 className="mt-7 text-[21px] font-semibold tracking-tight">{title}</h3><p className="mt-3 min-h-[52px] text-[15px] leading-7 text-black/52">{question}</p><p className="mt-6 border-t border-black/[0.06] pt-4 text-xs font-semibold text-violet-600">{link}</p></article>)}</div>
     </section>
 
-    <div className="liquid-content-card mt-8 flex items-center gap-3 rounded-[20px] border px-5 py-4 text-[14px] leading-6 text-black/50"><BrainCircuit size={18} className="shrink-0 text-violet-600" />本页保持为课程连接模块，不改变现有五章概率论知识地图和分布图像库。</div>
+    <section className="mt-14 border-t border-black/[0.07] pt-12">
+      <div className="flex items-center gap-3"><span className="grid h-11 w-11 place-items-center rounded-[14px] bg-blue/10"><BrainCircuit size={22} className="text-blue" /></span><div><p className="eyebrow">MACHINE LEARNING BRIDGE</p><h2 className="mt-1 text-[28px] font-semibold tracking-[-0.04em] sm:text-[34px]">机器学习过渡知识</h2></div></div>
+      <p className="mt-5 max-w-4xl text-[17px] leading-8 text-black/55">下面这些内容不属于当前概率论期末主线，但它们会把条件概率、期望、方差、最大似然和贝叶斯公式自然连接到机器学习。建议先建立直觉，再在机器学习课程中补充算法推导与代码实现。</p>
+      <div className="mt-7 grid gap-5 xl:grid-cols-2">
+        {machineLearningBridgeTopics.map((topic, index) => <article key={topic.id} className="liquid-content-card min-w-0 rounded-[26px] border p-6 sm:p-8">
+          <div className="flex items-start gap-3.5"><span className="section-number icon-blue">{String(index + 1).padStart(2, '0')}</span><div className="min-w-0"><h3 className="text-[22px] font-semibold leading-tight tracking-[-0.03em]">{topic.title}</h3><p className="mt-1 text-[12px] text-black/32">{topic.englishTitle}</p></div></div>
+          <p className="mt-6 text-[16px] leading-8 text-black/60">{topic.summary}</p>
+          <MathFormula value={topic.formula} block className="property-formula mt-5 text-[16px]" />
+          <div className="mt-5 grid gap-3 sm:grid-cols-2">
+            <div className="rounded-[16px] bg-blue/[0.055] p-4"><p className="text-[11px] font-semibold uppercase tracking-[0.11em] text-blue/70">概率论连接</p><p className="mt-2 text-[14px] leading-6 text-black/52">{topic.probabilityLink}</p></div>
+            <div className="rounded-[16px] bg-violet-500/[0.055] p-4"><p className="text-[11px] font-semibold uppercase tracking-[0.11em] text-violet-600/75">机器学习作用</p><p className="mt-2 text-[14px] leading-6 text-black/52">{topic.machineLearningUse}</p></div>
+          </div>
+          <div className="mt-5 border-t border-black/[0.06] pt-4"><p className="text-[11px] font-semibold uppercase tracking-[0.11em] text-black/35">学习时先抓住</p><ul className="mt-3 space-y-2">{topic.studyFocus.map((item) => <li key={item} className="flex gap-2.5 text-[13px] leading-6 text-black/48"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-blue/70" />{item}</li>)}</ul></div>
+        </article>)}
+      </div>
+    </section>
+
+    <div className="liquid-content-card mt-10 flex items-center gap-3 rounded-[20px] border px-5 py-4 text-[14px] leading-6 text-black/50"><BrainCircuit size={18} className="shrink-0 text-violet-600" />机器学习过渡内容是课程扩展，不改变现有五章概率论知识地图、期末复习主线和分布图像库。</div>
   </div>
 }

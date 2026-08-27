@@ -114,6 +114,17 @@ export type StatisticsBridgeTopic = {
   examFocus: string[]
 }
 
+export type MachineLearningBridgeTopic = {
+  id: string
+  title: string
+  englishTitle: string
+  summary: string
+  formula: string
+  probabilityLink: string
+  machineLearningUse: string
+  studyFocus: string[]
+}
+
 export type ChapterReview = {
   id: string
   number: string

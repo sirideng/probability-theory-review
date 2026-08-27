@@ -1,22 +1,34 @@
 [
   {
     "id": "population-sample",
-    "title": "总体、样本与统计量",
-    "englishTitle": "Population, Sample & Statistic",
-    "source": "讲义 PDF 第 60–62 页",
-    "summary": "概率论从已知分布研究随机结果；数理统计从样本出发，反推未知总体分布或参数。",
+    "title": "总体、样本与经验分布函数",
+    "englishTitle": "Population, Sample & Empirical CDF",
+    "source": "讲义 PDF 第 60–62 页（经验分布函数按课程要求补充）",
+    "summary": "概率论从已知分布研究随机结果；数理统计从总体中抽取样本，用样本观察值和经验分布函数反推未知总体分布或参数。",
     "prerequisites": ["随机变量", "独立同分布", "数学期望与方差"],
     "keyPoints": [
       "总体是研究对象某项数量指标的全体，可视为具有某个分布的随机变量 X。",
-      "简单随机样本 X₁,…,Xₙ 相互独立，并且都与总体 X 同分布。",
-      "统计量只能由样本构成，表达式中不能含有未知参数；代入观测值后得到统计值。"
+      "简单随机样本 X₁,…,Xₙ 相互独立，并且都与总体 X 同分布；抽样之前，每个 Xᵢ 都是随机变量。",
+      "抽样后得到的具体实数 x₁,…,xₙ 称为样本观察值（简称样本值）。小写 xᵢ 表示第 i 个观察结果；样本容量是 n，不是 xᵢ。",
+      "统计量只能由样本构成，表达式中不能含有未知参数；把 Xᵢ 换成观测值 xᵢ 后得到统计值。",
+      "若总体满足 E(X)=μ、D(X)=σ²，则每个样本变量继承总体的均值和方差；样本均值仍以 μ 为中心，但方差缩小为 σ²/n。",
+      "采用分母 n-1 定义的样本方差 S² 满足 E(S²)=σ²，因此是总体方差 σ² 的无偏估计量。",
+      "经验分布函数 Fₙ(x) 等于样本中不超过 x 的观察值所占比例，是总体分布函数 F(x) 的样本近似。",
+      "Fₙ(x) 是右连续、单调不减的阶梯函数；每个样本点处的跳跃量等于该取值出现次数除以 n。"
     ],
     "formulas": [
+      { "label": "简单随机样本与样本容量", "formula": "X_1,\\ldots,X_n\\overset{\\mathrm{i.i.d.}}{\\sim}F,\\qquad n=\\text{样本容量}", "note": "大写 Xᵢ 表示抽样前的随机变量；它们相互独立且与总体同分布。" },
+      { "label": "样本观察值", "formula": "X_i=x_i,\\quad i=1,2,\\ldots,n", "note": "小写 xᵢ 是第 i 个随机变量 Xᵢ 抽样后取得的具体数值。" },
+      { "label": "经验分布函数", "formula": "F_n(x)=\\frac1n\\sum_{i=1}^n\\mathbf 1_{\\{x_i\\le x\\}}=\\frac{\\#\\{i:x_i\\le x\\}}{n}", "note": "先数出不超过 x 的样本值个数，再除以样本容量 n；重复值要重复计数。" },
+      { "label": "经验分布函数示例", "formula": "x_1,x_2,x_3,x_4=1,1,2,4\\quad\\Longrightarrow\\quad F_4(x)=\\begin{cases}0,&x<1,\\\\\\frac12,&1\\le x<2,\\\\\\frac34,&2\\le x<4,\\\\1,&x\\ge4.\\end{cases}", "note": "数值 1 出现两次，所以在 x=1 处一次跳高 2/4；端点归入右侧区间，体现右连续。" },
       { "label": "样本均值", "formula": "\\bar X=\\frac1n\\sum_{i=1}^nX_i", "note": "估计总体均值并连接中心极限定理。" },
-      { "label": "样本方差", "formula": "S^2=\\frac1{n-1}\\sum_{i=1}^n(X_i-\\bar X)^2", "note": "分母 n-1 使其成为总体方差的无偏估计量。" },
+      { "label": "样本方差", "formula": "S^2=\\frac1{n-1}\\sum_{i=1}^n(X_i-\\bar X)^2=\\frac1{n-1}\\left(\\sum_{i=1}^nX_i^2-n\\bar X^2\\right)", "note": "前式是定义式，后式是常用计算式；分母 n-1 使其成为总体方差的无偏估计量。" },
+      { "label": "样本均值的数字特征", "formula": "E(\\bar X)=\\mu,\\qquad D(\\bar X)=\\frac{\\sigma^2}{n}", "note": "样本均值无偏；独立性使求和方差相加，因此平均后的方差缩小为原来的 1/n。" },
+      { "label": "单个样本变量的数字特征", "formula": "E(X_i)=\\mu,\\qquad D(X_i)=\\sigma^2,\\quad i=1,2,\\ldots,n", "note": "简单随机样本中的每个 Xᵢ 都与总体 X 同分布，所以继承总体的均值与方差。" },
+      { "label": "样本方差的数字特征", "formula": "E(S^2)=\\sigma^2", "note": "这就是样本方差 S² 对总体方差 σ² 的无偏性，也是分母使用 n-1 的核心原因。" },
       { "label": "k 阶样本原点矩", "formula": "A_k=\\frac1n\\sum_{i=1}^nX_i^k", "note": "矩估计法的基本材料。" }
     ],
-    "examFocus": ["辨认某表达式是否为统计量", "由样本观测值计算均值与方差", "区分随机的统计量与确定的统计值"]
+    "examFocus": ["区分总体 X、随机样本 Xᵢ、样本观察值 xᵢ 与样本容量 n", "由一组样本值写出经验分布函数，注意排序、端点和重复值", "辨认某表达式是否为统计量", "由样本观测值计算均值与方差", "区分随机的统计量与确定的统计值"]
   },
   {
     "id": "sampling-distributions",
@@ -112,5 +124,29 @@
       { "label": "相合性", "formula": "\\forall\\varepsilon>0,\\quad\\lim_{n\\to\\infty}P(|\\hat\\theta_n-\\theta|<\\varepsilon)=1", "note": "体现大样本下估计的稳定性。" }
     ],
     "examFocus": ["验证估计量是否无偏", "比较两个无偏估计量的方差", "利用大数定律说明相合性"]
+  },
+  {
+    "id": "linear-regression",
+    "title": "线性回归：从概率模型到机器学习",
+    "englishTitle": "Linear Regression: Probability to Machine Learning",
+    "source": "课程扩展 · 概率论 → 机器学习",
+    "summary": "线性回归不是单纯画一条直线，而是用条件期望描述输入与输出的平均关系，再通过最小二乘从样本中学习参数并预测新数据。",
+    "prerequisites": ["条件期望", "方差", "协方差与相关系数", "正态分布", "最大似然估计"],
+    "keyPoints": [
+      "模型把输出拆成可解释的线性部分和不可完全预测的随机误差：观测点不必全部落在回归线上。",
+      "斜率 β₁ 表示 x 增加 1 个单位时，Y 的条件均值平均改变 β₁；它描述关联，不自动代表因果关系。",
+      "训练线性回归就是寻找一组参数，使预测值与真实值的残差平方和或均方误差最小。",
+      "若误差独立同分布且服从均值为 0 的正态分布，最小二乘估计同时也是回归参数的最大似然估计。",
+      "机器学习中会把一个自变量推广为多个特征，并用训练集拟合参数、用未参与训练的数据检查泛化能力。"
+    ],
+    "formulas": [
+      { "label": "一元线性回归模型", "formula": "Y_i=\\beta_0+\\beta_1x_i+\\varepsilon_i", "note": "β₀ 是截距，β₁ 是斜率，εᵢ 汇总未观测因素、测量误差与随机波动。" },
+      { "label": "概率角度的回归线", "formula": "E(Y_i\\mid x_i)=\\beta_0+\\beta_1x_i,\\qquad E(\\varepsilon_i\\mid x_i)=0", "note": "回归线描述给定输入后的平均输出，而不是保证每个观测值都在线上。" },
+      { "label": "最小二乘训练目标", "formula": "(\\hat\\beta_0,\\hat\\beta_1)=\\arg\\min_{b_0,b_1}\\sum_{i=1}^n\\left[y_i-(b_0+b_1x_i)\\right]^2", "note": "除以 n 后就是机器学习中常见的均方误差损失，最优参数位置不变。" },
+      { "label": "一元回归参数解", "formula": "\\hat\\beta_1=\\frac{\\sum_{i=1}^n(x_i-\\bar x)(y_i-\\bar y)}{\\sum_{i=1}^n(x_i-\\bar x)^2},\\qquad \\hat\\beta_0=\\bar y-\\hat\\beta_1\\bar x", "note": "斜率由 x 与 y 的共同变化量除以 x 自身的波动量得到。" },
+      { "label": "多特征预测", "formula": "\\hat y=\\hat\\beta_0+\\sum_{j=1}^p\\hat\\beta_jx_j=\\boldsymbol{x}^{\\mathsf T}\\hat{\\boldsymbol\\beta}", "note": "多个自变量在机器学习中通常称为特征；模型仍是参数的线性组合。" },
+      { "label": "正态误差连接最大似然", "formula": "\\varepsilon_i\\overset{\\mathrm{i.i.d.}}{\\sim}N(0,\\sigma^2)\\quad\\Longrightarrow\\quad -\\log L=C+\\frac1{2\\sigma^2}\\sum_{i=1}^n(y_i-\\hat y_i)^2", "note": "最大化似然等价于最小化残差平方和，这把概率模型与机器学习损失函数连接起来。" }
+    ],
+    "examFocus": ["区分回归模型、回归线、观测值与预测值", "解释斜率 β₁ 的统计意义", "理解最小二乘与均方误差的关系", "说明正态误差下最小二乘为何等价于最大似然", "避免把相关关系直接解释为因果关系"]
   }
 ]

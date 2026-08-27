@@ -1,0 +1,72 @@
+[
+  {
+    "id": "conditional-learning",
+    "title": "从条件分布到监督学习",
+    "englishTitle": "Conditional Distribution & Supervised Learning",
+    "summary": "监督学习把每个样本写成特征 X 与标签 Y，并从数据中学习给定 X 后 Y 的规律。回归关注条件均值，分类关注条件概率。",
+    "formula": "f^*(x)=E(Y\\mid X=x),\\qquad \\hat y_{\\mathrm{class}}=\\arg\\max_y P(Y=y\\mid X=x)",
+    "probabilityLink": "联合分布、条件分布与条件期望决定“已知特征后还剩多少不确定性”。",
+    "machineLearningUse": "回归模型预测数值，分类模型比较各类别的条件概率。",
+    "studyFocus": ["区分特征 X、标签 Y 与模型输出", "理解预测目标本质上来自 P(Y|X)", "知道相关关系不自动等于因果关系"]
+  },
+  {
+    "id": "empirical-risk",
+    "title": "经验风险与泛化",
+    "englishTitle": "Empirical Risk & Generalization",
+    "summary": "训练误差只反映模型对已见样本的拟合程度；真正目标是让模型在同分布的新数据上仍保持较小误差，这称为泛化。",
+    "formula": "R(f)=E\\!\\left[\\ell(Y,f(X))\\right],\\qquad \\widehat R_n(f)=\\frac1n\\sum_{i=1}^n\\ell(y_i,f(x_i))",
+    "probabilityLink": "经验风险是总体期望风险的样本平均，大数定律解释了二者在固定模型下的联系。",
+    "machineLearningUse": "训练集拟合参数，验证集选择模型，测试集只用于最后评价泛化表现。",
+    "studyFocus": ["不要用测试集反复调参", "区分训练误差与测试误差", "理解样本同分布假设发生变化时模型可能失效"]
+  },
+  {
+    "id": "loss-likelihood",
+    "title": "损失函数与最大似然",
+    "englishTitle": "Loss Functions & Maximum Likelihood",
+    "summary": "很多常用损失函数并非人为规定，而是来自概率模型的负对数似然：先假设 Y|X 的分布，再得到相应训练目标。",
+    "formula": "\\hat\\theta_{\\mathrm{MLE}}=\\arg\\max_\\theta\\prod_{i=1}^np_\\theta(y_i\\mid x_i)=\\arg\\min_\\theta\\left[-\\sum_{i=1}^n\\log p_\\theta(y_i\\mid x_i)\\right]",
+    "probabilityLink": "似然衡量给定参数后当前样本出现的可能性，取负对数把概率乘积转为可优化的加和。",
+    "machineLearningUse": "高斯回归导出均方误差，伯努利分类导出二元交叉熵，多分类模型导出多类交叉熵。",
+    "studyFocus": ["能从分布假设识别对应损失", "区分概率、似然与损失", "理解更小的负对数似然代表模型更支持当前数据"]
+  },
+  {
+    "id": "logistic-regression",
+    "title": "逻辑回归与概率分类",
+    "englishTitle": "Logistic Regression",
+    "summary": "逻辑回归虽然名字带“回归”，主要用于二分类。它先计算线性得分，再用 Sigmoid 函数把得分压缩为 0 到 1 之间的条件概率。",
+    "formula": "P(Y=1\\mid x)=\\sigma(z)=\\frac1{1+e^{-z}},\\qquad z=\\beta_0+\\boldsymbol\\beta^{\\mathsf T}\\boldsymbol x",
+    "probabilityLink": "给定 x 后，标签 Y 可建模为参数为 p(x) 的 0–1 分布。",
+    "machineLearningUse": "模型输出可以解释为正类概率，再通过阈值转为类别；阈值不一定必须取 0.5。",
+    "studyFocus": ["区分概率输出与最终类别", "理解决策边界 z=0", "知道类别不平衡时准确率可能产生误导"]
+  },
+  {
+    "id": "bias-variance",
+    "title": "过拟合与偏差—方差权衡",
+    "englishTitle": "Overfitting & Bias–Variance Trade-off",
+    "summary": "模型太简单时无法捕捉真实规律，表现为高偏差；模型太复杂时容易追随样本噪声，表现为高方差。选择模型复杂度是在两者之间取平衡。",
+    "formula": "E\\!\\left[(Y-\\hat f(x))^2\\right]=\\operatorname{Bias}^2\\!\\left[\\hat f(x)\\right]+\\operatorname{Var}\\!\\left[\\hat f(x)\\right]+\\sigma^2",
+    "probabilityLink": "期望与方差把预测误差拆成系统偏离、训练样本引起的波动以及不可约噪声。",
+    "machineLearningUse": "训练误差低而验证误差高通常提示过拟合；二者都高通常提示欠拟合或特征信息不足。",
+    "studyFocus": ["看训练与验证曲线判断问题", "增加数据通常更有助于降低方差", "不可约噪声不能靠无限增加模型复杂度消除"]
+  },
+  {
+    "id": "regularization-map",
+    "title": "正则化、先验与 MAP",
+    "englishTitle": "Regularization, Priors & MAP",
+    "summary": "正则化在拟合误差之外惩罚过大的参数，限制模型复杂度；从贝叶斯角度看，它等价于为参数加入先验并做最大后验估计。",
+    "formula": "\\hat\\theta_{\\mathrm{MAP}}=\\arg\\max_\\theta L(\\theta)\\pi(\\theta),\\qquad \\min_{\\boldsymbol\\beta}\\ \\widehat R_n(\\boldsymbol\\beta)+\\lambda\\lVert\\boldsymbol\\beta\\rVert_2^2",
+    "probabilityLink": "后验正比于似然乘先验；高斯先验对应 L2 惩罚，拉普拉斯先验对应 L1 惩罚。",
+    "machineLearningUse": "L2 倾向于整体缩小参数，L1 还能产生稀疏解并进行一定程度的特征选择。",
+    "studyFocus": ["λ 越大表示约束越强", "正则化参数应由验证数据选择", "先标准化特征再比较或惩罚系数"]
+  },
+  {
+    "id": "gradient-descent",
+    "title": "梯度下降与模型训练",
+    "englishTitle": "Gradient Descent & Optimization",
+    "summary": "当参数解不能直接写出时，可以沿损失函数下降最快的反方向逐步更新参数。机器学习中的“训练”通常就是反复执行这种优化过程。",
+    "formula": "\\boldsymbol\\theta_{t+1}=\\boldsymbol\\theta_t-\\eta\\nabla_{\\boldsymbol\\theta}L(\\boldsymbol\\theta_t)",
+    "probabilityLink": "最大似然、最大后验和经验风险最小化最终都会形成一个需要求极值的目标函数。",
+    "machineLearningUse": "学习率 η 控制每一步大小；过大可能震荡或发散，过小则收敛很慢。",
+    "studyFocus": ["理解参数、超参数与梯度的区别", "特征尺度差异会影响优化速度", "区分批量、随机与小批量梯度下降"]
+  }
+]
