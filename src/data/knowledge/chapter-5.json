@@ -8,7 +8,16 @@
     "readTime": 9,
     "updatedAt": "2026.08",
     "core": ["切比雪夫不等式不要求知道完整分布形状，只利用均值与有限方差控制尾部概率。", "它给的是保守上界而非精确概率，价值在于适用范围广，并为弱大数定律提供证明工具。"],
-    "definition": { "intro": "若 E(X)=μ、Var(X)=σ²<∞，则对任意 ε>0，偏离均值至少 ε 的概率受到方差控制。", "formulas": ["P(|X-\\mu|\\ge\\varepsilon)\\le\\frac{\\sigma^2}{\\varepsilon^2}", "P(|X-\\mu|<k\\sigma)\\ge1-\\frac{1}{k^2}\\quad(k>1)"] },
+    "definition": {
+      "intro": "若 E(X)=μ、Var(X)=σ²<∞，则对任意 ε>0，偏离均值至少 ε 的概率受到方差控制。",
+      "formulas": ["P(|X-\\mu|\\ge\\varepsilon)\\le\\frac{\\sigma^2}{\\varepsilon^2}", "P(|X-\\mu|<k\\sigma)\\ge1-\\frac{1}{k^2}\\quad(k>1)"],
+      "proof": {
+        "title": "证明（连续型情形）",
+        "intro": "设连续型随机变量 X 的概率密度为 f(x)，均值为 μ。在区域 |x−μ|≥ε 上，有 (x−μ)²/ε²≥1，因此可以用这个非负因子放大被积函数；随后把积分区域扩展到整个实数轴。",
+        "formula": "\\begin{aligned}P(|X-\\mu|\\ge\\varepsilon)&=\\int_{|x-\\mu|\\ge\\varepsilon}f(x)\\,dx\\\\&\\le\\int_{|x-\\mu|\\ge\\varepsilon}\\frac{(x-\\mu)^2}{\\varepsilon^2}f(x)\\,dx\\\\&\\le\\frac{1}{\\varepsilon^2}\\int_{-\\infty}^{+\\infty}(x-\\mu)^2f(x)\\,dx\\\\&=\\frac{\\operatorname{Var}(X)}{\\varepsilon^2}=\\frac{\\sigma^2}{\\varepsilon^2}.\\end{aligned}",
+        "note": "离散型情形把积分改为求和即可；更一般地，也可对非负随机变量 (X−μ)² 使用马尔可夫不等式。"
+      }
+    },
     "intuition": ["如果方差很小，大量概率质量不可能都离均值很远，否则平均平方距离会被抬高。", "当阈值扩大到 k 个标准差时，区间外概率至多 1/k²；这是所有有限方差分布共同遵守的最低保证。"],
     "visual": { "type": "bound", "caption": "方差给出均值两侧尾部面积的上界；区间越宽，上界按距离平方下降。" },
     "properties": [
@@ -25,23 +34,38 @@
   {
     "slug": "law-of-large-numbers",
     "chapter": "第五章 · 大数定律与中心极限定理",
-    "title": "大数定律与伯努利大数定律",
+    "title": "大数定律",
     "englishTitle": "Law of Large Numbers",
-    "summary": "当独立重复观察足够多时，随机平均会稳定到理论期望。",
-    "readTime": 11,
+    "summary": "切比雪夫、辛钦和伯努利大数定律从不同条件说明随机平均或频率会趋于稳定。",
+    "readTime": 13,
     "updatedAt": "2026.08",
-    "core": ["大数定律解释“平均带来稳定”：单次结果不可预测，但大量结果的平均值逐渐靠近期望。", "伯努利大数定律是频率版本，说明事件发生频率依概率收敛到其概率，为概率的频率解释提供理论基础。"],
-    "definition": { "intro": "若 X₁,X₂,… 独立同分布，E(Xᵢ)=μ、Var(Xᵢ)=σ²<∞，则样本均值依概率收敛到 μ。", "formulas": ["\\overline X_n=\\frac1n\\sum_{i=1}^{n}X_i\\xrightarrow{P}\\mu", "\\forall\\varepsilon>0,\\quad P(|\\overline X_n-\\mu|\\ge\\varepsilon)\\to0", "\\frac{N_n}{n}\\xrightarrow{P}p\\quad\\text{（伯努利大数定律）}"] },
-    "intuition": ["每个观测的随机偏差有正有负；独立重复后，偏差在平均中相互抵消，而样本均值方差缩小为 σ²/n。", "大数定律保证趋近，但不告诉我们误差经 √n 放大后的具体形状；后者由中心极限定理回答。"],
+    "core": ["大数定律解释“平均带来稳定”：单次结果不可预测，但大量结果的平均会在概率意义下靠近一个确定值。", "切比雪夫大数定律允许变量不同分布，只要求两两不相关且方差一致有界；辛钦大数定律针对独立同分布且期望存在的序列。", "伯努利大数定律是频率版本，说明事件发生频率依概率收敛到事件概率。"],
+    "definition": {
+      "intro": "三条定律的结论都属于依概率收敛，但适用条件和被平均的对象不同。",
+      "formulas": [
+        "\\forall\\varepsilon>0,\\quad\\lim_{n\\to\\infty}P(|Y_n-a|<\\varepsilon)=1",
+        "\\forall\\varepsilon>0,\\quad\\lim_{n\\to\\infty}P\\!\\left(\\left|\\frac1n\\sum_{i=1}^{n}[X_i-E(X_i)]\\right|<\\varepsilon\\right)=1\\quad\\text{（切比雪夫大数定律）}",
+        "\\forall\\varepsilon>0,\\quad\\lim_{n\\to\\infty}P\\!\\left(\\left|\\frac1n\\sum_{i=1}^{n}X_i-\\mu\\right|<\\varepsilon\\right)=1\\quad\\text{（辛钦大数定律）}",
+        "\\forall\\varepsilon>0,\\quad\\lim_{n\\to\\infty}P\\!\\left(\\left|\\frac{f_A}{n}-p\\right|<\\varepsilon\\right)=1\\quad\\text{（伯努利大数定律）}"
+      ],
+      "proof": {
+        "title": "切比雪夫大数定律的证明主线",
+        "intro": "两两不相关使和的方差可以直接相加；方差一致有界使样本平均的方差至多为 c/n，再用切比雪夫不等式即可。",
+        "formula": "D\\!\\left(\\frac1n\\sum_{i=1}^{n}X_i\\right)=\\frac1{n^2}\\sum_{i=1}^{n}D(X_i)\\le\\frac cn,\\qquad P\\!\\left(\\left|\\frac1n\\sum_{i=1}^{n}[X_i-E(X_i)]\\right|\\ge\\varepsilon\\right)\\le\\frac{c}{n\\varepsilon^2}\\to0",
+        "note": "证明的关键不是完全独立，而是两两不相关，从而所有协方差交叉项为 0。"
+      }
+    },
+    "intuition": ["切比雪夫版本从“平均值的方差越来越小”推出稳定；辛钦版本说明即使方差不一定有限，只要独立同分布且期望存在，平均仍会稳定到期望。", "伯努利版本把每次试验是否发生事件 A 写成 0-1 指示变量，发生次数 f_A 除以 n 正是这些指示变量的样本平均。", "大数定律只回答平均值趋向哪里，不描述误差放大后的分布形状；后者由中心极限定理回答。"],
     "visual": { "type": "convergence", "caption": "样本量增大时，多条样本均值轨迹逐渐收拢到理论期望 μ。" },
     "properties": [
-      { "label": "依概率收敛", "text": "偏离任意固定 ε 的概率趋于 0，不等于有限 n 时完全相等。" },
-      { "label": "方差缩减", "text": "独立同分布时平均值波动随 n 反比下降。", "formula": "\\operatorname{Var}(\\overline X_n)=\\sigma^2/n" },
-      { "label": "切比雪夫证明", "text": "偏离概率上界随 1/n 趋于 0。", "formula": "P(|\\overline X_n-\\mu|\\ge\\varepsilon)\\le\\sigma^2/(n\\varepsilon^2)" },
-      { "label": "伯努利情形", "text": "令 Xᵢ 为事件指示变量，样本均值就是发生频率。" }
+      { "label": "依概率收敛", "text": "偏离任意固定 ε 的概率趋于 0，不等于有限 n 时样本平均必然等于极限。" },
+      { "label": "切比雪夫大数定律", "text": "X₁,X₂,… 两两不相关，期望与方差存在，且 D(Xᵢ)≤c；平均的中心化偏差依概率趋于 0。若各变量期望同为 μ，则样本平均依概率趋于 μ。", "formula": "\\forall\\varepsilon>0,\\quad\\lim_{n\\to\\infty}P\\!\\left(\\left|\\frac1n\\sum_{i=1}^{n}X_i-\\frac1n\\sum_{i=1}^{n}E(X_i)\\right|<\\varepsilon\\right)=1" },
+      { "label": "辛钦大数定律", "text": "X₁,X₂,… 独立同分布且 E|X₁|<∞，记 E(X₁)=μ，则样本平均依概率趋于 μ；不要求方差有限。", "formula": "\\forall\\varepsilon>0,\\quad\\lim_{n\\to\\infty}P\\!\\left(\\left|\\frac1n\\sum_{i=1}^{n}X_i-\\mu\\right|<\\varepsilon\\right)=1" },
+      { "label": "伯努利大数定律", "text": "在 n 重伯努利试验中，事件 A 每次发生的概率为 p，发生次数为 f_A，则频率 f_A/n 依概率趋于 p。", "formula": "\\forall\\varepsilon>0,\\quad\\lim_{n\\to\\infty}P\\!\\left(\\left|\\frac{f_A}{n}-p\\right|<\\varepsilon\\right)=1" },
+      { "label": "三者关系", "text": "伯努利定律可把每次试验写成 0-1 指示变量，是辛钦大数定律的特殊情形，也可由切比雪夫大数定律证明。" }
     ],
-    "exams": ["区分伯努利大数定律与一般弱大数定律。", "用切比雪夫不等式证明样本均值依概率收敛。", "解释频率稳定性、蒙特卡洛估计和样本平均的合理性。"],
-    "mistakes": ["认为 n 足够大后样本均值必然等于 μ。", "把大数定律理解为随机和趋于常数；稳定的是平均或适当归一化后的量。", "混淆依概率收敛与分布收敛。"],
+    "exams": ["根据“两两不相关且方差一致有界”“独立同分布且期望存在”“伯努利试验频率”选择对应定律。", "用切比雪夫不等式证明切比雪夫大数定律，写出方差不超过 c/n 的关键步骤。", "把 (1/n)∑g(Xᵢ) 视为新变量的样本平均，用辛钦大数定律求依概率极限。", "解释频率稳定性、蒙特卡洛估计和样本平均的合理性。"],
+    "mistakes": ["把三条大数定律的条件都写成“独立同分布、有限方差”。", "认为 n 足够大后样本均值必然等于 μ。", "把大数定律理解为未归一化的随机和趋于常数。", "认为辛钦大数定律必须要求方差有限。", "混淆依概率收敛与分布收敛。"],
     "prerequisites": [{ "title": "切比雪夫不等式", "slug": "chebyshev-inequality", "note": "提供经典弱大数定律的概率上界。" }, { "title": "独立性", "slug": "random-variable-independence", "note": "独立使平均值方差快速缩小。" }],
     "connections": [{ "title": "中心极限定理", "slug": "central-limit-theorem", "note": "进一步描述样本均值误差的近似分布。" }, { "title": "参数估计", "slug": "parameter-estimation", "note": "保证许多样本统计量的一致性。", "type": "data-science" }]
   },

@@ -109,7 +109,7 @@
     "formulas": [
       { "label": "无偏性", "formula": "E_\\theta(\\hat\\theta)=\\theta", "note": "对所有允许的 θ 都应成立。" },
       { "label": "有效性", "formula": "D_\\theta(\\hat\\theta_1)<D_\\theta(\\hat\\theta_2)", "note": "在无偏估计量之间比较。" },
-      { "label": "相合性", "formula": "\\hat\\theta_n\\xrightarrow{P}\\theta", "note": "体现大样本下估计的稳定性。" }
+      { "label": "相合性", "formula": "\\forall\\varepsilon>0,\\quad\\lim_{n\\to\\infty}P(|\\hat\\theta_n-\\theta|<\\varepsilon)=1", "note": "体现大样本下估计的稳定性。" }
     ],
     "examFocus": ["验证估计量是否无偏", "比较两个无偏估计量的方差", "利用大数定律说明相合性"]
   }

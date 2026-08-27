@@ -672,7 +672,7 @@
         "steps": [
           { "text": "参数为 2 的指数分布有 E(X)=1/2、D(X)=1/4。" },
           { "text": "计算二阶矩。", "formula": "E(X^2)=D(X)+[E(X)]^2=\\frac12" },
-          { "text": "由大数定律，样本二阶矩依概率收敛到总体二阶矩。", "formula": "\\frac1n\\sum_{i=1}^nX_i^2\\xrightarrow{P}E(X^2)" }
+          { "text": "由大数定律，样本二阶矩依概率收敛到总体二阶矩。", "formula": "\\forall\\varepsilon>0,\\quad\\lim_{n\\to\\infty}P\\!\\left(\\left|\\frac1n\\sum_{i=1}^nX_i^2-E(X^2)\\right|<\\varepsilon\\right)=1" }
         ],
         "answer": "依概率极限为 1/2。",
         "answerFormula": "\\operatorname*{plim}_{n\\to\\infty}\\frac1n\\sum_{i=1}^nX_i^2=\\frac12"

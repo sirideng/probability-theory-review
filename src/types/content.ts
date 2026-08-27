@@ -38,6 +38,12 @@ export type KnowledgePoint = {
   definition: {
     intro: string
     formulas: string[]
+    proof?: {
+      title: string
+      intro: string
+      formula: string
+      note: string
+    }
   }
   intuition: string[]
   visual?: KnowledgeVisual

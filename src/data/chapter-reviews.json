@@ -123,23 +123,27 @@
     "essentials": [
       { "title": "数学期望", "note": "概率加权平均；线性性不要求独立。" },
       { "title": "函数期望", "note": "E[g(X)] 可直接对 g(x) 加权或积分，不必先求新分布。" },
-      { "title": "方差", "note": "优先使用 E(X²)-[E(X)]²；平移不变，缩放平方。" },
+      { "title": "方差", "note": "一维优先使用 E(X²)-[E(X)]²；二维线性组合必须保留协方差交叉项。" },
       { "title": "协方差", "note": "决定和差方差中的交叉项；独立推出协方差为 0。" },
-      { "title": "相关系数", "note": "标准化后的线性相关强度；不相关通常不能推出独立。" }
+      { "title": "相关系数", "note": "标准化后的线性相关强度；独立推出不相关，反向一般不成立，二维正态下二者等价。" }
     ],
     "formulas": [
       { "label": "离散期望", "formula": "E(X)=\\sum_kx_kp_k", "note": "无限求和要求绝对收敛。" },
       { "label": "连续期望", "formula": "E[g(X)]=\\int_{-\\infty}^{+\\infty}g(x)f(x)\\,dx", "note": "直接计算函数期望。" },
       { "label": "方差快捷式", "formula": "D(X)=E(X^2)-[E(X)]^2", "note": "最常用计算式。" },
       { "label": "和差方差", "formula": "D(X\\pm Y)=D(X)+D(Y)\\pm2\\operatorname{Cov}(X,Y)", "note": "独立或不相关时交叉项为 0。" },
+      { "label": "二维线性组合方差", "formula": "D(aX+bY)=a^2D(X)+b^2D(Y)+2ab\\operatorname{Cov}(X,Y)", "note": "先算协方差，再代入；常数平移不影响方差。" },
       { "label": "协方差", "formula": "\\operatorname{Cov}(X,Y)=E(XY)-E(X)E(Y)", "note": "也等于中心化乘积的期望。" },
-      { "label": "相关系数", "formula": "\\rho_{XY}=\\frac{\\operatorname{Cov}(X,Y)}{\\sqrt{D(X)D(Y)}}", "note": "要求两个方差均非零。" }
+      { "label": "协方差拆分", "formula": "\\operatorname{Cov}(X+Y,Z)=\\operatorname{Cov}(X,Z)+\\operatorname{Cov}(Y,Z)", "note": "加法性不要求独立。" },
+      { "label": "相关系数", "formula": "\\rho_{XY}=\\frac{\\operatorname{Cov}(X,Y)}{\\sqrt{D(X)D(Y)}}", "note": "要求两个方差均非零。" },
+      { "label": "不相关的等价条件", "formula": "\\operatorname{Cov}(X,Y)=0\\Longleftrightarrow E(XY)=E(X)E(Y)", "note": "还等价于 D(X±Y)=D(X)+D(Y)；一般不能推出独立。" }
     ],
     "problemTypes": [
       { "title": "由分布求期望方差", "method": "求 E(X) 与 E(X²)，再代方差快捷式；对称分布先利用奇偶性。" },
       { "title": "随机变量函数期望", "method": "直接使用 E[g(X)]，不要先绕路求 g(X) 的分布。" },
-      { "title": "线性组合方差", "method": "先判断独立/不相关条件，再决定协方差项能否消失。" },
-      { "title": "相关关系判断", "method": "确定线性关系可直接判断 ±1；一般先求协方差再标准化。" }
+      { "title": "线性组合方差", "method": "先由联合分布或相关系数求协方差，再代 D(aX+bY)；最后判断独立/不相关时交叉项能否消失。" },
+      { "title": "相关关系判断", "method": "确定线性关系可直接判断 ±1；一般先求协方差再标准化。" },
+      { "title": "不相关与独立判断", "method": "先用 Cov(X,Y)=0 判断不相关，再单独检查联合分布能否分解；只有已知联合正态时，零相关才可直接推出独立。" }
     ],
     "mistakes": [
       "误以为期望可乘性不需要独立。",
@@ -159,27 +163,32 @@
     "essentials": [
       { "title": "切比雪夫不等式", "note": "只知道均值、方差时给出尾概率上界，通常不等于真实概率。" },
       { "title": "依概率收敛", "note": "对任意 ε>0，偏离超过 ε 的概率趋于 0。" },
-      { "title": "大数定律", "note": "样本平均稳定到总体期望；频率稳定到事件概率。" },
+      { "title": "切比雪夫大数定律", "note": "两两不相关、方差一致有界时，中心化平均依概率趋于 0。" },
+      { "title": "辛钦大数定律", "note": "独立同分布且期望存在时，样本平均依概率趋于期望。" },
+      { "title": "伯努利大数定律", "note": "n 重伯努利试验中，事件频率依概率趋于事件概率。" },
       { "title": "中心极限定理", "note": "标准化和趋近标准正态，核心是减均值、除标准差。" },
       { "title": "二项正态近似", "note": "使用 np、npq，并对整数边界做连续性修正。" }
     ],
     "formulas": [
       { "label": "切比雪夫", "formula": "P(|X-E(X)|\\ge\\varepsilon)\\le\\frac{D(X)}{\\varepsilon^2}", "note": "ε>0。" },
-      { "label": "依概率收敛", "formula": "X_n\\xrightarrow{P}a\\iff P(|X_n-a|\\ge\\varepsilon)\\to0", "note": "对任意 ε>0。" },
-      { "label": "大数定律", "formula": "\\frac1n\\sum_{i=1}^nX_i\\xrightarrow{P}\\mu", "note": "常见条件为独立同分布且期望存在。" },
-      { "label": "伯努利大数定律", "formula": "\\frac{N_n}{n}\\xrightarrow{P}p", "note": "试验频率趋于成功概率。" },
+      { "label": "依概率收敛", "formula": "\\forall\\varepsilon>0,\\quad\\lim_{n\\to\\infty}P(|X_n-a|<\\varepsilon)=1", "note": "用极限概率形式表示。" },
+      { "label": "切比雪夫大数定律", "formula": "\\forall\\varepsilon>0,\\quad\\lim_{n\\to\\infty}P\\!\\left(\\left|\\frac1n\\sum_{i=1}^n[X_i-E(X_i)]\\right|<\\varepsilon\\right)=1", "note": "两两不相关且方差一致有界。" },
+      { "label": "辛钦大数定律", "formula": "\\forall\\varepsilon>0,\\quad\\lim_{n\\to\\infty}P\\!\\left(\\left|\\frac1n\\sum_{i=1}^nX_i-\\mu\\right|<\\varepsilon\\right)=1", "note": "独立同分布且期望存在。" },
+      { "label": "伯努利大数定律", "formula": "\\forall\\varepsilon>0,\\quad\\lim_{n\\to\\infty}P\\!\\left(\\left|\\frac{f_A}{n}-p\\right|<\\varepsilon\\right)=1", "note": "试验频率趋于成功概率。" },
       { "label": "中心极限定理", "formula": "\\frac{\\sum_{i=1}^nX_i-n\\mu}{\\sqrt n\\sigma}\\xrightarrow{d}N(0,1)", "note": "独立同分布、方差有限的经典形式。" },
       { "label": "二项标准化", "formula": "\\frac{X-np}{\\sqrt{np(1-p)}}\\approx N(0,1)", "note": "n 足够大时使用。" }
     ],
     "problemTypes": [
       { "title": "切比雪夫概率界", "method": "先求目标变量的均值和方差，把事件改写成偏离均值至少 ε。" },
       { "title": "样本平均极限", "method": "识别 1/n∑g(Xi)，极限等于 E[g(X)]。" },
+      { "title": "大数定律辨析", "method": "两两不相关且方差一致有界用切比雪夫；独立同分布且期望存在用辛钦；事件频率用伯努利。" },
       { "title": "一般随机和的 CLT", "method": "先求单项 μ、σ²，再对总和减 nμ、除 √nσ。" },
       { "title": "二项分布正态近似", "method": "使用 N(np,npq)，整数区间端点采用 ±0.5 修正。" }
     ],
     "mistakes": [
       "把切比雪夫上界当成等号或精确概率。",
       "混淆大数定律和中心极限定理的结论。",
+      "混淆切比雪夫、辛钦和伯努利大数定律的适用条件。",
       "CLT 标准化时漏乘 n 或漏掉 √n。",
       "样本平均与随机和使用同一个方差尺度。",
       "二项正态近似忘记连续性修正。"

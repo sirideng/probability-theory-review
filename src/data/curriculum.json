@@ -344,7 +344,7 @@
         "title": "方差",
         "englishTitle": "Variance",
         "summary": "用到均值的平方距离刻画随机变量的波动程度。",
-        "subtopics": ["定义", "计算公式", "物理意义"],
+        "subtopics": ["定义", "计算公式", "二维线性组合", "物理意义"],
         "status": "ready",
         "prerequisites": ["expectation"],
         "next": ["chebyshev-inequality", "covariance"]
@@ -364,10 +364,20 @@
         "title": "相关系数",
         "englishTitle": "Correlation Coefficient",
         "summary": "把协方差标准化为无量纲的线性相关强度指标。",
-        "subtopics": ["标准化", "取值范围", "线性相关"],
+        "subtopics": ["标准化", "取值范围", "不相关与独立", "线性相关"],
         "status": "ready",
         "prerequisites": ["covariance", "variance"],
-        "next": ["linear-regression"]
+        "next": ["uncorrelated-and-independence", "linear-regression"]
+      },
+      {
+        "slug": "uncorrelated-and-independence",
+        "title": "不相关与独立",
+        "englishTitle": "Uncorrelatedness & Independence",
+        "summary": "区分“没有线性关系”和“联合分布可以完全拆开”，掌握独立与不相关的推导方向。",
+        "subtopics": ["不相关定义", "独立推出不相关", "反例", "二维正态"],
+        "status": "ready",
+        "prerequisites": ["correlation-coefficient", "random-variable-independence"],
+        "next": ["law-of-large-numbers", "linear-regression"]
       },
       {
         "slug": "moments",
@@ -405,7 +415,7 @@
         "title": "大数定律",
         "englishTitle": "Law of Large Numbers",
         "summary": "样本量增大时，随机平均会逐渐接近稳定的理论平均。",
-        "subtopics": ["伯努利大数定律", "弱大数定律", "频率稳定性"],
+        "subtopics": ["切比雪夫大数定律", "辛钦大数定律", "伯努利大数定律", "依概率收敛"],
         "status": "ready",
         "prerequisites": ["chebyshev-inequality", "event-independence", "expectation"],
         "next": ["central-limit-theorem", "parameter-estimation"]

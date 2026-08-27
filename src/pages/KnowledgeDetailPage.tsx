@@ -71,13 +71,14 @@ export default function KnowledgeDetailPage() {
         <section className="knowledge-section">
           <SectionHeading number="01" title="知识总结" icon={<Lightbulb size={21} className="text-blue" />} />
           <div className="mt-5 space-y-4">{point.core.map((text) => <p key={text} className="knowledge-body">{text}</p>)}</div>
-          {enhancement && <div className="mt-7 rounded-[18px] border border-blue/10 bg-blue/[0.035] p-5 sm:p-6"><p className="text-xs font-semibold uppercase tracking-[0.12em] text-blue/70">讲义速记</p><ul className="mt-4 space-y-3">{enhancement.lectureSummary.map((item) => <li key={item} className="flex gap-3 text-[16px] leading-7 text-black/60"><Check size={16} className="mt-1.5 shrink-0 text-blue" /><span>{item}</span></li>)}</ul></div>}
+          {enhancement && <div className="mt-7 rounded-[18px] border border-blue/10 bg-blue/[0.035] p-5 sm:p-6"><p className="text-xs font-semibold uppercase tracking-[0.12em] text-blue/70">讲义速记</p><ul className="mt-4 space-y-3">{enhancement.lectureSummary.map((item) => <li key={item} className="flex min-w-0 gap-3 text-[16px] leading-7 text-black/60"><Check size={16} className="mt-1.5 shrink-0 text-blue" /><span className="min-w-0 break-words [overflow-wrap:anywhere]">{item}</span></li>)}</ul></div>}
         </section>
 
         <section className="knowledge-section">
           <SectionHeading number="02" title="重要公式" icon={<Sigma size={20} className="text-violet-600" />} />
           <p className="knowledge-body mt-5">{point.definition.intro}</p>
           <div className="mt-5 space-y-3">{point.definition.formulas.map((formula) => <MathFormula key={formula} value={formula} block className="formula-display" />)}</div>
+          {point.definition.proof && <div className="mt-6 rounded-[20px] border border-violet-500/10 bg-violet-50/55 p-5 sm:p-6"><div className="flex items-center gap-2.5"><Lightbulb size={19} className="shrink-0 text-violet-600"/><h3 className="text-[19px] font-semibold tracking-tight text-black/75">{point.definition.proof.title}</h3></div><p className="mt-4 text-[16px] leading-8 text-black/60 sm:text-[17px]">{point.definition.proof.intro}</p><MathFormula value={point.definition.proof.formula} block className="property-formula mt-5 text-[16px] sm:text-[19px]"/><p className="mt-4 text-[14px] leading-7 text-black/45 sm:text-[15px]">{point.definition.proof.note}</p></div>}
           <div className="mt-7 divide-y divide-black/[0.06]">{point.properties.map((item) => <div key={item.label} className="grid min-w-0 gap-2 py-5 first:pt-0 sm:grid-cols-[150px_1fr]"><h3 className="text-[15px] font-semibold text-ink">{item.label}</h3><div className="min-w-0"><p className="knowledge-body">{item.text}</p>{item.formula && <MathFormula value={item.formula} block className="property-formula mt-3" />}</div></div>)}</div>
         </section>
 
