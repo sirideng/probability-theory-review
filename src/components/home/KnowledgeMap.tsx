@@ -24,11 +24,11 @@ const distributionRoutes: Record<string, string> = {
 }
 
 function TopicRow({ topic, index, tone, chapterStatus }: { topic: CurriculumTopic; index: number; tone: CurriculumChapter['tone']; chapterStatus: CurriculumChapter['status'] }) {
-  const route = distributionRoutes[topic.slug]
+  const route = topic.route ?? (distributionRoutes[topic.slug]
     ? `/distributions/${distributionRoutes[topic.slug]}`
     : chapterStatus === 'future'
       ? '/data-science'
-      : `/knowledge/${topic.slug}`
+      : `/knowledge/${topic.slug}`)
   const content = (
     <>
       <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-[10px] text-[11px] font-bold icon-${tone}`}>

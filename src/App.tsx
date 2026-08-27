@@ -7,6 +7,7 @@ import DistributionDetailPage from './pages/DistributionDetailPage'
 import FormulaLibraryPage from './pages/FormulaLibraryPage'
 import DataSciencePage from './pages/DataSciencePage'
 import ChapterReviewPage from './pages/ChapterReviewPage'
+import MachineLearningBridgePage from './pages/MachineLearningBridgePage'
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/review" element={<Navigate to="/review/chapter-1" replace />} />
         <Route path="/review/:chapterId" element={<ChapterReviewPage />} />
         <Route path="/data-science" element={<DataSciencePage />} />
+        <Route path="/machine-learning/:groupId" element={<MachineLearningBridgePage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </AppShell>

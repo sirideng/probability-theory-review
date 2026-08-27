@@ -1,6 +1,7 @@
 import { AlertTriangle, ArrowRight, BookOpenCheck, Check, ListChecks, Sigma } from 'lucide-react'
 import { Link, useParams } from 'react-router-dom'
 import MathFormula from '../components/math/MathFormula'
+import LongPageNavigation from '../components/navigation/LongPageNavigation'
 import PageHeader from '../components/ui/PageHeader'
 import reviewData from '../data/chapter-reviews.json'
 import chapter1 from '../data/knowledge/chapter-1.json'
@@ -19,6 +20,7 @@ export default function ChapterReviewPage() {
   const review = reviews.find((item) => item.id === chapterId) ?? reviews[0]
 
   return (
+    <LongPageNavigation>
     <div className="page-container-narrow pb-28 pt-10 sm:pt-16">
       <PageHeader
         eyebrow="EXAM QUICK REVIEW"
@@ -130,5 +132,6 @@ export default function ChapterReviewPage() {
         </div>
       </section>
     </div>
+    </LongPageNavigation>
   )
 }

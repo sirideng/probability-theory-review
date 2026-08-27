@@ -16,6 +16,7 @@ import type { ReactNode } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import MathFormula from '../components/math/MathFormula'
 import ConceptVisual from '../components/knowledge/ConceptVisual'
+import LongPageNavigation from '../components/navigation/LongPageNavigation'
 import chapter1 from '../data/knowledge/chapter-1.json'
 import chapter2 from '../data/knowledge/chapter-2.json'
 import chapter3 from '../data/knowledge/chapter-3.json'
@@ -53,6 +54,7 @@ export default function KnowledgeDetailPage() {
   const nextPoint = knowledge[currentIndex + 1]
 
   return (
+    <LongPageNavigation>
     <div className="page-container-narrow pb-28 pt-8 sm:pt-14">
       <div className="sticky top-20 z-10 -ml-2 w-fit lg:top-4">
         <Link to="/" className="liquid-control inline-flex items-center gap-1.5 rounded-full border px-3 py-2 text-[15px] font-medium text-black/55 transition hover:text-blue"><ArrowLeft size={17} /> 返回学习地图</Link>
@@ -152,5 +154,6 @@ export default function KnowledgeDetailPage() {
 
       {nextPoint && <Link to={`/knowledge/${nextPoint.slug}`} className="liquid-content-card group mt-10 flex items-center justify-between rounded-[24px] border p-7 text-ink transition hover:border-blue/15"><div><p className="text-xs font-medium text-black/40">下一知识点</p><p className="mt-1.5 text-xl font-semibold tracking-tight">{nextPoint.title}</p></div><span className="grid h-10 w-10 place-items-center rounded-full bg-blue/10"><ArrowRight size={18} className="text-blue transition group-hover:translate-x-0.5" /></span></Link>}
     </div>
+    </LongPageNavigation>
   )
 }

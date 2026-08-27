@@ -448,6 +448,7 @@
         "englishTitle": "Sampling Distribution",
         "summary": "研究统计量在重复抽样中的概率分布。",
         "subtopics": ["样本均值", "卡方分布", "t 分布", "F 分布"],
+        "route": "/data-science",
         "status": "future",
         "prerequisites": ["normal-distribution", "central-limit-theorem"],
         "next": ["parameter-estimation", "hypothesis-testing"]
@@ -458,6 +459,7 @@
         "englishTitle": "Parameter Estimation",
         "summary": "用样本信息估计未知总体参数。",
         "subtopics": ["点估计", "区间估计", "最大似然"],
+        "route": "/data-science",
         "status": "future",
         "prerequisites": ["sampling-distribution"],
         "next": ["hypothesis-testing"]
@@ -468,6 +470,7 @@
         "englishTitle": "Hypothesis Testing",
         "summary": "用样本证据判断关于总体的假设是否合理。",
         "subtopics": ["原假设", "显著性水平", "P 值"],
+        "route": "/data-science",
         "status": "future",
         "prerequisites": ["sampling-distribution", "parameter-estimation"],
         "next": ["linear-regression"]
@@ -478,9 +481,43 @@
         "englishTitle": "Regression Analysis",
         "summary": "建立变量之间的概率关系并服务于解释与预测。",
         "subtopics": ["条件期望", "误差分布", "最小二乘"],
+        "route": "/data-science",
         "status": "future",
         "prerequisites": ["correlation-coefficient", "normal-distribution", "hypothesis-testing"],
-        "next": ["machine-learning"]
+        "next": ["supervised-generalization"]
+      },
+      {
+        "slug": "supervised-generalization",
+        "title": "监督学习与泛化",
+        "englishTitle": "Supervised Learning & Generalization",
+        "summary": "从条件分布、经验风险和偏差—方差理解预测与泛化。",
+        "subtopics": ["条件分布", "经验风险", "偏差—方差"],
+        "route": "/machine-learning/supervised-generalization",
+        "status": "future",
+        "prerequisites": ["linear-regression", "law-of-large-numbers"],
+        "next": ["probabilistic-classification"]
+      },
+      {
+        "slug": "probabilistic-classification",
+        "title": "概率模型与分类",
+        "englishTitle": "Probabilistic Models & Classification",
+        "summary": "从最大似然出发理解损失函数、逻辑回归和概率分类。",
+        "subtopics": ["负对数似然", "逻辑回归", "交叉熵"],
+        "route": "/machine-learning/probabilistic-classification",
+        "status": "future",
+        "prerequisites": ["parameter-estimation", "conditional-probability"],
+        "next": ["regularization-training"]
+      },
+      {
+        "slug": "regularization-training",
+        "title": "正则化与模型训练",
+        "englishTitle": "Regularization & Model Training",
+        "summary": "连接贝叶斯先验、最大后验估计、参数惩罚和梯度下降。",
+        "subtopics": ["MAP", "L1/L2 正则化", "梯度下降"],
+        "route": "/machine-learning/regularization-training",
+        "status": "future",
+        "prerequisites": ["bayes-formula", "maximum-likelihood"],
+        "next": []
       }
     ]
   }
