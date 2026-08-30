@@ -1,7 +1,9 @@
-import { ArrowUpRight, BarChart3, BookOpenCheck, Search, Sigma } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, BarChart3, BookOpenCheck, GraduationCap, Search, Sigma } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import KnowledgeMap from '../components/home/KnowledgeMap'
 import MiniBellCurve from '../components/distributions/MiniBellCurve'
+import { useMachineLearningProgress } from '../utils/machineLearningProgress'
+import { machineLearningLessons, machineLearningScope } from '../data/machine-learning-course'
 
 const quickCards = [
   { to: '/knowledge/conditional-probability', icon: BookOpenCheck, label: '继续学习', title: '条件概率', meta: '第一章 · 6 分钟', tone: 'blue' },
@@ -9,6 +11,7 @@ const quickCards = [
 ]
 
 export default function HomePage() {
+  const { completed } = useMachineLearningProgress()
   return (
     <div className="page-container pb-24">
       <section className="pt-12 sm:pt-20">
@@ -27,6 +30,14 @@ export default function HomePage() {
             <span className="flex-1 text-sm text-black/40">搜索知识点或公式</span>
             <span className="rounded-md bg-black/[0.05] px-2 py-1 text-[10px] font-medium text-black/35">⌘ K</span>
           </Link>
+        </div>
+      </section>
+
+      <section className="mt-12" aria-labelledby="learning-directions-title">
+        <div className="flex flex-wrap items-end justify-between gap-4"><div><p className="eyebrow">LEARNING DIRECTIONS</p><h2 id="learning-directions-title" className="mt-2 text-[27px] font-semibold tracking-[-0.04em] sm:text-[34px]">选择学习路线</h2></div><p className="text-[13px] text-black/50">两条路线独立记录，互不覆盖</p></div>
+        <div className="mt-6 grid gap-5 md:grid-cols-2">
+          <Link to="/" className="liquid-content-card group rounded-[28px] border p-7 transition hover:-translate-y-0.5 sm:p-8"><div className="flex items-start justify-between"><span className="icon-tile icon-blue"><BookOpenCheck size={21} /></span><ArrowUpRight size={18} className="text-black/25 transition group-hover:text-blue" /></div><p className="mt-8 text-[12px] font-semibold uppercase tracking-[0.12em] text-blue/70">当前主线</p><h3 className="mt-2 text-[28px] font-semibold tracking-[-0.04em]">概率论</h3><p className="mt-3 text-[15px] leading-7 text-black/55">从随机事件、概率分布与数字特征，走向极限定理和统计推断。</p><div className="mt-6 flex min-h-11 items-center justify-between border-t border-black/[0.06] pt-5 text-[13px]"><span className="font-semibold text-black/55">5 章 · 完整学习地图</span><span className="inline-flex items-center gap-1.5 font-semibold text-blue">继续学习 <ArrowRight size={14} /></span></div></Link>
+          <Link to="/machine-learning" className="liquid-content-card group rounded-[28px] border p-7 transition hover:-translate-y-0.5 sm:p-8"><div className="flex items-start justify-between"><span className="icon-tile icon-violet"><GraduationCap size={22} /></span><ArrowUpRight size={18} className="text-black/25 transition group-hover:text-blue" /></div><p className="mt-8 text-[12px] font-semibold uppercase tracking-[0.12em] text-violet-600/75">当前路线 · {machineLearningScope.videos}</p><h3 className="mt-2 text-[28px] font-semibold tracking-[-0.04em]">机器学习</h3><p className="mt-3 text-[15px] leading-7 text-black/55">从回归与特征工程出发，继续学习逻辑回归、过拟合和正则化。</p><div className="mt-6 border-t border-black/[0.06] pt-5"><div className="flex items-center justify-between text-[13px]"><span className="font-semibold text-black/55">{completed.length} / {machineLearningLessons.length} 模块</span><span className="inline-flex items-center gap-1.5 font-semibold text-blue">进入路线 <ArrowRight size={14} /></span></div><div className="mt-3 h-1.5 overflow-hidden rounded-full bg-black/[0.06]"><div className="h-full rounded-full bg-gradient-to-r from-blue to-violet-500" style={{ width: `${completed.length / machineLearningLessons.length * 100}%` }} /></div></div></Link>
         </div>
       </section>
 

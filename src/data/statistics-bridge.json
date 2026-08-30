@@ -155,6 +155,24 @@
       { "label": "对数似然", "formula": "\\ell(\\theta)=\\log L(\\theta)=\\sum_{i=1}^n\\log f(x_i;\\theta)", "note": "通常求解 ℓ'(θ)=0，并检查极值。" },
       { "label": "不变性", "formula": "\\widehat{g(\\theta)}_{\\mathrm{MLE}}=g(\\hat\\theta_{\\mathrm{MLE}})", "note": "对参数函数的最大似然估计可直接代入。" }
     ],
+    "examples": [
+      {
+        "title": "例 7.6：正态总体参数的最大似然估计",
+        "source": "讲义例 7.6",
+        "problem": "设 x₁，x₂，…，xₙ 是来自总体 X∼N(μ,σ²)（μ、σ² 均未知）的简单随机样本的观测值，求 μ 和 σ² 的最大似然估计值。",
+        "problemFormula": "X\\sim N(\\mu,\\sigma^2),\\qquad \\mu\\in\\mathbb R,\\quad \\sigma^2>0",
+        "analysis": "两个参数同时未知时，先写联合似然并取对数。分别对 μ 和 σ² 求偏导；先由 μ 的似然方程得到样本均值，再代入 σ² 的似然方程。",
+        "steps": [
+          { "text": "由样本独立性写出联合似然函数。", "formula": "L(\\mu,\\sigma^2)=(2\\pi\\sigma^2)^{-n/2}\\exp\\left[-\\frac{1}{2\\sigma^2}\\sum_{i=1}^n(x_i-\\mu)^2\\right]" },
+          { "text": "取对数，把乘积和指数化为便于求导的形式。", "formula": "\\ell(\\mu,\\sigma^2)=-\\frac n2\\log(2\\pi)-\\frac n2\\log\\sigma^2-\\frac{1}{2\\sigma^2}\\sum_{i=1}^n(x_i-\\mu)^2" },
+          { "text": "对 μ 求偏导并令其为 0，得到 μ 的最大似然估计值。", "formula": "\\frac{\\partial\\ell}{\\partial\\mu}=\\frac{1}{\\sigma^2}\\sum_{i=1}^n(x_i-\\mu)=0\\qquad\\Longrightarrow\\qquad \\hat\\mu=\\bar x" },
+          { "text": "把 μ̂=x̄ 代入后对 σ² 求偏导并令其为 0。", "formula": "\\frac{\\partial\\ell}{\\partial\\sigma^2}=-\\frac{n}{2\\sigma^2}+\\frac{1}{2(\\sigma^2)^2}\\sum_{i=1}^n(x_i-\\bar x)^2=0" },
+          { "text": "解出 σ² 的最大似然估计值。注意这里分母是 n，不是无偏样本方差使用的 n−1。", "formula": "\\widehat{\\sigma^2}=\\frac1n\\sum_{i=1}^n(x_i-\\bar x)^2" }
+        ],
+        "answer": "μ 的最大似然估计值为样本均值；σ² 的最大似然估计值为分母取 n 的样本离差平方和。",
+        "answerFormula": "\\hat\\mu=\\bar x,\\qquad \\widehat{\\sigma^2}=\\frac1n\\sum_{i=1}^n(x_i-\\bar x)^2"
+      }
+    ],
     "examFocus": ["正确写出样本联合似然", "对数似然求导", "均匀分布等参数相关支持集的边界最大值"]
   },
   {

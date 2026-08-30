@@ -94,7 +94,7 @@ export default function DataSciencePage() {
       <div className="flex items-center gap-3"><span className="grid h-11 w-11 place-items-center rounded-[14px] bg-blue/10"><BrainCircuit size={22} className="text-blue" /></span><div><p className="eyebrow">MACHINE LEARNING BRIDGE</p><h2 className="mt-1 text-[28px] font-semibold tracking-[-0.04em] sm:text-[34px]">机器学习分支入口</h2></div></div>
       <p className="mt-5 max-w-4xl text-[17px] leading-8 text-black/55">回归分析保留在本页；其余机器学习过渡内容按学习目标拆为三个独立页面，也可以直接从学习地图进入。</p>
       <div className="mt-7 grid gap-4 md:grid-cols-3">
-        {machineLearningPaths.map((path) => <Link key={path.id} to={`/machine-learning/${path.id}`} className="liquid-content-card group rounded-[22px] border p-6 transition hover:-translate-y-0.5">
+        {machineLearningPaths.map((path) => <Link key={path.id} to={`/machine-learning/bridge/${path.id}`} className="liquid-content-card group rounded-[22px] border p-6 transition hover:-translate-y-0.5">
           <h3 className="text-[19px] font-semibold tracking-[-0.025em]">{path.title}</h3>
           <p className="mt-3 text-[13px] leading-6 text-black/45">{path.note}</p>
           <span className="mt-6 flex items-center gap-2 text-[12px] font-semibold text-blue">进入专题 <ArrowRight size={14} className="transition group-hover:translate-x-0.5" /></span>

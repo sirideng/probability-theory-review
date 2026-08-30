@@ -492,7 +492,7 @@
         "englishTitle": "Supervised Learning & Generalization",
         "summary": "从条件分布、经验风险和偏差—方差理解预测与泛化。",
         "subtopics": ["条件分布", "经验风险", "偏差—方差"],
-        "route": "/machine-learning/supervised-generalization",
+        "route": "/machine-learning/bridge/supervised-generalization",
         "status": "future",
         "prerequisites": ["linear-regression", "law-of-large-numbers"],
         "next": ["probabilistic-classification"]
@@ -503,7 +503,7 @@
         "englishTitle": "Probabilistic Models & Classification",
         "summary": "从最大似然出发理解损失函数、逻辑回归和概率分类。",
         "subtopics": ["负对数似然", "逻辑回归", "交叉熵"],
-        "route": "/machine-learning/probabilistic-classification",
+        "route": "/machine-learning/bridge/probabilistic-classification",
         "status": "future",
         "prerequisites": ["parameter-estimation", "conditional-probability"],
         "next": ["regularization-training"]
@@ -514,7 +514,7 @@
         "englishTitle": "Regularization & Model Training",
         "summary": "连接贝叶斯先验、最大后验估计、参数惩罚和梯度下降。",
         "subtopics": ["MAP", "L1/L2 正则化", "梯度下降"],
-        "route": "/machine-learning/regularization-training",
+        "route": "/machine-learning/bridge/regularization-training",
         "status": "future",
         "prerequisites": ["bayes-formula", "maximum-likelihood"],
         "next": []

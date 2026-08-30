@@ -127,6 +127,39 @@ export type MachineLearningBridgeTopic = {
   studyFocus: string[]
 }
 
+export type MachineLearningFormula = {
+  label: string
+  formula: string
+  explanation: string
+  symbols: { symbol: string; meaning: string }[]
+}
+
+export type MachineLearningExample = {
+  title: string
+  setup: string
+  steps: { text: string; formula?: string }[]
+  result: string
+}
+
+export type MachineLearningLesson = {
+  id: string
+  number: string
+  title: string
+  englishTitle: string
+  videoRange: string
+  summary: string
+  problem: string
+  intuition: string[]
+  formulas: MachineLearningFormula[]
+  algorithm: { title: string; detail: string }[]
+  example: MachineLearningExample
+  python: { code: string; output: string; notes: string[] }
+  interaction: 'none' | 'supervised-toggle' | 'linear-regression' | 'cost-function' | 'gradient-descent' | 'learning-rate' | 'vectorization' | 'feature-scaling' | 'convergence-learning-rate' | 'polynomial-regression' | 'logistic-regression' | 'logistic-cost' | 'overfitting-regularization' | 'regularized-models'
+  misconceptions: { wrong: string; why: string; correct: string }[]
+  recap: string[]
+  probabilityLink?: { label: string; to: string }
+}
+
 export type ChapterReview = {
   id: string
   number: string
