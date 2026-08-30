@@ -310,6 +310,7 @@ svg { display: block; }
 
 .katex-display { margin: 0; max-width: 100%; }
 .katex { line-height: 1.45; }
+.python-formula-reference .katex-display { text-align: left; }
 
 .range-slider {
   --progress: 50%;

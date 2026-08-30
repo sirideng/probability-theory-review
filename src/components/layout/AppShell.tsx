@@ -98,6 +98,7 @@ function Navigation({ mode, onNavigate }: { mode: CourseMode; onNavigate?: () =>
 }
 
 let learningMapScrollY = 0
+let machineLearningMapScrollY = 0
 
 function RouteScrollManager() {
   const { pathname } = useLocation()
@@ -111,10 +112,16 @@ function RouteScrollManager() {
   }, [])
 
   useLayoutEffect(() => {
-    window.scrollTo(0, pathname === '/' ? learningMapScrollY : 0)
+    const restoredScrollY = pathname === '/'
+      ? learningMapScrollY
+      : pathname === '/machine-learning'
+        ? machineLearningMapScrollY
+        : 0
+    window.scrollTo(0, restoredScrollY)
 
     return () => {
       if (pathname === '/') learningMapScrollY = window.scrollY
+      if (pathname === '/machine-learning') machineLearningMapScrollY = window.scrollY
     }
   }, [pathname])
 
