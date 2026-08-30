@@ -6,6 +6,7 @@ export type CalculatorTool = 'probability' | 'quantile'
 export type DistributionCalculationState = {
   tool: CalculatorTool
   mode: ProbabilityMode
+  selectionEnabled: boolean
   a: number
   b: number
   probability: number
@@ -260,6 +261,7 @@ export function createDefaultCalculation(model: DistributionModel, params: Distr
   return {
     tool: 'probability',
     mode: 'interval',
+    selectionEnabled: false,
     a: Number.isFinite(lower) ? lower : domainMin,
     b: Number.isFinite(upper) ? upper : domainMax,
     probability: 0.95,

@@ -83,7 +83,7 @@ export default function DistributionChart({ slug, params, color, activeSeries, o
     : Number.NaN
   const baseDomain: [number, number] = model ? model.chartDomain(params) : [fallback.min, fallback.max]
   const importantValues = calculation
-    ? calculation.tool === 'quantile' ? [quantile] : calculation.mode === 'left' ? [calculation.b] : calculation.mode === 'right' ? [calculation.a] : [calculation.a, calculation.b]
+    ? calculation.tool === 'quantile' ? [quantile] : !calculation.selectionEnabled ? [] : calculation.mode === 'left' ? [calculation.b] : calculation.mode === 'right' ? [calculation.a] : [calculation.a, calculation.b]
     : []
   const finiteImportantValues = importantValues.filter(Number.isFinite)
   const domainValues = model?.kind === 'discrete'
@@ -138,7 +138,7 @@ export default function DistributionChart({ slug, params, color, activeSeries, o
   const hasValidCalculation = Boolean(model && calculation && model.validateParameters(params).length === 0 && (
     calculation.tool === 'quantile'
       ? calculation.probability > 0 && calculation.probability < 1 && Number.isFinite(quantile)
-      : Number.isFinite(calculation.a) && Number.isFinite(calculation.b) && (!(calculation.mode === 'interval' || calculation.mode === 'two-tail') || calculation.a <= calculation.b)
+      : calculation.selectionEnabled && Number.isFinite(calculation.a) && Number.isFinite(calculation.b) && (!(calculation.mode === 'interval' || calculation.mode === 'two-tail') || calculation.a <= calculation.b)
   ))
   const isSelected = (x: number) => {
     if (!hasValidCalculation || !calculation) return false
@@ -180,10 +180,10 @@ export default function DistributionChart({ slug, params, color, activeSeries, o
 
   return <div>
     <div className="mb-2 flex flex-wrap items-center justify-end gap-2" aria-label="图像索引">
-      <button type="button" onClick={() => onSeriesChange('density')} aria-pressed={activeSeries === 'density'} className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-xs font-semibold transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue/15 ${activeSeries === 'density' ? 'border-black/[0.08] bg-white shadow-sm text-black/75' : 'border-transparent text-black/35 hover:bg-white/60'}`}>
+      <button type="button" onClick={() => onSeriesChange('density')} aria-pressed={activeSeries === 'density'} className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-[13px] font-semibold transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue/15 ${activeSeries === 'density' ? 'border-black/[0.08] bg-white shadow-sm text-black/75' : 'border-transparent text-black/65 hover:bg-white/60'}`}>
         <span className="h-[3px] w-5 rounded-full" style={{ backgroundColor: color, opacity: densityOpacity }} />{densityLabel}
       </button>
-      <button type="button" onClick={() => onSeriesChange('cdf')} aria-pressed={activeSeries === 'cdf'} className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-xs font-semibold transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue/15 ${activeSeries === 'cdf' ? 'border-black/[0.08] bg-white shadow-sm text-black/75' : 'border-transparent text-black/35 hover:bg-white/60'}`}>
+      <button type="button" onClick={() => onSeriesChange('cdf')} aria-pressed={activeSeries === 'cdf'} className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-[13px] font-semibold transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue/15 ${activeSeries === 'cdf' ? 'border-black/[0.08] bg-white shadow-sm text-black/75' : 'border-transparent text-black/65 hover:bg-white/60'}`}>
         <span className="w-5 border-t-[3px] border-dashed border-black/70" style={{ opacity: cdfOpacity }} />分布函数
       </button>
     </div>

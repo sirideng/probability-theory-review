@@ -69,6 +69,7 @@ export type WorkedExampleStep = {
 export type WorkedExample = {
   title: string
   problem: string
+  problemFormula?: string
   analysis: string
   steps: WorkedExampleStep[]
   answer: string
@@ -111,6 +112,7 @@ export type StatisticsBridgeTopic = {
   prerequisites: string[]
   keyPoints: string[]
   formulas: { label: string; formula: string; note: string }[]
+  examples?: WorkedExample[]
   examFocus: string[]
 }
 

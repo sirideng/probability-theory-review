@@ -1,4 +1,4 @@
-import { ArrowRight, BrainCircuit, ChartNoAxesCombined, FlaskConical, GitCompareArrows, Goal, LibraryBig, Sigma } from 'lucide-react'
+import { ArrowLeft, ArrowRight, BrainCircuit, ChartNoAxesCombined, FlaskConical, GitCompareArrows, Goal, LibraryBig, Sigma } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import MathFormula from '../components/math/MathFormula'
 import LongPageNavigation from '../components/navigation/LongPageNavigation'
@@ -22,11 +22,14 @@ const machineLearningPaths = [
 
 export default function DataSciencePage() {
   return <LongPageNavigation><div className="page-container pb-24 pt-10 sm:pt-16">
-    <PageHeader eyebrow="PROBABILITY → STATISTICS → DATA SCIENCE" title="从概率走向统计与预测" description="讲义后半部分的数理统计内容已经整理为预备路径：先从总体与样本建立统计语言，再进入抽样分布、参数估计，最终连接真实数据分析。" />
+    <div className="sticky top-20 z-10 -ml-2 w-fit lg:top-4">
+      <Link to="/" className="liquid-control inline-flex items-center gap-1.5 rounded-full border px-3 py-2 text-[15px] font-medium text-black/55 transition hover:text-blue"><ArrowLeft size={17} /> 返回学习地图</Link>
+    </div>
+    <div className="mt-10"><PageHeader eyebrow="PROBABILITY → STATISTICS → DATA SCIENCE" title="从概率走向统计与预测" description="讲义后半部分的数理统计内容已经整理为预备路径：先从总体与样本建立统计语言，再进入抽样分布、参数估计，最终连接真实数据分析。" /></div>
 
     <section className="liquid-content-card mt-10 overflow-hidden rounded-[32px] border p-8 text-ink sm:p-12">
       <span className="grid h-12 w-12 place-items-center rounded-2xl bg-blue/10"><LibraryBig size={24} className="text-blue" /></span>
-      <p className="mt-10 text-sm font-medium text-black/40">讲义第 60–70 页 · 数理统计预备</p>
+      <p className="mt-10 text-sm font-medium text-black/65">讲义第 60–70 页 · 数理统计预备</p>
       <h2 className="mt-3 max-w-4xl text-[32px] font-semibold leading-[1.18] tracking-[-0.04em] sm:text-[44px]">概率论给出模型，数理统计用样本反推模型。</h2>
       <div className="mt-8 flex flex-wrap items-center gap-2 text-xs font-medium text-black/50">
         <span className="rounded-full bg-black/[0.045] px-3.5 py-2">总体与样本</span><ArrowRight size={14} />
@@ -36,14 +39,14 @@ export default function DataSciencePage() {
       </div>
     </section>
 
-    <div className="mt-6 grid gap-5">
-      {bridgeTopics.map((topic, index) => <section key={topic.id} className="liquid-content-card rounded-[28px] border p-6 sm:p-9">
+    <div className="mt-6 grid min-w-0 gap-5">
+      {bridgeTopics.map((topic, index) => <section key={topic.id} className="liquid-content-card min-w-0 rounded-[28px] border p-6 sm:p-9">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="flex items-center gap-3.5">
             <span className="section-number icon-violet">{String(index + 1).padStart(2, '0')}</span>
             <div><h2 className="text-[24px] font-semibold tracking-[-0.035em] sm:text-[29px]">{topic.title}</h2><p className="mt-1 text-sm text-black/32">{topic.englishTitle}</p></div>
           </div>
-          <span className="rounded-full bg-black/[0.04] px-3 py-1.5 text-[11px] font-medium text-black/38">{topic.source}</span>
+          <span className="rounded-full bg-black/[0.04] px-3 py-1.5 text-xs font-medium text-black/65">{topic.source}</span>
         </div>
 
         <p className="mt-6 max-w-4xl text-[17px] leading-8 text-black/60">{topic.summary}</p>
@@ -61,7 +64,23 @@ export default function DataSciencePage() {
           <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.12em] text-violet-600"><Sigma size={15} />核心公式</div>
           <div className="mt-3 grid gap-x-6 xl:grid-cols-2">{topic.formulas.map((item) => <div key={item.label} className="min-w-0 border-t border-black/[0.06] py-5"><h3 className="text-[14px] font-semibold">{item.label}</h3><MathFormula value={item.formula} block className="property-formula mt-3" /><p className="mt-2 text-[13px] leading-6 text-black/45">{item.note}</p></div>)}</div>
         </div>
-        <div className="mt-6 flex flex-wrap items-center gap-2 border-t border-black/[0.06] pt-5 text-[12px] text-black/40"><span className="font-semibold text-black/45">需要先会：</span>{topic.prerequisites.map((item) => <span key={item} className="rounded-full bg-black/[0.04] px-2.5 py-1">{item}</span>)}</div>
+        {topic.examples?.length ? <div className="mt-6 min-w-0 rounded-[22px] border border-blue/10 bg-blue/[0.025] p-4 sm:p-6">
+          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.12em] text-blue"><FlaskConical size={15} />典型例题</div>
+          <div className="mt-4 space-y-5">{topic.examples.map((example) => <article key={example.title} className="overflow-hidden rounded-[18px] border border-black/[0.06] bg-white/80">
+            <div className="border-b border-black/[0.06] px-4 py-5 sm:px-6">
+              <div className="flex flex-wrap items-center justify-between gap-3"><h3 className="text-[19px] font-semibold tracking-tight">{example.title}</h3><span className="text-xs font-medium text-black/65">{example.source}</span></div>
+              <p className="mt-4 text-[16px] leading-7 text-black/65">{example.problem}</p>
+              {example.problemFormula && <MathFormula value={example.problemFormula} block className="property-formula mt-3" />}
+            </div>
+            <div className="px-4 py-5 sm:px-6">
+              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-black/65">解题思路</p>
+              <p className="mt-3 text-[15px] leading-7 text-black/60">{example.analysis}</p>
+              <ol className="mt-5 space-y-4">{example.steps.map((step, stepIndex) => <li key={`${example.title}-${stepIndex}`} className="grid gap-2 sm:grid-cols-[28px_1fr]"><span className="grid h-7 w-7 place-items-center rounded-full bg-blue/10 text-[11px] font-semibold text-blue">{stepIndex + 1}</span><div><p className="text-[15px] leading-7 text-black/62">{step.text}</p>{step.formula && <MathFormula value={step.formula} block className="property-formula mt-2" />}</div></li>)}</ol>
+              <div className="mt-6 rounded-[15px] bg-green-50/75 p-4 text-[15px] leading-7 text-green-900/75"><span className="font-semibold text-green-700">结论：</span>{example.answer}{example.answerFormula && <MathFormula value={example.answerFormula} block className="mt-2 overflow-x-auto text-[18px] text-green-800" />}</div>
+            </div>
+          </article>)}</div>
+        </div> : null}
+          <div className="mt-6 flex flex-wrap items-center gap-2 border-t border-black/[0.06] pt-5 text-[12px] text-black/65"><span className="font-semibold text-black/70">需要先会：</span>{topic.prerequisites.map((item) => <span key={item} className="rounded-full bg-black/[0.04] px-2.5 py-1">{item}</span>)}</div>
       </section>)}
     </div>
 

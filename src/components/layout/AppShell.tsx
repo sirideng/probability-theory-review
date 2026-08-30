@@ -1,6 +1,8 @@
 import { type ReactNode, useLayoutEffect, useState } from 'react'
-import { BarChart3, BrainCircuit, House, Menu, ScanText, Sigma, X } from 'lucide-react'
+import { BarChart3, BookOpenText, BrainCircuit, ExternalLink, House, Menu, ScanText, Sigma, X } from 'lucide-react'
 import { NavLink, useLocation } from 'react-router-dom'
+
+const lectureHref = '../2026考研数学-基础阶段-概率讲义+习题-张翀.pdf'
 
 const navItems = [
   { to: '/', label: '学习地图', icon: House, end: true },
@@ -37,6 +39,20 @@ function Navigation({ onNavigate }: { onNavigate?: () => void }) {
           )}
         </NavLink>
       ))}
+      <a
+        href={lectureHref}
+        target="_blank"
+        rel="noreferrer"
+        onClick={onNavigate}
+        aria-label="查看讲义（在新标签页打开）"
+        className="group flex min-h-11 items-center gap-3 rounded-[12px] px-3 py-2.5 text-[14px] font-medium text-black/55 transition-all duration-200 hover:bg-black/[0.045] hover:text-ink focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue/15"
+      >
+        <span className="grid h-7 w-7 place-items-center rounded-[9px] text-black/45">
+          <BookOpenText size={16} strokeWidth={1.8} />
+        </span>
+        <span>查看讲义</span>
+        <ExternalLink className="ml-auto text-black/35" size={13} aria-hidden="true" />
+      </a>
     </nav>
   )
 }

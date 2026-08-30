@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { calculateProbability, getDistributionModel, standardNormalCdf, standardNormalQuantile } from '../src/utils/distributionMath.ts'
+import { calculateProbability, createDefaultCalculation, getDistributionModel, standardNormalCdf, standardNormalQuantile } from '../src/utils/distributionMath.ts'
 
 function closeTo(actual: number, expected: number, tolerance: number, message?: string) {
   assert.ok(Math.abs(actual - expected) <= tolerance, message ?? `${actual} should be within ${tolerance} of ${expected}`)
@@ -12,6 +12,14 @@ test('standard normal known CDF and quantile values', () => {
   const normal = getDistributionModel('normal')
   assert.ok(normal)
   closeTo(calculateProbability(normal, { mean: 0, sigma: 1 }, { mode: 'interval', a: -1.96, b: 1.96 }), 0.95, 1e-4)
+})
+
+test('distribution calculator starts without a selected probability region', () => {
+  const normal = getDistributionModel('normal')
+  assert.ok(normal)
+  const state = createDefaultCalculation(normal, { mean: 0, sigma: 1 })
+  assert.equal(state.selectionEnabled, false)
+  assert.equal(state.tool, 'probability')
 })
 
 test('uniform and exponential interval probabilities use their CDFs', () => {

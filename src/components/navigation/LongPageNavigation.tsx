@@ -56,7 +56,7 @@ async function copyText(value: string) {
 
 function TableOfContents({ headings, activeId, onSelect }: { headings: PageHeading[]; activeId: string; onSelect: (id: string) => void }) {
   return <nav aria-label="本页目录" className="long-page-toc-nav">
-    <p className="px-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-black/32">On this page</p>
+    <p className="px-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-black/45">On this page</p>
     <ul className="mt-3 space-y-0.5">
       {headings.map((heading) => <li key={heading.id}>
         <button
