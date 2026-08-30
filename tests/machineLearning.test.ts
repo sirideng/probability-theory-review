@@ -34,10 +34,13 @@ test('linear regression cost and gradients use the documented formulas', () => {
 
 test('feature scaling keeps order and z-score has zero mean', () => {
   const values = [300, 1650, 3000]
+  const chosenScale = scaleColumn(values, 'chosen')
   const meanScaled = scaleColumn(values, 'mean')
   const zScores = scaleColumn(values, 'zscore')
+  assert.deepEqual(chosenScale, [0.1, 0.55, 1])
   assert.ok(meanScaled[0] < meanScaled[1] && meanScaled[1] < meanScaled[2])
   assert.ok(Math.abs(zScores.reduce((sum, value) => sum + value, 0)) < 1e-12)
+  assert.deepEqual(scaleColumn([0, 0, 0], 'chosen'), [0, 0, 0])
   assert.deepEqual(scaleColumn([5, 5, 5], 'zscore'), [0, 0, 0])
 })
 
@@ -158,16 +161,18 @@ test('machine learning route contains exactly the learned video 1-36 scope', () 
 
 test('machine learning terminology is consistent across all 14 modules', () => {
   const courseText = JSON.stringify(machineLearningLessons)
-  for (const outdatedTerm of ['成本函数', '当前成本', '成本曲线', '多重线性回归', '按范围缩放', 'Z-score 标准化', '训练数据集', '直接输出得分']) {
+  for (const outdatedTerm of ['成本函数', '当前成本', '成本曲线', '多重线性回归', '按范围缩放', 'Z-score标准化', 'L2正则化', 'Sigmoid函数', '训练数据集', '直接输出得分', '参数目标', '代价值']) {
     assert.equal(courseText.includes(outdatedTerm), false, `found outdated term: ${outdatedTerm}`)
   }
-  for (const requiredTerm of ['单样本二元交叉熵损失', '逻辑回归代价函数', '多元线性回归', 'Z-score标准化', '启发式停止条件', '总体标准差口径']) {
+  for (const requiredTerm of ['单样本二元交叉熵损失', '逻辑回归代价函数', '多元线性回归', '按选定尺度缩放', 'Scaling by a Chosen Scale', 'Z-score 标准化', 'L2 正则化', 'Sigmoid 函数', '代价函数值', '启发式停止条件', '总体标准差口径', '验证集', '测试集', '0<αλ/m<1']) {
     assert.equal(courseText.includes(requiredTerm), true, `missing required term: ${requiredTerm}`)
   }
   assert.match(courseText, /np\.linalg\.lstsq/)
   assert.match(courseText, /不属于本节训练主线/)
   assert.match(courseText, /概率论中的随机变量方差描述随机变量的波动/)
   assert.match(courseText, /机器学习中的模型方差描述模型对训练样本变化的敏感程度/)
+  assert.match(courseText, /测试集只用于模型确定后的最终评估/)
+  assert.match(courseText, /完整更新还包含数据拟合项的梯度/)
 })
 
 test('machine learning lesson ids and video 1-36 ranges remain unchanged', () => {

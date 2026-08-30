@@ -1,5 +1,5 @@
 export type LinearSample = { x: number; y: number }
-export type FeatureScalingMode = 'raw' | 'mean' | 'zscore'
+export type FeatureScalingMode = 'raw' | 'chosen' | 'mean' | 'zscore'
 
 export function linearPrediction(x: number, w: number, b: number) {
   return w * x + b
@@ -128,6 +128,10 @@ export function regularizedLinearCost(features: number[][], targets: number[], w
 
 export function scaleColumn(values: number[], mode: FeatureScalingMode) {
   if (mode === 'raw' || !values.length) return [...values]
+  if (mode === 'chosen') {
+    const selectedScale = Math.max(...values.map((value) => Math.abs(value)))
+    return values.map((value) => selectedScale ? value / selectedScale : 0)
+  }
   const mean = values.reduce((sum, value) => sum + value, 0) / values.length
   if (mode === 'mean') {
     const range = Math.max(...values) - Math.min(...values)
