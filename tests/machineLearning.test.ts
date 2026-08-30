@@ -155,3 +155,37 @@ test('machine learning route contains exactly the learned video 1-36 scope', () 
     assert.equal(courseText.includes(futureTopic), false)
   }
 })
+
+test('machine learning terminology is consistent across all 14 modules', () => {
+  const courseText = JSON.stringify(machineLearningLessons)
+  for (const outdatedTerm of ['成本函数', '当前成本', '成本曲线', '多重线性回归', '按范围缩放', 'Z-score 标准化', '训练数据集', '直接输出得分']) {
+    assert.equal(courseText.includes(outdatedTerm), false, `found outdated term: ${outdatedTerm}`)
+  }
+  for (const requiredTerm of ['单样本二元交叉熵损失', '逻辑回归代价函数', '多元线性回归', 'Z-score标准化', '启发式停止条件', '总体标准差口径']) {
+    assert.equal(courseText.includes(requiredTerm), true, `missing required term: ${requiredTerm}`)
+  }
+  assert.match(courseText, /np\.linalg\.lstsq/)
+  assert.match(courseText, /不属于本节训练主线/)
+  assert.match(courseText, /概率论中的随机变量方差描述随机变量的波动/)
+  assert.match(courseText, /机器学习中的模型方差描述模型对训练样本变化的敏感程度/)
+})
+
+test('machine learning lesson ids and video 1-36 ranges remain unchanged', () => {
+  assert.deepEqual(machineLearningLessons.map(({ id, videoRange }) => [id, videoRange]), [
+    ['machine-learning-basics', '视频 1—2'],
+    ['supervised-unsupervised', '视频 3—5'],
+    ['linear-regression-model', '视频 6'],
+    ['cost-function', '视频 7—9'],
+    ['gradient-descent', '视频 10—12'],
+    ['learning-rate-training', '视频 13—15'],
+    ['multiple-features-vectorization', '视频 16—19'],
+    ['feature-scaling', '视频 20—21'],
+    ['convergence-learning-rate', '视频 22—23'],
+    ['feature-engineering-polynomial-regression', '视频 24—25'],
+    ['classification-logistic-regression', '视频 26—28'],
+    ['logistic-cost-gradient', '视频 29—31'],
+    ['overfitting-regularization', '视频 32—34'],
+    ['regularized-linear-logistic', '视频 35—36'],
+  ])
+  assert.equal(MACHINE_LEARNING_PROGRESS_KEY, 'probability-atlas:machine-learning-progress:v1')
+})
