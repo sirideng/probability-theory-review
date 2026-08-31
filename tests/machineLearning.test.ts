@@ -22,6 +22,7 @@ import {
 import { machineLearningLessons } from '../src/data/machine-learning-course.ts'
 import { MACHINE_LEARNING_PROGRESS_KEY, clearMachineLearningProgress, readMachineLearningProgress, writeMachineLearningProgress } from '../src/utils/machineLearningProgressStore.ts'
 import { tokenizePythonLine } from '../src/utils/pythonSyntax.ts'
+import { numpyReferenceItems } from '../src/data/numpy-reference.ts'
 
 test('linear regression cost and gradients use the documented formulas', () => {
   const samples = [{ x: 1, y: 2 }, { x: 2, y: 4 }, { x: 3, y: 6 }]
@@ -193,4 +194,18 @@ test('machine learning lesson ids and video 1-36 ranges remain unchanged', () =>
     ['regularized-linear-logistic', '视频 35—36'],
   ])
   assert.equal(MACHINE_LEARNING_PROGRESS_KEY, 'probability-atlas:machine-learning-progress:v1')
+})
+
+test('NumPy quick reference starts with the core machine learning operations', () => {
+  assert.equal(numpyReferenceItems.length, 6)
+  assert.equal(new Set(numpyReferenceItems.map((item) => item.id)).size, numpyReferenceItems.length)
+  const referenceText = JSON.stringify(numpyReferenceItems)
+  for (const requiredSyntax of ['np.array', 'reshape', 'axis=0', 'np.std', 'np.dot', 'X @ w']) {
+    assert.equal(referenceText.includes(requiredSyntax), true, 'missing NumPy reference: ' + requiredSyntax)
+  }
+  assert.match(referenceText, /ddof=0/)
+  for (const item of numpyReferenceItems) {
+    assert.equal(item.outputs.length >= 2, true, `multiple outputs are not separated: ${item.id}`)
+    assert.equal(item.outputs.some((output) => output.includes('\\n')), false, `output contains a literal \\n: ${item.id}`)
+  }
 })

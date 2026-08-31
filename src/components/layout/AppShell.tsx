@@ -1,5 +1,5 @@
 import { type ReactNode, useLayoutEffect, useState } from 'react'
-import { BarChart3, BookOpenText, BrainCircuit, ExternalLink, GraduationCap, House, Menu, ScanText, Sigma, X } from 'lucide-react'
+import { BarChart3, BookOpenText, Braces, BrainCircuit, ExternalLink, GraduationCap, House, Menu, ScanText, Sigma, X } from 'lucide-react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { machineLearningLessons, machineLearningScope } from '../../data/machine-learning-course'
 
@@ -15,6 +15,7 @@ const probabilityNavItems = [
 
 const machineLearningNavItems = [
   { to: '/machine-learning', label: '学习地图', icon: House, end: true },
+  { to: '/machine-learning/numpy', label: 'NumPy 速查', icon: Braces },
 ]
 
 type CourseMode = 'probability' | 'machine-learning'

@@ -12,6 +12,7 @@ import MachineLearningBridgePage from './pages/MachineLearningBridgePage'
 
 const MachineLearningMapPage = lazy(() => import('./pages/MachineLearningMapPage'))
 const MachineLearningLessonPage = lazy(() => import('./pages/MachineLearningLessonPage'))
+const NumpyReferencePage = lazy(() => import('./pages/NumpyReferencePage'))
 
 const machineLearningFallback = <div className="page-container py-20"><div className="h-56 animate-pulse rounded-[28px] bg-white/65" /></div>
 
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="/review/:chapterId" element={<ChapterReviewPage />} />
         <Route path="/data-science" element={<DataSciencePage />} />
         <Route path="/machine-learning" element={<Suspense fallback={machineLearningFallback}><MachineLearningMapPage /></Suspense>} />
+        <Route path="/machine-learning/numpy" element={<Suspense fallback={machineLearningFallback}><NumpyReferencePage /></Suspense>} />
         <Route path="/machine-learning/bridge/:groupId" element={<MachineLearningBridgePage />} />
         <Route path="/machine-learning/supervised-generalization" element={<Navigate to="/machine-learning/bridge/supervised-generalization" replace />} />
         <Route path="/machine-learning/probabilistic-classification" element={<Navigate to="/machine-learning/bridge/probabilistic-classification" replace />} />
