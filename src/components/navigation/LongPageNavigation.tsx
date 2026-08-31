@@ -72,7 +72,7 @@ function TableOfContents({ headings, activeId, onSelect }: { headings: PageHeadi
   </nav>
 }
 
-export default function LongPageNavigation({ children }: { children: ReactNode }) {
+export default function LongPageNavigation({ children, tableOfContents = true }: { children: ReactNode; tableOfContents?: boolean }) {
   const { pathname } = useLocation()
   const contentRef = useRef<HTMLDivElement>(null)
   const progressRef = useRef<HTMLDivElement>(null)
@@ -111,6 +111,7 @@ export default function LongPageNavigation({ children }: { children: ReactNode }
   useLayoutEffect(() => {
     const content = contentRef.current
     if (!content) return
+    if (!tableOfContents) return
     let scanFrame = 0
 
     const scan = () => {
@@ -173,7 +174,7 @@ export default function LongPageNavigation({ children }: { children: ReactNode }
       resizeObserver.disconnect()
       window.removeEventListener('resize', queueScan)
     }
-  }, [copySectionLink])
+  }, [copySectionLink, tableOfContents])
 
   useEffect(() => {
     const content = contentRef.current

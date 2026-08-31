@@ -22,7 +22,7 @@ import {
 import { machineLearningLessons } from '../src/data/machine-learning-course.ts'
 import { MACHINE_LEARNING_PROGRESS_KEY, clearMachineLearningProgress, readMachineLearningProgress, writeMachineLearningProgress } from '../src/utils/machineLearningProgressStore.ts'
 import { tokenizePythonLine } from '../src/utils/pythonSyntax.ts'
-import { numpyReferenceItems } from '../src/data/numpy-reference.ts'
+import { numpyReferenceCategories, numpyReferenceItems } from '../src/data/numpy-reference.ts'
 
 test('linear regression cost and gradients use the documented formulas', () => {
   const samples = [{ x: 1, y: 2 }, { x: 2, y: 4 }, { x: 3, y: 6 }]
@@ -197,15 +197,27 @@ test('machine learning lesson ids and video 1-36 ranges remain unchanged', () =>
 })
 
 test('NumPy quick reference starts with the core machine learning operations', () => {
-  assert.equal(numpyReferenceItems.length, 6)
+  assert.equal(numpyReferenceItems.length, 12)
   assert.equal(new Set(numpyReferenceItems.map((item) => item.id)).size, numpyReferenceItems.length)
+  assert.deepEqual(numpyReferenceCategories.map(({ label }) => label), ['数组与形状', '数据处理', '数值函数', '线性代数'])
+  assert.deepEqual(
+    numpyReferenceCategories.map(({ label }) => numpyReferenceItems.filter((item) => item.category === label).length),
+    [4, 5, 1, 2],
+  )
   const referenceText = JSON.stringify(numpyReferenceItems)
-  for (const requiredSyntax of ['np.array', 'reshape', 'axis=0', 'np.std', 'np.dot', 'X @ w']) {
+  for (const requiredSyntax of ['np.array', 'np.ones', 'reshape', 'np.newaxis', 'np.std', 'np.column_stack', 'np.concatenate', 'np.clip', 'np.where', 'np.isfinite', 'np.dot', 'X @ w', 'np.linalg.norm', 'np.linalg.lstsq']) {
     assert.equal(referenceText.includes(requiredSyntax), true, 'missing NumPy reference: ' + requiredSyntax)
   }
   assert.match(referenceText, /ddof=0/)
+  assert.match(referenceText, /X\[1, 0\]/)
+  assert.match(referenceText, /一维数组使用 x\.T 不会改变形状/)
+  assert.match(referenceText, /不改变理论损失函数/)
+  assert.match(referenceText, /课程仍以梯度下降为训练主线/)
   for (const item of numpyReferenceItems) {
-    assert.equal(item.outputs.length >= 2, true, `multiple outputs are not separated: ${item.id}`)
+    assert.match(item.code, /^import numpy as np/)
+    assert.equal((item.code.match(/\bprint\(/g) ?? []).length, item.outputs.length, `output count does not match print count: ${item.id}`)
+    assert.equal(item.outputs.length >= 2, true, `outputs are not separated: ${item.id}`)
+    assert.equal(item.notes.length >= 2 && item.notes.length <= 4, true, `unexpected note count: ${item.id}`)
     assert.equal(item.outputs.some((output) => output.includes('\\n')), false, `output contains a literal \\n: ${item.id}`)
   }
 })
